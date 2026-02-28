@@ -32,23 +32,21 @@ This project demonstrates full-stack fundamentals including frontend rendering, 
 
 ## 📂 Project Structure
 
-AUREON/
-│
-├── public/
-│ ├── index.html
-│ ├── styles.css
-│ └── script.js
-│
-├── routes/
-│ └── movieRoutes.js
-│
-├── data/
-│ └── movies.json
-│
+<pre>
+```bash
+AUREON
+├── public
+│   ├── index.html
+│   ├── styles.css
+│   └── script.js
+├── routes
+│   └── movieRoutes.js
+├── data
+│   └── movies.json
 ├── app.js
 ├── package.json
 └── README.md
-
+</pre>
 
 ---
 
