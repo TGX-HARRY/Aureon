@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aureon Originals</title>
+  <link rel="stylesheet" href="./CSS/movie.css">
+</head>
+<body class="trailer-page">
+
+  <div class="video-container">
+    <iframe id="trailerFrame" width="100%" height="600" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <div class="movie-details">
+    <h1 id="movieTitle"></h1>
+    <p><strong>Genre:</strong> <span id="movieGenre"></span></p>
+    <p><strong>Rating:</strong> <span id="movieRating"></span></p>
+    <p id="movieOverview"></p>
+  </div>
+
+  <a href="homepage.html" class="back-button">← Back to Aureon Originals</a>
+
+  <script>
+    // Movie data (can be expanded easily)
+    const movies = {
+      "stranger-things": {
+        title: "Stranger Things",
+        trailer: "https://www.youtube.com/embed/b9EkMc79ZSU",
+        genre: "Sci-Fi • Horror",
+        rating: "★★★★★",
+        overview: "When a young boy disappears, his friends and family uncover a world of supernatural mysteries, dark secrets, and dangerous experiments."
+      },
+      "dark": {
+        title: "Dark",
+        trailer: "https://www.youtube.com/embed/rrwycJ08PSA",
+        genre: "Mystery • Thriller",
+        rating: "★★★★★",
+        overview: "A time-travel mystery spanning multiple generations in a small German town where the past and present mysteriously collide."
+      },
+      "the-crown": {
+        title: "The Crown",
+        trailer: "https://www.youtube.com/embed/JWtnJjn6ng0",
+        genre: "Historical • Drama",
+        rating: "★★★★☆",
+        overview: "Follows the political rivalries and romance of Queen Elizabeth II's reign and the events that shaped the second half of the 20th century."
+      },
+      "elite": {
+        title: "Elite",
+        trailer: "https://www.youtube.com/embed/QNwhAdrdwp0",
+        genre: "Teen • Crime • Drama",
+        rating: "★★★★☆",
+        overview: "When three working-class teens enroll in an exclusive private school in Spain, the clash between them and the wealthy students leads to murder."
+      },
+      "queens-gambit": {
+        title: "The Queen's Gambit",
+        trailer: "https://www.youtube.com/embed/CDrieqwSdgI",
+        genre: "Drama • Sports",
+        rating: "★★★★★",
+        overview: "Orphaned chess prodigy Beth Harmon struggles with addiction while on a quest to become the greatest chess player in the world."
+      },
+      "narcos": {
+        title: "Narcos",
+        trailer: "https://www.youtube.com/embed/U7elNhHwgBU",
+        genre: "Crime • Biography",
+        rating: "★★★★☆",
+        overview: "A chronicled look at the criminal exploits of Colombian drug lord Pablo Escobar, as well as the many other drug kingpins who plagued the country."
+      },
+      "money-heist": {
+        title: "Money Heist",
+        trailer: "https://www.youtube.com/embed/fvCdLmxnkj0",
+        genre: "Crime • Thriller",
+        rating: "★★★★★",
+        overview: "A criminal mastermind who goes by 'The Professor' recruits eight thieves to carry out an ambitious plan that involves entering the Royal Mint of Spain."
+      },
+      "lupin": {
+        title: "Lupin",
+        trailer: "https://www.youtube.com/embed/ga0iTWXCGa0",
+        genre: "Mystery • Crime",
+        rating: "★★★★☆",
+        overview: "Inspired by the adventures of Arsène Lupin, gentleman thief Assane Diop sets out to avenge his father for an injustice inflicted by a wealthy family."
+      },
+      "the-witcher": {
+        title: "The Witcher",
+        trailer: "https://www.youtube.com/embed/ndl1W4ltcmg",
+        genre: "Fantasy • Action",
+        rating: "★★★★☆",
+        overview: "Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked than beasts."
+      },
+      "the-boys": {
+        title: "The Boys",
+        trailer: "https://www.youtube.com/embed/06rueu_fh30",
+        genre: "Action • Superhero",
+        rating: "★★★★☆",
+        overview: "A group of vigilantes set out to take down corrupt superheroes who abuse their superpowers and exploit their celebrity status."
+      },
+      "the-umbrella-academy": {
+        title: "The Umbrella Academy",
+        trailer: "https://www.youtube.com/embed/0DAmWHxeoKw",
+        genre: "Action • Drama",
+        rating: "★★★★☆",
+        overview: "A dysfunctional family of adopted sibling superheroes reunite to solve the mystery of their father's death and the threat of an impending apocalypse."
+      },
+      "arcane": {
+        title: "Arcane",
+        trailer: "https://www.youtube.com/embed/fXmAurh012s",
+        genre: "Animation • Action",
+        rating: "★★★★★",
+        overview: "Set in utopian Piltover and the oppressed underground of Zaun, the story follows the origins of two iconic League of Legends champions."
+      },
+      "the-sandman": {
+        title: "The Sandman",
+        trailer: "https://www.youtube.com/embed/83ClbRPRDXU",
+        genre: "Fantasy • Drama",
+        rating: "★★★★☆",
+        overview: "Upon escaping after decades of imprisonment by a mortal wizard, Dream goes on a quest across worlds to find what was stolen from him."
+      },
+      "wednesday": {
+        title: "Wednesday",
+        trailer: "https://www.youtube.com/embed/Di310WS8zLk",
+        genre: "Mystery • Comedy",
+        rating: "★★★★☆",
+        overview: "Wednesday Addams' years as a student at Nevermore Academy as she attempts to master her emerging psychic ability and solve a mystery."
+      },
+      "stranger": {
+        title: "Stranger",
+        trailer: "https://www.youtube.com/embed/RXwXIBOf5rA",
+        genre: "Thriller • Crime",
+        rating: "★★★★☆",
+        overview: "A cold and emotionless prosecutor teams up with a passionate police officer to solve a series of mysterious murders in South Korea."
+      }
+    };
+
+    // Get the movie name from the URL
+    const params = new URLSearchParams(window.location.search);
+    const movieKey = params.get("name");
+
+    const movie = movies[movieKey];
+
+    if (movie) {
+      document.title = `${movie.title} | Aureon Originals`;
+      document.getElementById("movieTitle").textContent = movie.title;
+      document.getElementById("movieGenre").textContent = movie.genre;
+      document.getElementById("movieRating").textContent = movie.rating;
+      document.getElementById("movieOverview").textContent = movie.overview;
+      document.getElementById("trailerFrame").src = `${movie.trailer}?autoplay=1&mute=1`;
+    } else {
+      document.body.innerHTML = "<h2 style='color:white;text-align:center;'>Movie not found!</h2>";
+    }
+  </script>
+
+</body>
+</html>
