@@ -5,7 +5,7 @@ async function validateForm(event) {
     const password = document.getElementById('password').value.trim();
     const errorMessage = document.getElementById('error-message');
 
-    const response = await fetch("/api/users/customers/login", {
+    const response = await fetch("/api/users/subscribers/login", {
         method: "POST",   
         headers: {
             "Content-Type": "application/json"
@@ -17,9 +17,6 @@ async function validateForm(event) {
     console.log(data);
     if (data && data.sessionData) {
         localStorage.setItem("sessionData", JSON.stringify(data.sessionData));
-        // setInterval(()=> {
-        //     console.log("15 sec wait for updation of storage")
-        // }, 15000);
         window.location.href = "/";
     } else {
         errorMessage.innerHTML = '<span style="color:red;">*Invalid email or password.</span>';

@@ -1,21 +1,21 @@
-const {getUsersData, writeUserData, rewriteUserData} = require("../utils/file.utils");
+const {getUsersData, writeUserData, rewriteUserData, getMoviesData} = require("../utils/file.utils");
 const bcrypt = require("bcrypt");
 
 async function checkUserData(data, role) {
     const existingData = await getUsersData();
-    const userGroup = (role === "admin") ? existingData.admins : existingData.customers;
+    const userGroup = (role === "admin") ? existingData.admins : existingData.subscribers;
     return userGroup.find(u => u.email === data.email) || null;
 }
 
 async function userLookupWithID(id, role) {
     const existingData = await getUsersData();
-    const userGroup = (role === "admin") ? existingData.admins : existingData.customers;
+    const userGroup = (role === "admin") ? existingData.admins : existingData.subscribers;
     return userGroup.find(u => u.id === id) || null;
 }
 
-exports.addCustomer = async (req, res) => {
+exports.addSubscriber = async (req, res) => {
 
-    const present = await checkUserData(req.body, "customer");
+    const present = await checkUserData(req.body, "subscriber");
 
     if (present) {
         return res.status(400).json({
@@ -26,7 +26,7 @@ exports.addCustomer = async (req, res) => {
     const newUser = {
         id: crypto.randomUUID(),
         ...req.body,
-        role: "customer"
+        role: "subscriber"
     };
 
     const response = await writeUserData(newUser);
@@ -41,18 +41,18 @@ exports.addCustomer = async (req, res) => {
     });
 };
 
-exports.fetchCustomer = async (req, res) => {
-    const isEmailPresent = await checkUserData(req.body.email, "customer");
+exports.fetchSubscriber = async (req, res) => {
+    const isEmailPresent = await checkUserData(req.body.email, "subscriber");
 
     if (isEmailPresent) {
         // Email match found, now trying to match hash
-        const isMatch = await bcrypt.compare(req.body.password, user.password);
+        const isMatch = await bcrypt.compare(req.body.password, isEmailPresent.password);
         if (isMatch) {
             // Hash matched, user logged in succesfully
             const sessionData =  {
-                "name" : user.name, 
-                "email" : user.email, 
-                "userType" : "customer",
+                "name" : isEmailPresent.name, 
+                "email" : isEmailPresent.email, 
+                "userType" : "subscriber",
                 "sessionID" : crypto.randomUUID()
             };
             return res.status(200).json({ sessionData });
@@ -94,14 +94,14 @@ exports.getCustomers = (req, res) => {
         return res.status(403).json({ message: "Access denied" });
     }
     const existingData = getUsersData();
-    const customersDataWithoutPassword = existingData.customers.map(customer => {
+    const customersDataWithoutPassword = existingData.subscribers.map(subscriber => {
         return {
-            name: customer.name,
-            email: customer.email
+            name: subscriber.name,
+            email: subscriber.email
         }
     });
     if (customersDataWithoutPassword.length === 0) {
-        return res.status(404).json({ message: "No customers found" });
+        return res.status(404).json({ message: "No subscribers found" });
     }
     return res.status(200).json({data : customersDataWithoutPassword});
 }
@@ -118,39 +118,45 @@ exports.getAdmins = (req, res) => {
     return res.status(200).json({data : adminsNames});
 }
 
-exports.changeCustomerInfo = (req, res) => {
+exports.changeSubscriberInfo = (req, res) => {
     const email = req.body.email;
     const existingData = getUsersData();
-    for(let user of existingData) {
+    for(let user of existingData.subscribers) {
         if (user.email === email) {
             user.name = req.body.name;
-            user
+            user.phone = req.body.phone;
+            user.address = req.body.address;
         }
     }
 }
 
-exports.removeCustomerAccount = async (req, res) => {
+exports.removeSubscriberAccount = async (req, res) => {
     const id = req.params.id;
     if (!id) {
         return res.status(400).json({message : "Invalid email!"})
     }
-    const isPresent = await userLookupWithID(id, "customer");
+    const isPresent = await userLookupWithID(id, "subscriber");
     if (!isPresent) {
         return res.status(400).json({message : "User does not exist!"});
     }
 
     const data = await getUsersData();
     
-    const filteredData = data.customers.filter(u => u.id !== id);
+    const filteredData = data.subscribers.filter(u => u.id !== id);
 
     try {
         await rewriteUserData({
             ...data,
-            customers: filteredData
+            subscribers: filteredData
         });
     }
     catch (err) {
         return res.status(400).json({ message : "Data write failed!"});
     }
-    return res.status(200).json({ message : "User removed successfully!"});
+    return res.status(200).json({ message : "Subscriber removed successfully!"});
+}
+
+exports.fetchMoviesData = async (req, res) => {
+    const data = await getMoviesData();
+    return (!data)?res.status(200).json({message : "Movies not found"}) : res.status(200).json({data});
 }

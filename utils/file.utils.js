@@ -1,9 +1,10 @@
 const fs = require("fs").promises;
 const bcrypt = require("bcrypt");
+const { json } = require("express");
 const path = require("path");
 
 const filePath = path.join(__dirname, "../data/users.json");
-
+const moviesFilePath = path.join(__dirname, "../data/movies.json");
 
 async function getUsersData() {
     try {
@@ -38,8 +39,8 @@ async function writeUserData(data) {
     if (data.role.toLowerCase() === "admin") {
         existingUsers.admins.push(newUser);
     } 
-    else if (data.role.toLowerCase() === "customer") {
-        existingUsers.customers.push(newUser);
+    else if (data.role.toLowerCase() === "subscriber") {
+        existingUsers.subscribers.push(newUser);
     } 
     else {
         throw new Error("Invalid role");
@@ -69,4 +70,19 @@ async function rewriteUserData(data) {
         console.error("Error writing file:", err);
     }
 }
-module.exports = { getUsersData, writeUserData, rewriteUserData };
+
+async function getMoviesData() {
+    try {
+        const data = await fs.readFile(moviesFilePath, 'utf-8');
+        if (!data) {
+            return null;
+        }
+        return JSON.parse(data);
+    }
+    catch (err) {
+        console.error("Error reading file:", err);
+        return null;
+    }
+}
+
+module.exports = { getUsersData, writeUserData, rewriteUserData , getMoviesData};

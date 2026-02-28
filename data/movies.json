@@ -1,0 +1,996 @@
+{
+  "sections": [
+    {
+      "id": "movie-section",
+      "title": "Aureon Originals",
+      "movies": [
+        {
+          "id": "stranger-things",
+          "title": "Stranger Things",
+          "img": "https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg",
+          "genre": "Sci-Fi • Horror",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=PssKpzB0Ah0"
+        },
+        {
+          "id": "dark",
+          "title": "Dark",
+          "img": "https://image.tmdb.org/t/p/w500/apbrbWs8M9lyOpJYU5WXrpFbk1Z.jpg",
+          "genre": "Mystery • Thriller",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=ESEUoa-mz2c"
+        },
+        {
+          "id": "the-crown",
+          "title": "The Crown",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8KUH--qJE1IDUHm3GB2etS_S91qeORtvtHA&s",
+          "genre": "Historical • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=JWtnJjn6ng0"
+        },
+        {
+          "id": "elite",
+          "title": "Elite",
+          "img": "https://image.tmdb.org/t/p/w500/3NTAbAiao4JLzFQw6YxP1YZppM8.jpg",
+          "genre": "Teen • Crime • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=QNwhAdrdwp0"
+        },
+        {
+          "id": "queens-gambit",
+          "title": "Queen’s Gambit",
+          "img": "https://image.tmdb.org/t/p/w500/zU0htwkhNvBQdVSIKB9s6hgVeFK.jpg",
+          "genre": "Drama • Sports",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=oZn3qSgmLqI"
+        },
+        {
+          "id": "narcos",
+          "title": "Narcos",
+          "img": "https://image.tmdb.org/t/p/w500/rTmal9fDbwh5F0waol2hq35U4ah.jpg",
+          "genre": "Crime • Biography",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=xl8zdCY-abw"
+        },
+        {
+          "id": "money-heist",
+          "title": "Money Heist",
+          "img": "https://resizing.flixster.com/ITt1FPrFePNR6FSqZrZK7BocG2U=/ems.cHJkLWVtcy1hc3NldHMvdHZzZWFzb24vUlRUVjEwMTMyOTMud2VicA==",
+          "genre": "Crime • Thriller",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=_InqQJRqGW4"
+        },
+        {
+          "id": "lupin",
+          "title": "Lupin",
+          "img": "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p19204904_b_v13_al.jpg",
+          "genre": "Mystery • Crime",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=ga0iTWXCGa0"
+        },
+        {
+          "id": "the-witcher",
+          "title": "The Witcher",
+          "img": "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p17580215_b_v13_ab.jpg",
+          "genre": "Fantasy • Action",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=ndl1W4ltcmg"
+        },
+        {
+          "id": "the-boys",
+          "title": "The Boys",
+          "img": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a8/The-Boys_Volume_One.jpg/250px-The-Boys_Volume_One.jpg",
+          "genre": "Action • Superhero",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=M1bhOaLV4FU"
+        },
+        {
+          "id": "the-umbrella-academy",
+          "title": "The Umbrella Academy",
+          "img": "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/theumbrellaacademy.png",
+          "genre": "Action • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=0DAmWHxeoKw"
+        },
+        {
+          "id": "arcane",
+          "title": "Arcane",
+          "img": "https://sm.ign.com/ign_in/image/a/arcane-sea/arcane-season-1-gets-4k-blu-ray-release-in-rare-move-for-a-n_a8qj.jpg",
+          "genre": "Animation • Action",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=fXmAurh012s"
+        },
+        {
+          "id": "the-sandman",
+          "title": "The Sandman",
+          "img": "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p22337132_b_v13_aa.jpg",
+          "genre": "Fantasy • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=Z6pdYkqeT7A"
+        },
+        {
+          "id": "wednesday",
+          "title": "Wednesday",
+          "img": "https://images.justwatch.com/poster/301078631/s718/wednesday.jpg",
+          "genre": "Mystery • Comedy",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=03u4xyj0TH4"
+        },
+        {
+          "id": "stranger",
+          "title": "Stranger",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvxHck760s8iQ8SyufpXd85CFu4ej34dMtNw&s",
+          "genre": "Thriller • Crime",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=fwUWlxAQj-o"
+        }
+      ]
+    },
+    {
+      "id": "trending-movies",
+      "title": "Trending Movies",
+      "movies": [
+        {
+          "id": "squid-game",
+          "title": "Squid Game",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnCa2fibWttA_ttVw2q0QlojgktweKHBiZsA&s",
+          "genre": "Survival • Drama",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=oqxAJKy0ii4"
+        },
+        {
+          "id": "wednesday",
+          "title": "Wednesday",
+          "img": "https://image.tmdb.org/t/p/w500/9PFonBhy4cQy7Jz20NpMygczOkv.jpg",
+          "genre": "Mystery • Comedy",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=03u4xyj0TH4"
+        },
+        {
+          "id": "breaking-bad",
+          "title": "Breaking Bad",
+          "img": "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",
+          "genre": "Crime • Thriller",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=HhesaQXLuRY"
+        },
+        {
+          "id": "bridgerton",
+          "title": "Bridgerton",
+          "img": "https://image.tmdb.org/t/p/w500/luoKpgVwi1E5nQsi7W0UuKHu2Rq.jpg",
+          "genre": "Romance • Period",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=gpv7ayf_tyE"
+        },
+        {
+          "id": "the-witcher",
+          "title": "The Witcher",
+          "img": "https://image.tmdb.org/t/p/w500/7vjaCdMw15FEbXyLQTVa04URsPm.jpg",
+          "genre": "Fantasy • Action",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=ndl1W4ltcmg"
+        },
+        {
+          "id": "money-heist",
+          "title": "Money Heist",
+          "img": "https://resizing.flixster.com/ITt1FPrFePNR6FSqZrZK7BocG2U=/ems.cHJkLWVtcy1hc3NldHMvdHZzZWFzb24vUlRUVjEwMTMyOTMud2VicA==",
+          "genre": "Crime • Thriller",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=_InqQJRqGW4"
+        },
+        {
+          "id": "lupin",
+          "title": "Lupin",
+          "img": "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p19204904_b_v13_al.jpg",
+          "genre": "Mystery • Crime",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=ga0iTWXCGa0"
+        },
+        {
+          "id": "the-boys",
+          "title": "The Boys",
+          "img": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a8/The-Boys_Volume_One.jpg/250px-The-Boys_Volume_One.jpg",
+          "genre": "Action • Superhero",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=M1bhOaLV4FU"
+        },
+        {
+          "id": "the-umbrella-academy",
+          "title": "The Umbrella Academy",
+          "img": "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/theumbrellaacademy.png",
+          "genre": "Action • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=0DAmWHxeoKw"
+        },
+        {
+          "id": "arcane",
+          "title": "Arcane",
+          "img": "https://sm.ign.com/ign_in/image/a/arcane-sea/arcane-season-1-gets-4k-blu-ray-release-in-rare-move-for-a-n_a8qj.jpg",
+          "genre": "Animation • Action",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=fXmAurh012s"
+        },
+        {
+          "id": "stranger",
+          "title": "Stranger",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvxHck760s8iQ8SyufpXd85CFu4ej34dMtNw&s",
+          "genre": "Thriller • Crime",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=fwUWlxAQj-o"
+        },
+        {
+          "id": "chernobyl",
+          "title": "Chernobyl",
+          "img": "https://resizing.flixster.com/DEQSmL21iHU-3aeci_nL2jNriN4=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzUzNDRmM2I5LWFiZDUtNDA5MS05MjM5LTAyNTg0ZWExYTU4OS5qcGc=",
+          "genre": "Drama • History",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=s9APLXM9Ei8"
+        },
+        {
+          "id": "the-sandman",
+          "title": "The Sandman",
+          "img": "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p22337132_b_v13_aa.jpg",
+          "genre": "Fantasy • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=Z6pdYkqeT7A"
+        },
+        {
+          "id": "elite",
+          "title": "Elite",
+          "img": "https://image.tmdb.org/t/p/w500/3NTAbAiao4JLzFQw6YxP1YZppM8.jpg",
+          "genre": "Teen • Crime • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=QNwhAdrdwp0"
+        },
+        {
+          "id": "band-of-brothers",
+          "title": "Band of Brothers",
+          "img": "https://m.media-amazon.com/images/M/MV5BMTQ3NTdmOTEtZTRmMi00NTg5LWI5NmUtYTNiOTc0ZmNkODU0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+          "genre": "History • Drama",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=KKRBAFlN5ww"
+        }
+      ]
+    },
+    {
+      "id": "drama",
+      "title": "Drama",
+      "movies": [
+        {
+          "id": "chernobyl",
+          "title": "Chernobyl",
+          "img": "https://image.tmdb.org/t/p/w500/hlLXt2tOPT6RRnjiUmoxyG1LTFi.jpg",
+          "genre": "Drama • History",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=s9APLXM9Ei8"
+        },
+        {
+          "id": "breaking-bad",
+          "title": "Breaking Bad",
+          "img": "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",
+          "genre": "Crime • Thriller",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=HhesaQXLuRY"
+        },
+        {
+          "id": "the-crown",
+          "title": "The Crown",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8KUH--qJE1IDUHm3GB2etS_S91qeORtvtHA&s",
+          "genre": "Historical • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=JWtnJjn6ng0"
+        },
+        {
+          "id": "game-of-thrones",
+          "title": "Game of Thrones",
+          "img": "https://m.media-amazon.com/images/M/MV5BMTNhMDJmNmYtNDQ5OS00ODdlLWE0ZDAtZTgyYTIwNDY3OTU3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+          "genre": "Fantasy • Drama",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=KPLWWIOCOOQ"
+        },
+        {
+          "id": "the-handmaids-tale",
+          "title": "The Handmaid's Tale",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcL6zOAbmG3NQqj5OjaZRWMYcO8xuxvqyGWQ&s",
+          "genre": "Drama • Sci-Fi",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=dVLiDETfx1c"
+        },
+        {
+          "id": "fargo",
+          "title": "Fargo",
+          "img": "https://upload.wikimedia.org/wikipedia/en/3/33/Fargo_%281996_movie_poster%29.jpg",
+          "genre": "Crime • Thriller",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=ju75Sd4yAZw"
+        },
+        {
+          "id": "sherlock",
+          "title": "Sherlock",
+          "img": "https://m.media-amazon.com/images/M/MV5BNTQzNGZjNDEtOTMwYi00MzFjLWE2ZTYtYzYxYzMwMjZkZDc5XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+          "genre": "Mystery • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=y9ZouUyPKx8"
+        },
+        {
+          "id": "better-call-saul",
+          "title": "Better Call Saul",
+          "img": "https://m.media-amazon.com/images/I/81gwy45Dx7L._AC_UF1000,1000_QL80_.jpg",
+          "genre": "Crime • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=HN4oydykJFc"
+        },
+        {
+          "id": "do-patti",
+          "title": "Do Patti",
+          "img": "https://cdn.moviefone.com/image-assets/1148172/wbXSE68cDwqUPsHJcpdu7I5kSLK.jpg?d=360x540&q=30",
+          "genre": "Drama • History",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=b6Z_RYC8IAQ"
+        },
+        {
+          "id": "mad-men",
+          "title": "Mad Men",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNacVk_nmi6NhjEhKY-jsUIY5FI9DqNzhfEg&s",
+          "genre": "Drama • Period",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=m7NChV93LBw"
+        },
+        {
+          "id": "the-west-wing",
+          "title": "The West Wing",
+          "img": "https://resizing.flixster.com/R5jz1fQD_lqlnTv8XRsOIqyKTHg=/ems.cHJkLWVtcy1hc3NldHMvdHZzZXJpZXMvMmE2MzZkMjEtMmM1Mi00ZWJiLTlmMjAtNTIxZDVlMWQ0NTM1LmpwZw==",
+          "genre": "Drama • Political",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=oBZlwRkB6Bs"
+        },
+        {
+          "id": "house-of-cards",
+          "title": "House of Cards",
+          "img": "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p9691630_b_v8_ag.jpg",
+          "genre": "Drama • Political",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=8QnMmpfKWvo"
+        },
+        {
+          "id": "the-sopranos",
+          "title": "The Sopranos",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQoXi_f20OW6QKLEzSTatr9rhu45LPFCiLsw&s",
+          "genre": "Crime • Drama",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=Q8cBFvpqmH0"
+        },
+        {
+          "id": "metro-in-dino",
+          "title": "Metro In Dino",
+          "img": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/metro-in-dino-et00363553-1751606247.jpg",
+          "genre": "Drama • History",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=Wm2R3aJPY2M"
+        },
+        {
+          "id": "twin-peaks",
+          "title": "Twin Peaks",
+          "img": "https://m.media-amazon.com/images/I/61TnKJjchLL._AC_UF1000,1000_QL80_.jpg",
+          "genre": "Mystery • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=rFuKtJjhBCQ"
+        },
+        {
+          "id": "the-wire",
+          "title": "The Wire",
+          "img": "https://images.justwatch.com/poster/8608274/s718/season-1.jpg",
+          "genre": "Crime • Drama",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=1S5khOZ1wBs"
+        },
+        {
+          "id": "band-of-brothers",
+          "title": "Band of Brothers",
+          "img": "https://m.media-amazon.com/images/M/MV5BMTQ3NTdmOTEtZTRmMi00NTg5LWI5NmUtYTNiOTc0ZmNkODU0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+          "genre": "History • Drama",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=KKRBAFlN5ww"
+        }
+      ]
+    },
+    {
+      "id": "thriller",
+      "title": "Thriller",
+      "movies": [
+        {
+          "id": "delhi-crime",
+          "title": "Delhi Crime",
+          "img": "https://resizing.flixster.com/Ee4ML9I_7xiO7FbMz_hmcTS7lsA=/fit-in/705x460/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p16527007_b_v8_aj.jpg",
+          "genre": "Crime • Drama",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=9I4FKW0tlFU"
+        },
+        {
+          "id": "made-in-heaven",
+          "title": "Made in Heaven",
+          "img": "https://images.justwatch.com/poster/307415470/s718/made-in-heaven-2019.jpg",
+          "genre": "Romance • Thriller",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=_lpxWzvII5k"
+        },
+        {
+          "id": "paatal-lok",
+          "title": "Paatal Lok",
+          "img": "https://i.redd.it/0asogf85y2ee1.jpeg",
+          "genre": "Crime • Mystery",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=cNwWMW4mxO8"
+        },
+        {
+          "id": "tandav",
+          "title": "Tandav",
+          "img": "https://upload.wikimedia.org/wikipedia/en/4/40/Tandav_2021_poster.jpg",
+          "genre": "Political • thriller",
+          "rating": "★★★☆☆",
+          "trailer": "https://www.youtube.com/watch?v=ZcFV_rJDa7s"
+        },
+        {
+          "id": "breathe",
+          "title": "Breathe",
+          "img": "https://www.bobbytalkscinema.com/adminpanel/imagetemp/Breathe-Site.jpg",
+          "genre": "Thriller • Crime",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=GfLhuXcj4b4"
+        },
+        {
+          "id": "kota-factory",
+          "title": "Kota Factory",
+          "img": "https://m.media-amazon.com/images/M/MV5BOWI5NmJiZjYtNDJiYy00N2JlLWE3YjItNGMzYjFiMTljNzA5XkEyXkFqcGc@._V1_.jpg",
+          "genre": "thriller • Education",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=pNZQ6msbOvM"
+        },
+        {
+          "id": "asur",
+          "title": "Asur",
+          "img": "https://mena-img-cdn-lb.aws.playco.com/474w/ev-evision-avod/AVODASURY2020S01E001HI/AVODASURY2020S01E001HI-474x677-PST.jpg",
+          "genre": "Crime • Mythology",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=oveko3h4pxk"
+        },
+        {
+          "id": "scam-1992",
+          "title": "Scam 1992",
+          "img": "https://m.media-amazon.com/images/M/MV5BNGRkOTVjODgtNTBmZS00MDQ3LWE3ZjQtM2ZiNDQ3OWJkMjM2XkEyXkFqcGc@._V1_.jpg",
+          "genre": "thriller • Biography",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=ISORfez27og"
+        },
+        {
+          "id": "mirzapur",
+          "title": "Mirzapur",
+          "img": "https://images.plex.tv/photo?size=large-1920&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fp0qM8hhlMF5DuxHBzl2EZR6TehX.jpg",
+          "genre": "Crime • Action",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=ZNeGF-PvRHY"
+        },
+        {
+          "id": "made-in-heaven-s2",
+          "title": "Made in Heaven S2",
+          "img": "https://resizing.flixster.com/UxpdArs3acyoUyd-aYP9IA9VYmw=/ems.cHJkLWVtcy1hc3NldHMvdHZzZXJpZXMvUlRUVjQ0MDQyNC53ZWJw",
+          "genre": "Romance • thriller",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=_lpxWzvII5k"
+        },
+        {
+          "id": "bard-of-blood",
+          "title": "Bard of Blood",
+          "img": "https://upload.wikimedia.org/wikipedia/en/7/7b/Bard_of_Blood_Poster.jpg",
+          "genre": "Spy • Thriller",
+          "rating": "★★★☆☆",
+          "trailer": "https://www.youtube.com/watch?v=uEE7HqPvqOg"
+        },
+        {
+          "id": "kahaani",
+          "title": "Kahaani",
+          "img": "https://m.media-amazon.com/images/M/MV5BMTQ1NDI0NzkyOF5BMl5BanBnXkFtZTcwNzAyNzE2Nw@@._V1_.jpg",
+          "genre": "Mystery • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=rsjamVgPoI8"
+        },
+        {
+          "id": "breathe-2",
+          "title": "Breathe 2",
+          "img": "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p23352667_b_v8_aa.jpg",
+          "genre": "Thriller • Crime",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=gRbG2tjHYCA"
+        },
+        {
+          "id": "selection-day",
+          "title": "Selection Day",
+          "img": "https://m.media-amazon.com/images/I/810CsOCTLOL._AC_UF1000,1000_QL80_.jpg",
+          "genre": "thriller• Sports",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=2Q8xTwV9ecI"
+        }
+      ]
+    },
+    {
+      "id": "action",
+      "title": "Action",
+      "movies": [
+        {
+          "id": "rrr",
+          "title": "RRR",
+          "img": "https://upload.wikimedia.org/wikipedia/en/d/d7/RRR_Poster.jpg",
+          "genre": "Action • Drama",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=GY4BgdUSpbE"
+        },
+        {
+          "id": "pathaan",
+          "title": "Pathaan",
+          "img": "https://upload.wikimedia.org/wikipedia/en/c/c3/Pathaan_film_poster.jpg",
+          "genre": "Action • Thriller",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=vqu4z34wENw"
+        },
+        {
+          "id": "jawan",
+          "title": "Jawan",
+          "img": "https://www.tribuneindia.com/sortd-service/imaginary/v22-01/jpg/large/high?url=dGhldHJpYnVuZS1zb3J0ZC1wcm8tcHJvZC1zb3J0ZC9tZWRpYWQzODczNGYwLTRlNmQtMTFlZi1iMzFjLWM3ZTc5MGQ0OWM0MS5qcGc=",
+          "genre": "Action • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=MWOlnZSnXJo"
+        },
+        {
+          "id": "fast-and-furious",
+          "title": "Fast and Furious",
+          "img": "https://play-lh.googleusercontent.com/OWfr4HF6X3--BaiqIBMy_-FcIgnib7k6LXw3ULKjxmmf302eSgZgDf9meeVFfGxnfqQbNw",
+          "genre": "Drama • Action",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=RMmLTmjXKH8"
+        },
+        {
+          "id": "kgf-chapter-2",
+          "title": "KGF Chapter 2",
+          "img": "https://m.media-amazon.com/images/S/pv-target-images/dbe30e1e25813a698e0da679a5968c380bd2d1b4e6966394d4c964c6b3301896.jpg",
+          "genre": "Action • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=JKa05nyUmuQ"
+        },
+        {
+          "id": "brahmastra",
+          "title": "Brahmastra",
+          "img": "https://cf-img-a-in.tosshub.com/sites/visualstory/stories/2023_04/story_29522/assets/2.jpeg?time=1680609695",
+          "genre": "Fantasy • Action",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=BUjXzrgntcY"
+        },
+        {
+          "id": "tiger-zinda-hai",
+          "title": "Tiger Zinda Hai",
+          "img": "https://images.justwatch.com/poster/293882611/s718/tiger-zinda-hai.jpg",
+          "genre": "Action • Thriller",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=ePO5M5DE01I"
+        },
+        {
+          "id": "dangal",
+          "title": "Dangal",
+          "img": "https://m.media-amazon.com/images/M/MV5BMTQ4MzQzMzM2Nl5BMl5BanBnXkFtZTgwMTQ1NzU3MDI@._V1_.jpg",
+          "genre": "Sports • Action",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=x_7YlGv9u1g"
+        },
+        {
+          "id": "sultan",
+          "title": "Sultan",
+          "img": "https://m.media-amazon.com/images/M/MV5BMmM4NzJjNTQtZGU0Mi00NmJhLTkxMWQtYThiYjA2YjlhMjRkXkEyXkFqcGc@._V1_.jpg",
+          "genre": "Action • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=wPxqcq6Byq0"
+        },
+        {
+          "id": "war",
+          "title": "War",
+          "img": "https://upload.wikimedia.org/wikipedia/en/6/6f/War_official_poster.jpg",
+          "genre": "Action • Thriller",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=tQ0mzXRk-oM"
+        },
+        {
+          "id": "mission-impossible",
+          "title": "Mission Impossible",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSafalx_eWYqtyL60gkiDE61XXeEmyeuRBf8g&s",
+          "genre": "Action • Historical",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=fsQgc9pCyDU"
+        },
+        {
+          "id": "john-wick-ballerina",
+          "title": "From the World of John Wick: Ballerina",
+          "img": "https://m.media-amazon.com/images/S/pv-target-images/c0423aec06e740f429175606ca75c605bdf1634644d7f28c92497ad149434ae6.jpg",
+          "genre": "Action • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=0FSwsrFpkbw"
+        },
+        {
+          "id": "the-fall-guy",
+          "title": "The Fall Guy",
+          "img": "https://www.uphe.com/sites/default/files/styles/scale__344w_/public/2024/06/TheFallGuy_PosterArt.jpg?itok=k-4iVCoA",
+          "genre": "Action • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=j7jPnwVGdZ8"
+        },
+        {
+          "id": "krrish-3",
+          "title": "Krrish 3",
+          "img": "https://upload.wikimedia.org/wikipedia/en/2/28/Krrish_3_%282013_film%29_poster.jpg",
+          "genre": "Action • Sci-Fi",
+          "rating": "★★★☆☆",
+          "trailer": "https://www.youtube.com/watch?v=_6Ix1VF_yWM"
+        },
+        {
+          "id": "the-killers-game",
+          "title": "The Killer's Game",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQafDhyCdfSfrha6alUZk6LRoBE9R83phOl6tHawwbjxDz-duSP",
+          "genre": "Action • Drama",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=ZHK6WghyWGY"
+        },
+        {
+          "id": "lift",
+          "title": "Lift",
+          "img": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQVISWRRnthAAYSh55ArjXu1XoS9PYPKinHREKhicSncQLF0Xck",
+          "genre": "Action • Drama",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=m2L-Sa_6MU0"
+        }
+      ]
+    },
+    {
+      "id": "sci-fi",
+      "title": "Sci-Fi",
+      "movies": [
+        {
+          "id": "dark",
+          "title": "Dark",
+          "img": "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",
+          "genre": "Mystery • Thriller",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=ESEUoa-mz2c"
+        },
+        {
+          "id": "stranger-things-2",
+          "title": "Stranger Things 2",
+          "img": "https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg",
+          "genre": "Sci-Fi • Horror",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=R1ZXOOLMJ8s"
+        },
+        {
+          "id": "elite",
+          "title": "Elite",
+          "img": "https://image.tmdb.org/t/p/w500/3NTAbAiao4JLzFQw6YxP1YZppM8.jpg",
+          "genre": "Teen • Crime • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=QNwhAdrdwp0"
+        },
+        {
+          "id": "the-oa",
+          "title": "The OA",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcS4h6Dlz9-b7S2K1x9Gs_eT91vWv1Y-BNiA&s",
+          "genre": "Sci-Fi • Mystery",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=DvHJtez2IlY"
+        },
+        {
+          "id": "locke-and-key",
+          "title": "Locke & Key",
+          "img": "https://images.justwatch.com/poster/252540701/s718/locke-and-key.jpg",
+          "genre": "Fantasy • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=_EonRi0yQOE"
+        },
+        {
+          "id": "the-witcher",
+          "title": "The Witcher",
+          "img": "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p17580215_b_v13_ab.jpg",
+          "genre": "Fantasy • Action",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=ndl1W4ltcmg"
+        },
+        {
+          "id": "the-umbrella-academy",
+          "title": "The Umbrella Academy",
+          "img": "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/theumbrellaacademy.png",
+          "genre": "Action • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=0DAmWHxeoKw"
+        },
+        {
+          "id": "glitch",
+          "title": "Glitch",
+          "img": "https://m.media-amazon.com/images/M/MV5BZWRjOTYyM2UtZWViZS00YjYzLWE2N2UtMWM0NjNkMzAxMTFjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+          "genre": "Mystery • Sci-Fi",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=inGM8RB6H00"
+        },
+        {
+          "id": "chilling-adventures-of-sabrina",
+          "title": "Chilling Adventures of Sabrina",
+          "img": "https://images.justwatch.com/poster/81606904/s718/chilling-adventures-of-sabrina.jpg",
+          "genre": "Fantasy • Horror",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=R2gbPxeNk2E"
+        },
+        {
+          "id": "sense8",
+          "title": "Sense8",
+          "img": "https://m.media-amazon.com/images/M/MV5BMjA4MTEyMzcwMl5BMl5BanBnXkFtZTgwMTIwODczNTM@._V1_FMjpg_UX1000_.jpg",
+          "genre": "Sci-Fi • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=iKpKAlbJ7BQ"
+        },
+        {
+          "id": "lost-in-space",
+          "title": "Lost in Space",
+          "img": "https://images.justwatch.com/poster/333790662/s718/lost-in-space-1965.jpg",
+          "genre": "Sci-Fi • Adventure",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=fzmM0AB60QQ"
+        },
+        {
+          "id": "black-mirror",
+          "title": "Black Mirror",
+          "img": "https://m.media-amazon.com/images/M/MV5BODcxMWI2NDMtYTc3NC00OTZjLWFmNmUtM2NmY2I1ODkxYzczXkEyXkFqcGc@._V1_.jpg",
+          "genre": "Sci-Fi • Thriller",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/watch?v=-qIlCo9yqpY"
+        },
+        {
+          "id": "the-oa-s2",
+          "title": "The OA S2",
+          "img": "https://m.media-amazon.com/images/M/MV5BMTY5OTkwNDkzOF5BMl5BanBnXkFtZTgwMDEyNzI1NzM@._V1_.jpg",
+          "genre": "Sci-Fi • Mystery",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=WlSXDaRR2bw"
+        },
+        {
+          "id": "the-society",
+          "title": "The Society",
+          "img": "https://m.media-amazon.com/images/M/MV5BMmNlZDcwNjYtOWY3ZC00NGY4LTlkYTktMTAxZjFjNjRhYjJiXkEyXkFqcGc@._V1_.jpg",
+          "genre": "Drama • Mystery",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=lSj77j1Dnxg"
+        },
+        {
+          "id": "wayward-pines",
+          "title": "Wayward Pines",
+          "img": "https://m.media-amazon.com/images/M/MV5BMjUwY2NmZDItZjdjNC00ZGQ3LTk2NTEtNjY5NTQxOGYwNGY4XkEyXkFqcGc@._V1_.jpg",
+          "genre": "Mystery • Thriller",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=RsQ9Fl0VCkk"
+        }
+      ]
+    },
+    {
+      "id": "horror",
+      "title": "Horror",
+      "movies": [
+        {
+          "id": "the-conjuring-2",
+          "title": "The Conjuring 2",
+          "img": "https://play-lh.googleusercontent.com/CiJZjbBu2tAEZGPomtudU1Yny6A5V48Va0D_nOw7-BoZiPPuRHVYRC41Nb1o2TQEJ6A",
+          "genre": "Horror • Mystery",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=VFsmuRPClr4"
+        },
+        {
+          "id": "it-2017",
+          "title": "It (2017)",
+          "img": "https://images.justwatch.com/poster/8638195/s718/it-2017.jpg",
+          "genre": "Horror • Thriller",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=xKJmEC5ieOk"
+        },
+        {
+          "id": "a-quiet-place",
+          "title": "A Quiet Place",
+          "img": "https://images.justwatch.com/poster/44829556/s718/a-quiet-place.jpg",
+          "genre": "Horror • Sci-Fi",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=WR7cc5t7tv8"
+        },
+        {
+          "id": "the-babadook",
+          "title": "The Babadook",
+          "img": "https://m.media-amazon.com/images/M/MV5BMTk0NzMzODc2NF5BMl5BanBnXkFtZTgwOTYzNTM1MzE@._V1_.jpg",
+          "genre": "Horror • Psychological",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=k5WQZzDRVtw"
+        },
+        {
+          "id": "hereditary",
+          "title": "Hereditary",
+          "img": "https://m.media-amazon.com/images/S/pv-target-images/2be98bed028f1d53e01a860b6bb91c362dc32611c45effbcf2aa2645d590b22a.jpg",
+          "genre": "Horror • Drama",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=V6wWKNij_1M"
+        },
+        {
+          "id": "insidious",
+          "title": "Insidious",
+          "img": "https://m.media-amazon.com/images/S/pv-target-images/a311d626796e53a03cebd7241088cd74389a7940e10de7bfeabf46f73a80d91d.jpg",
+          "genre": "Horror • Supernatural",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=zuZnRUcoWos"
+        },
+        {
+          "id": "paranormal-activity",
+          "title": "Paranormal Activity",
+          "img": "https://m.media-amazon.com/images/S/pv-target-images/a98a2df8da12ee502cc4ad2edbcc7bc779a8906e3931fe0a8497029590739acc.jpg",
+          "genre": "Horror • Found Footage",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=5od3NGHrXrI"
+        },
+        {
+          "id": "get-out",
+          "title": "Get Out",
+          "img": "https://upload.wikimedia.org/wikipedia/en/a/a3/Get_Out_poster.png",
+          "genre": "Horror • Thriller",
+          "rating": "★★★★☆",
+          "trailer": "https://www.youtube.com/watch?v=DzfpyUB60YY"
+        },
+        {
+          "id": "it-follows",
+          "title": "It Follows",
+          "img": "https://m.media-amazon.com/images/M/MV5BNGZiYWRiYjAtODU0NS00YzAzLTk2MzQtZGVlMzVjM2M3MGQ3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+          "genre": "Horror • Supernatural",
+          "rating": "★★★★☆",
+          "trailer": null
+        },
+        {
+          "id": "the-ring",
+          "title": "The Ring",
+          "img": "https://upload.wikimedia.org/wikipedia/en/thumb/3/37/Theringpostere.jpg/250px-Theringpostere.jpg",
+          "genre": "Horror • Mystery",
+          "rating": "★★★★☆",
+          "trailer": null
+        },
+        {
+          "id": "the-omen",
+          "title": "The Omen",
+          "img": "https://play-lh.googleusercontent.com/Sc2R65Wy9PzJ3nvgRsMEXhdJugYQpJJW1iz5jq2imkZMlR9e49jBc1F1TJqWitr0czZlZ_o-_Nw7JBf-8zY=w240-h480-rw",
+          "genre": "Horror • Supernatural",
+          "rating": "★★★★☆",
+          "trailer": null
+        },
+        {
+          "id": "midsommar",
+          "title": "Midsommar",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgFHI9_dWqcsYC6SZphGQTWz0eIN28OzeOAg&s",
+          "genre": "Horror • Psychological",
+          "rating": "★★★★☆",
+          "trailer": null
+        },
+        {
+          "id": "the-exorcist",
+          "title": "The Exorcist",
+          "img": "https://images.justwatch.com/poster/248371483/s718/the-exorcist.jpg",
+          "genre": "Horror • Supernatural",
+          "rating": "★★★★☆",
+          "trailer": null
+        }
+      ]
+    },
+    {
+      "id": "comedy",
+      "title": "Comedy",
+      "movies": [
+        {
+          "id": "3-idiots",
+          "title": "3 Idiots",
+          "img": "https://images.justwatch.com/poster/115370120/s718/3-idiots.jpg",
+          "genre": "Comedy • Drama",
+          "rating": "★★★★★",
+          "trailer": null
+        },
+        {
+          "id": "the-intouchables",
+          "title": "The Intouchables",
+          "img": "https://images.justwatch.com/poster/306832957/s718/the-intouchables.jpg",
+          "genre": "Comedy • Drama",
+          "rating": "★★★★☆",
+          "trailer": null
+        },
+        {
+          "id": "friends",
+          "title": "Friends",
+          "img": "https://m.media-amazon.com/images/M/MV5BOTU2YmM5ZjctOGVlMC00YTczLTljM2MtYjhlNGI5YWMyZjFkXkEyXkFqcGc@._V1_.jpg",
+          "genre": "Romantic • Comedy",
+          "rating": "★★★★★",
+          "trailer": null
+        },
+        {
+          "id": "andaz-apna-apna",
+          "title": "Andaz Apna Apna",
+          "img": "https://m.media-amazon.com/images/M/MV5BZjdiNGRmY2UtMjhkNy00OGQyLWIxNWQtMTJhMWM5YTNiMzVhXkEyXkFqcGc@._V1_.jpg",
+          "genre": "Comedy • Romance",
+          "rating": "★★★★★",
+          "trailer": null
+        },
+        {
+          "id": "pk",
+          "title": "PK",
+          "img": "https://m.media-amazon.com/images/M/MV5BMTYzOTE2NjkxN15BMl5BanBnXkFtZTgwMDgzMTg0MzE@._V1_FMjpg_UX1000_.jpg",
+          "genre": "Comedy • Sci-Fi",
+          "rating": "★★★★☆",
+          "trailer": null
+        },
+        {
+          "id": "home-alone",
+          "title": "Home Alone",
+          "img": "https://m.media-amazon.com/images/I/A1T+lZ6iUZL._AC_UF1000,1000_QL80_.jpg",
+          "genre": "Comedy • Family",
+          "rating": "★★★★★",
+          "trailer": null
+        },
+        {
+          "id": "the-hangover",
+          "title": "The Hangover",
+          "img": "https://images.justwatch.com/poster/285598209/s718/the-hangover.jpg",
+          "genre": "Comedy • Adventure",
+          "rating": "★★★★☆",
+          "trailer": null
+        },
+        {
+          "id": "forrest-gump",
+          "title": "Forrest Gump",
+          "img": "https://m.media-amazon.com/images/M/MV5BNDYwNzVjMTItZmU5YS00YjQ5LTljYjgtMjY2NDVmYWMyNWFmXkEyXkFqcGc@._V1_.jpg",
+          "genre": "Comedy • Drama",
+          "rating": "★★★★★",
+          "trailer": null
+        },
+        {
+          "id": "chhichhore",
+          "title": "Chhichhore",
+          "img": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/Chhichhore_Poster.jpg/250px-Chhichhore_Poster.jpg",
+          "genre": "Comedy • Drama",
+          "rating": "★★★★☆",
+          "trailer": null
+        },
+        {
+          "id": "golmaal",
+          "title": "Golmaal",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKsKNi2-Bd5g65RZPHtvCY1qBmOCqRGl3KAw&s",
+          "genre": "Comedy • Action",
+          "rating": "★★★★☆",
+          "trailer": null
+        },
+        {
+          "id": "mission-mangal",
+          "title": "Mission Mangal",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfyphyHEGFKStVrahf0Wp-qHWm_uofVuxMEw&s",
+          "genre": "Comedy • Drama",
+          "rating": "★★★★☆",
+          "trailer": null
+        },
+        {
+          "id": "deadpool",
+          "title": "Deadpool",
+          "img": "https://play-lh.googleusercontent.com/8IRAJantwDju48RC42P-x07gdRXRYfDmxSmNtUD7ul8CbMM0EfHMFYvxOZH0QN2fu6ZW=w240-h480-rw",
+          "genre": "Comedy • Action",
+          "rating": "★★★★☆",
+          "trailer": null
+        },
+        {
+          "id": "jumanji",
+          "title": "Jumanji: Welcome to the Jungle",
+          "img": "https://upload.wikimedia.org/wikipedia/en/1/12/Jumanji_-The_Next_Level_film_poster.jpg",
+          "genre": "Comedy • Adventure",
+          "rating": "★★★★☆",
+          "trailer": null
+        }
+      ]
+    }
+  ]
+}
