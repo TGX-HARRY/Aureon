@@ -13,10 +13,9 @@ async function userLookupWithID(id, role) {
     return userGroup.find(u => u.id === id) || null;
 }
 
+// adding subscriber 
 exports.addSubscriber = async (req, res) => {
-
     const present = await checkUserData(req.body, "subscriber");
-
     if (present) {
         return res.status(400).json({
             message: "Account already exists!"
