@@ -10,13 +10,13 @@ async function getUsersData() {
     try {
         const data = await fs.readFile(filePath, 'utf-8');
         if (!data) {
-            return null;
+            return { admins: [], subscribers: [] };
         }
         return JSON.parse(data); 
     } 
     catch (err) {
         console.error("Error reading file:", err);
-        return null;
+        return { admins: [], subscribers: [] };
     }
 }
 
@@ -34,8 +34,7 @@ async function writeUserData(data) {
         role: data.role
     };
 
-    const existingUsers = getUsersData();
-
+    const existingUsers = await getUsersData();
     if (data.role.toLowerCase() === "admin") {
         existingUsers.admins.push(newUser);
     } 
@@ -47,7 +46,7 @@ async function writeUserData(data) {
     }
 
     try {
-        fs.writeFileSync(
+        await fs.writeFile(
             filePath,
             JSON.stringify(existingUsers, null, 2)
         );
