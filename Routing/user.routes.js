@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/users/admins", controllers.getAdmins);
 router.post("/users/subscribers/login", controllers.fetchSubscriber);
 router.get("/movies", controllers.fetchMoviesData);
-// router.get("/customers/:email", controllers.checkSubscriberByEmail);
+router.get("/subscribers/:id", controllers.getUsersDataByID);
 router.post("/users/subscribers/register", controllers.addSubscriber);
 router.post("/users/admins/register", controllers.addAdmin);
 // router.patch("/admins/changeinfo/:email", controllers.changeAdminInfo);
