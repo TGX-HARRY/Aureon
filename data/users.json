@@ -4,7 +4,16 @@
       "id": "9b370175-c977-4376-b5ea-037aa56b7335",
       "name": "test",
       "email": "test@gmail.com",
+      "movies": [],
       "password": "$2b$10$TVXRkl3sCTEkVPdHGKtr7ercC3cnH.xtaV/GYo8N7jFkuCWiBpXuq",
+      "role": "subscriber"
+    },
+    {
+      "id": "31d9985c-b732-49af-8881-00eb98763656",
+      "name" : "testuser",
+      "email": "testuser@gmail.com",
+      "movies": [],
+      "password": "$2b$10$wqNyDnSQfkZLZxA4.8tDK.jD1vpn1UKxt8KTEnuN.ptEy7wpKMyTW",
       "role": "subscriber"
     }
   ],
