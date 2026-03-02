@@ -1,10 +1,20 @@
 const {getUsersData, writeUserData, rewriteUserData, getMoviesData} = require("../utils/file.utils");
 const bcrypt = require("bcrypt");
 
-async function checkUserData(data, role) {
+let sessionID;
+exports.getSessionID = () => {
+    return sessionID;
+}
+
+function generateSessionID (){
+    sessionID = crypto.randomUUID();
+    return sessionID;
+} 
+
+async function checkUserData(email, role) {
     const existingData = await getUsersData();
     const userGroup = (role === "admin") ? existingData.admins : existingData.subscribers;
-    return userGroup.find(u => u.email === data.email) || null;
+    return userGroup.find(u => u.email === email) || null;
 }
 
 async function userLookupWithID(id, role) {
@@ -13,9 +23,10 @@ async function userLookupWithID(id, role) {
     return userGroup.find(u => u.id === id) || null;
 }
 
-// adding subscriber 
 exports.addSubscriber = async (req, res) => {
+
     const present = await checkUserData(req.body, "subscriber");
+
     if (present) {
         return res.status(400).json({
             message: "Account already exists!"
@@ -28,8 +39,9 @@ exports.addSubscriber = async (req, res) => {
         role: "subscriber"
     };
 
-    const response = await writeUserData(newUser);
-    if (!response.json()) {
+    try {
+        await writeUserData(newUser);
+    } catch (err) {
         return res.status(500).json({
             message: "Error creating user"
         });
@@ -50,9 +62,9 @@ exports.fetchSubscriber = async (req, res) => {
             // Hash matched, user logged in succesfully
             const sessionData =  {
                 "name" : isEmailPresent.name, 
-                "email" : isEmailPresent.email, 
+                "id" : isEmailPresent.id, 
                 "userType" : "subscriber",
-                "sessionID" : crypto.randomUUID()
+                "sessionID" : generateSessionID()
             };
             return res.status(200).json({ sessionData });
         }
@@ -158,4 +170,16 @@ exports.removeSubscriberAccount = async (req, res) => {
 exports.fetchMoviesData = async (req, res) => {
     const data = await getMoviesData();
     return (!data)?res.status(200).json({message : "Movies not found"}) : res.status(200).json({data});
+}
+
+exports.getUsersDataByID = async (req, res) => {
+    const id = req.params.id;
+    if (!id) {
+        return res.status(400).json({message : "Invalid ID!"})
+    }
+    const data = await userLookupWithID(id, "subscriber");
+    if (!data) {
+        return res.status(400).json({message : "Data couldn't be fetched!"});
+    }
+    return res.status(200).json({fetchedData: data});
 }
