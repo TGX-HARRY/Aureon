@@ -111,6 +111,11 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault(); // Prevent default form submission
 
+            const sessionData = localStorage.getItem("sessionData");
+            if (!sessionData) {
+                alert("Please login to submit a ticket!");
+                window.location.href = "/login";
+            }
             // Get form values
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
