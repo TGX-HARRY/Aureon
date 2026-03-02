@@ -89,6 +89,31 @@ async function loadMovies() {
     console.error("Error loading movies:", error);
   }
 }
+async function handleMovieClick(movie) {
+  const sessionData = JSON.parse(localStorage.getItem("sessionData"));
+  if (!sessionData) {
+    window.location.href = "/login";
+  }
+  
+  else {
+    console.log("Session Data:", sessionData.sessionID);
+    try {
+      const response = await fetch( 
+        `/api/movies?watch=${encodeURIComponent(movie.id)}&sessionid=${encodeURIComponent(sessionData.sessionID)}`
+      );
+      const data = await response.json();
 
+      if (!data) {
+        throw new Error("Failed to fetch movie details");
+      }
+      else {
+        window.location.href = `movie.html?watch=${encodeURIComponent(movie.id)}&sessionid=${encodeURIComponent(sessionData.sessionID)}`;
+      }
+    }
+    catch (error) {
+      console.error("Error fetching movie details:", error);
+    }
+  }
+}
 // Run it
 loadMovies();
