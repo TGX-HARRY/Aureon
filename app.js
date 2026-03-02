@@ -1,11 +1,15 @@
+// app.js
+
 const express = require("express");
 const userRoutes = require("./Routing/user.routes");
+const { applyMiddlewares, setupRoutes } = require("./utils/helper");
 
 const app = express();
 
-app.use(express.json());
-app.use(express.static("public"));
+// apply middleware
+applyMiddlewares(app);
 
-app.use("/api", userRoutes);
+// setup routes
+setupRoutes(app, userRoutes);
 
 module.exports = app;
