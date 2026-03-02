@@ -1,4 +1,4 @@
-const {getUsersData, writeUserData, rewriteUserData, getMoviesData} = require("../utils/file.utils");
+const {getUsersData, writeUserData, rewriteUserData, getMoviesData, getUserMovies} = require("../utils/file.utils");
 const bcrypt = require("bcrypt");
 
 let sessionID;
@@ -182,4 +182,9 @@ exports.getUsersDataByID = async (req, res) => {
         return res.status(400).json({message : "Data couldn't be fetched!"});
     }
     return res.status(200).json({fetchedData: data});
+}
+
+exports.fetchUserMovieList = async (req, res) => {
+    const response = await getUserMovies(req.params.id);
+    return res.status(200).json({movieList : response}); 
 }
