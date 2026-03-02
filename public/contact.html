@@ -16,6 +16,7 @@
 
                 if (storedData) {
                     const user = JSON.parse(storedData);
+                    loginLink.innerHTML = "";
                     loginLink.innerHTML = `<a href="./profile.html"><i class="fa fa-user"></i> ${user.name}</a>`;   
                 }
             });
@@ -114,7 +115,7 @@
             const sessionData = localStorage.getItem("sessionData");
             if (!sessionData) {
                 alert("Please login to submit a ticket!");
-                window.location.href = "/login";
+                window.location.href = "/login.html";
             }
             // Get form values
             const name = document.getElementById('name').value.trim();
