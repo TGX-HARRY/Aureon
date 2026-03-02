@@ -33,7 +33,6 @@ This project demonstrates full-stack fundamentals including frontend rendering, 
 ## 📂 Project Structure
 
 <pre>
-```bash
 AUREON
 ├── public
 │   ├── index.html
