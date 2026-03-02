@@ -8,13 +8,26 @@
     <link rel="icon" href="./images/Logo.png">
 </head>
 <body>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const storedData = localStorage.getItem("sessionData");
+            const loginLink = document.getElementById("loginStatus");
+            const footerLogin = document.getElementById("footerLogin");
+
+            if (storedData) {
+                const user = JSON.parse(storedData);
+                footerLogin.style.display = "none";    
+                loginLink.textContent = user.name;
+                loginLink.href = "#";  // or profile.html
+            }
+        });
+    </script>
     <nav class="navbar">
         <div class="logo">Aureon</div>
         <ul class="nav-links">
             <li><a href="/">Home</a></li>
-            <li><a href="./about.html">About</a></li>
             <li><a href="./contact.html">Contact</a></li>
-            <li><a href="./login.html">Login</a></li>
+            <li id="loginStatus"><a href="./login.html">Login</a></li>
         </ul>
     </nav>
 
@@ -71,9 +84,8 @@
 
     <footer class="footer">
         <p>&copy; 2025 Aureon. Made by passionate developers!</p>
-        <a href="./about.html">About</a>
         <a href="./contact.html">Contact</a>
-        <a href="./login.html">Login</a>
+        <a id="footerLogin" href="./login.html">Login</a>
         <a href="/">Home</a>
     </footer>
 </body>
