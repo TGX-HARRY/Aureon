@@ -7,7 +7,6 @@ const nameError = document.getElementById('nameError');
 const emailError = document.getElementById('emailError');
 const passwordError = document.getElementById('passwordError');
 const confirmError = document.getElementById('confirmError');
-const app = require("../App/app")
 
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -100,7 +99,7 @@ function validateConfirmPassword() {
 }
 
 
-form.addEventListener('submit', function(e) {
+form.addEventListener('submit', async function(e) {
     e.preventDefault();
     const name = nameInput.value.trim();
     const email = emailInput.value.trim();
@@ -145,8 +144,22 @@ form.addEventListener('submit', function(e) {
     }
     
     if (isValid) {
-        AudioScheduledSourceNode()
-        alert('Account created successfully!');
+        const response = await fetch("/api/users/subscribers/register",  {
+            method : "POST", 
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body : JSON.stringify({email, password})
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            alert(errorData.message || "Account Creation Failed!");
+            return;
+        }
+
+        const data = await response.json();
+        alert(data.message || "Account Created Successfully!");
         window.location.href = "/login.html";
     }
 });
