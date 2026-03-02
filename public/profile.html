@@ -1,43 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Profile Page</title>
-  <link rel="stylesheet" href="CSS/profile.css">
-  <link rel="icon" href="./images/Logo.png">
+    <meta charset="UTF-8">
+    <link rel="icon" href="./images/Logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
 </head>
 <body>
-  <div class = "profile">Who's Watching?</div>
-  <div class="profile-container">
+    <script>
+        const sessionData = localStorage.getItem("sessionData");
+        const userID = sessionData ? JSON.parse(sessionData).id : null;
+        if (!userID) {
+            window.location.href = "/login.html";
+        }
 
-    <a class="profile-link" href="homepage.html">
-      <div class="profile-icon">
-        <img src="./images/avatar4.jpg" alt="Profile Icon">
-      </div>
-      <div class="profile-name">Hemang</div>
-    </a>
+        async function getData() {
+            const response = await fetch(`/api/subscribers/${userID}`);
+            if (!response.ok) {
+                const errorData = await response.json() || "Data couldn't be fetched at this moment, please try again later!";
+                alert(errorData.message || errorData);
+                return;
+            }
 
-    <a class="profile-link" href="homepage.html">
-      <div class="profile-icon">
-        <img src="./images/avatar3.jpg" alt="Profile Icon">
-      </div>
-      <div class="profile-name">Mahesh</div>
-    </a>
-    
-    <a class="profile-link" href="homepage.html">
-      <div class="profile-icon">
-        <img src="./images/avatar2.jpg" alt="Profile Icon">
-      </div>
-      <div class="profile-name">Manvi</div>
-    </a>
+            const data = await response.json();
+            return {
+                name: data.fetchedData.name,
+                email: data.fetchedData.email
+            };
+        }
+        document.addEventListener("DOMContentLoaded", async () => {
+                try {
+                    const userData = await getData();
+                    
+                    const submitButton = document.getElementById("submitButton");
+                    if (!userData) return;
 
-    <a class="profile-link" href="homepage.html">
-      <div class="profile-icon">
-        <img src="./images/avatar1.jpg" alt="Profile Icon">
-      </div>
-      <div class="profile-name">Prisha</div>
-    </a>
+                    const username = document.getElementById("uname");
+                    const email = document.getElementById("email");
 
-  </div>
+                    if (username) username.value = userData.name || "";
+                    if (email) email.value = userData.email || "";
+
+                } catch (error) {
+                    console.error("Error loading user data:", error);
+                }
+            });
+    </script>
+    <body>
+        <form>
+            <label for="uname">Username: </label>
+            <input type="text" id="uname" value="" placeholder="username">
+
+            <label for="email">Email: </label>
+            <input type="email" id="email" value="" disabled>
+        </form>
+    </body>
 </body>
 </html>
