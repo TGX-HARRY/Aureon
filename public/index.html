@@ -18,8 +18,7 @@
                 if (storedData) {
                     const user = JSON.parse(storedData);
                     const loginLink = document.getElementById("loginStatus");
-                    loginLink.textContent = user.name;
-                    loginLink.href = "#";  // or profile.html
+                    loginLink.innerHTML = `<a href="./profile.html"><i class="fa fa-user"></i> ${user.name}</a>`;
                 }
             });
     </script>
@@ -68,6 +67,7 @@
             </div>
         </div>
     </section>
+    
     <script src="./JS/Homepage.js"></script>
     <div id="moviesContainer"></div>
 
@@ -113,7 +113,7 @@
                         <li>Matthew Modin</li>
                     </ul>
                     <br>
-                    <button onclick="window.location.href = `movie.html?name=stranger-things`" class="btn-play"><i
+                    <button onclick="playMovie()" class="btn-play"><i
                             class="fa fa-play"></i> Watch Now</button>
                 </div>
             </div>
