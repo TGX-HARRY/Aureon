@@ -28,8 +28,9 @@ async function writeUserData(data) {
 
     const newUser = {
         id: data.id,
-        name: data.name,
+        name: data.name || "user",
         email: data.email,
+        movies: data.movies || [],
         password: hashedPassword, 
         role: data.role
     };
@@ -84,4 +85,9 @@ async function getMoviesData() {
     }
 }
 
-module.exports = { getUsersData, writeUserData, rewriteUserData , getMoviesData};
+async function getUserMovies(id) {
+    const data = await getUsersData();
+    const userdata = data.find(u => u.id === id);
+    return userdata.movies;
+}
+module.exports = { getUsersData, writeUserData, rewriteUserData , getMoviesData, getUserMovies};
