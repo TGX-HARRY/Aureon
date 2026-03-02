@@ -2,58 +2,115 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="./images/Logo.png">
+    <link rel="stylesheet" href="CSS/profile.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>Edit Profile</title>
 </head>
+
 <body>
-    <script>
-        const sessionData = localStorage.getItem("sessionData");
-        const userID = sessionData ? JSON.parse(sessionData).id : null;
-        if (!userID) {
-            window.location.href = "/login.html";
-        }
 
-        async function getData() {
-            const response = await fetch(`/api/subscribers/${userID}`);
-            if (!response.ok) {
-                const errorData = await response.json() || "Data couldn't be fetched at this moment, please try again later!";
-                alert(errorData.message || errorData);
-                return;
-            }
+<script>
+    const sessionData = localStorage.getItem("sessionData");
+    const userID = sessionData ? JSON.parse(sessionData).id : null;
 
-            const data = await response.json();
-            return {
-                name: data.fetchedData.name,
-                email: data.fetchedData.email
-            };
-        }
-        document.addEventListener("DOMContentLoaded", async () => {
-                try {
-                    const userData = await getData();
-                    
-                    const submitButton = document.getElementById("submitButton");
-                    if (!userData) return;
+    if (!userID) {
+        window.location.href = "./login.html";
+    }
 
-                    const username = document.getElementById("uname");
-                    const email = document.getElementById("email");
+    async function getData() {
+        const response = await fetch(`/api/subscribers/${userID}`);
+        if (!response.ok) return;
 
-                    if (username) username.value = userData.name || "";
-                    if (email) email.value = userData.email || "";
+        const data = await response.json();
+        return {
+            name: data.fetchedData.name,
+            email: data.fetchedData.email
+        };
+    }
 
-                } catch (error) {
-                    console.error("Error loading user data:", error);
-                }
-            });
-    </script>
-    <body>
+    document.addEventListener("DOMContentLoaded", async () => {
+        const userData = await getData();
+        if (!userData) return;
+
+        document.getElementById("uname").value = userData.name || "";
+        document.getElementById("email").value = userData.email || "";
+    });
+
+    // Only numbers in phone
+    document.addEventListener("DOMContentLoaded", () => {
+        const phone = document.getElementById("phone");
+        phone.addEventListener("input", function () {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    });
+</script>
+
+<div class="container">
+
+    <div class="form-card">
+
+        <h1>Edit Profile</h1>
+
         <form>
-            <label for="uname">Username: </label>
-            <input type="text" id="uname" value="" placeholder="username">
 
-            <label for="email">Email: </label>
-            <input type="email" id="email" value="" disabled>
+            <!-- Full Name -->
+            <div class="input-group">
+                <input type="text" id="fullname" placeholder=" " required>
+                <label>Full Name</label>
+            </div>
+
+            <!-- Username -->
+            <div class="input-group">
+                <input type="text" id="uname" placeholder=" " required>
+                <label>Username</label>
+            </div>
+
+            <!-- Email -->
+            <div class="input-group">
+                <input type="email" id="email" placeholder=" " disabled required>
+                <label>Email</label>
+            </div>
+
+            <!-- Phone -->
+            <div class="input-group">
+                <input type="tel" id="phone" placeholder=" " maxlength="10" required>
+                <label>Phone Number</label>
+            </div>
+
+            <!-- Address -->
+            <div class="input-group">
+                <input type="text" id="address" placeholder=" " required>
+                <label>Address</label>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="input-group">
+                <input type="date" id="dob" required>
+                <label class="fixed-label">Date of Birth</label>
+            </div>
+
+            <!-- Gender -->
+            <div class="input-group">
+                <select id="gender" required>
+                    <option value="" disabled selected></option>
+                    <option>Female</option>
+                    <option>Male</option>
+                    <option>Others</option>
+                </select>
+                <label class="fixed-label">Gender</label>
+            </div>
+
+            <!-- Buttons -->
+            <div class="btn-group">
+                <button type="button" class="btn cancel" onclick="window.history.back()">Cancel</button>
+                <button type="submit" class="btn save">Save Changes</button>
+            </div>
+
         </form>
-    </body>
+
+    </div>
+
+</div>
+
 </body>
 </html>
