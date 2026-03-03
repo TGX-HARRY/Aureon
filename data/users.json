@@ -10,10 +10,18 @@
     },
     {
       "id": "31d9985c-b732-49af-8881-00eb98763656",
-      "name" : "testuser",
+      "name": "testuser",
       "email": "testuser@gmail.com",
       "movies": [],
       "password": "$2b$10$wqNyDnSQfkZLZxA4.8tDK.jD1vpn1UKxt8KTEnuN.ptEy7wpKMyTW",
+      "role": "subscriber"
+    },
+    {
+      "id": "7e009091-ce42-432b-a1d7-547c97220d62",
+      "name": "user",
+      "email": "maheshsingla2007@gmail.com",
+      "movies": [],
+      "password": "$2b$10$oYHfTnMDrVGjK5LZcIgkfujfGUYYaWZkKdFnEmgrrz8tEqPxXpE1G",
       "role": "subscriber"
     }
   ],

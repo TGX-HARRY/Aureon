@@ -1,14 +1,1 @@
-{ 
-  "type": "commonjs",
-  
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "express": "^5.2.1",
-    "nodemon": "^3.1.14"
-  },
-
-  "scripts" : {
-    "dev" : "nodemon server.js",
-    "start" : "node server.js"
-  }
-}
+{"type":"commonjs","dependencies":{"bcrypt":"^6.0.0","express":"^5.2.1","nodemon":"^3.1.14"},"scripts":{"dev":"nodemon server.js","start":"node server.js"},"name":"aureon","version":"1.0.0","description":"AUREON is a basic movie streaming website built using HTML, CSS, JavaScript, Node.js, and Express.","main":"app.js","repository":{"type":"git","url":"git+https://github.com/TGX-HARRY/Aureon.git"},"keywords":[],"author":"","license":"ISC","bugs":{"url":"https://github.com/TGX-HARRY/Aureon/issues"},"homepage":"https://github.com/TGX-HARRY/Aureon#readme"}
