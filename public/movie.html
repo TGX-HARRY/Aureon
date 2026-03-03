@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./images/Logo.png">
   <title>Aureon Originals</title>
   <link rel="stylesheet" href="./CSS/movie.css">
 </head>
 <body class="trailer-page">
-
+  <script src="./JS/Movie.js"></script>
   <div class="video-container">
     <iframe id="trailerFrame" width="100%" height="600" frameborder="0" allowfullscreen></iframe>
   </div>
@@ -20,28 +21,6 @@
   </div>
 
   <a href="/" class="back-button">← Back to Aureon Originals</a>
-
-  <script>
-    // Movie data (can be expanded easily)
-
-
-    // Get the movie name from the URL
-    const params = new URLSearchParams(window.location.search);
-    const movieKey = params.get("name");
-
-    const movie = movies[movieKey];
-
-    if (movie) {
-      document.title = `${movie.title} | Aureon Originals`;
-      document.getElementById("movieTitle").textContent = movie.title;
-      document.getElementById("movieGenre").textContent = movie.genre;
-      document.getElementById("movieRating").textContent = movie.rating;
-      document.getElementById("movieOverview").textContent = movie.overview;
-      document.getElementById("trailerFrame").src = `${movie.trailer}?autoplay=1&mute=1`;
-    } else {
-      document.body.innerHTML = "<h2 style='color:white;text-align:center;'>Movie not found!</h2>";
-    }
-  </script>
 
 </body>
 </html>
