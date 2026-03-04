@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
 </head>
-
 <body>
-
 <script>
     const sessionData = localStorage.getItem("sessionData");
     const userID = sessionData ? JSON.parse(sessionData).id : null;
@@ -24,7 +22,12 @@
         const data = await response.json();
         return {
             name: data.fetchedData.name,
-            email: data.fetchedData.email
+            email: data.fetchedData.email,
+            phone: data.fetchedData.phone,
+            fullName: data.fetchedData.fullName,
+            gender: data.fetchedData.gender,
+            address: data.fetchedData.address,
+            dob: data.fetchedData.dob
         };
     }
 
@@ -34,6 +37,19 @@
 
         document.getElementById("uname").value = userData.name || "";
         document.getElementById("email").value = userData.email || "";
+        document.getElementById("fullname").value = userData.fullName || "";
+        document.getElementById("phone").value = userData.phone || "";
+        document.getElementById("address").value = userData.address || "";
+        document.getElementById("dob").value = userData.dob || "";
+        if (userData.gender) {
+            const genderSelect = document.getElementById("gender");
+            for (let i = 0; i < genderSelect.options.length; i++) {
+                if (genderSelect.options[i].text === userData.gender) {
+                    genderSelect.selectedIndex = i;
+                    break;
+                }
+            }
+        }     
     });
 
     // Only numbers in phone
@@ -42,53 +58,72 @@
         phone.addEventListener("input", function () {
             this.value = this.value.replace(/[^0-9]/g, '');
         });
+
+        const submitBtn = document.getElementById("submitButton");
+        submitBtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const updatedData = {
+                id: userID,
+                name: document.getElementById("uname").value,
+                fullName: document.getElementById("fullname").value,
+                email: document.getElementById("email").value,
+                gender: document.getElementById("gender").value,
+                address: document.getElementById("address").value,
+                dob: document.getElementById("dob").value
+            };
+
+            const response = await fetch(`/api/users/subscribers/changeinfo`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(updatedData)
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to update user data");
+            }
+
+            const result = await response.json();
+            // console.log(result.message);
+        });
     });
 </script>
 
 <div class="container">
-
     <div class="form-card">
-
         <h1>Edit Profile</h1>
-
         <form>
-
             <!-- Full Name -->
             <div class="input-group">
                 <input type="text" id="fullname" placeholder=" " required>
                 <label>Full Name</label>
             </div>
-
             <!-- Username -->
             <div class="input-group">
                 <input type="text" id="uname" placeholder=" " required>
                 <label>Username</label>
             </div>
-
             <!-- Email -->
             <div class="input-group">
                 <input type="email" id="email" placeholder=" " disabled required>
                 <label>Email</label>
             </div>
-
             <!-- Phone -->
             <div class="input-group">
                 <input type="tel" id="phone" placeholder=" " maxlength="10" required>
                 <label>Phone Number</label>
             </div>
-
             <!-- Address -->
             <div class="input-group">
                 <input type="text" id="address" placeholder=" " required>
                 <label>Address</label>
             </div>
-
             <!-- Date of Birth -->
             <div class="input-group">
                 <input type="date" id="dob" required>
                 <label class="fixed-label">Date of Birth</label>
             </div>
-
             <!-- Gender -->
             <div class="input-group">
                 <select id="gender" required>
@@ -103,13 +138,10 @@
             <!-- Buttons -->
             <div class="btn-group">
                 <button type="button" class="btn cancel" onclick="window.history.back()">Cancel</button>
-                <button type="submit" class="btn save">Save Changes</button>
+                <button type="submit" id="submitButton" class="btn save">Save Changes</button>
             </div>
-
         </form>
-
     </div>
-
 </div>
 
 </body>
