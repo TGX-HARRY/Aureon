@@ -2,13 +2,13 @@
   "subscribers": [
     {
       "id": "9b370175-c977-4376-b5ea-037aa56b7335",
-      "name": "testchange",
-      "fullName": "testchange",
+      "name": "testchange2",
+      "fullName": "testchange2",
       "email": "test@gmail.com",
       "phone": "1234567890",
       "gender": "Male",
       "address": "#123, Test Street, Test City, Test Country",
-      "dob": "12.12.2012",
+      "dob": "2012-12-12",
       "movies": [],
       "password": "$2b$10$TVXRkl3sCTEkVPdHGKtr7ercC3cnH.xtaV/GYo8N7jFkuCWiBpXuq",
       "role": "subscriber"
