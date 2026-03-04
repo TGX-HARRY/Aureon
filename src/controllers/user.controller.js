@@ -104,6 +104,7 @@ exports.getCustomers = (req, res) => {
     if (req.userType !== "admin") {
         return res.status(403).json({ message: "Access denied" });
     }
+
     const existingData = getUsersData();
     const customersDataWithoutPassword = existingData.subscribers.map(subscriber => {
         return {
@@ -121,6 +122,7 @@ exports.getAdmins = (req, res) => {
     if (req.userType !== "admin") {
         return res.status(403).json({ message: "Access denied" });
     }
+
     const existingData = getUsersData();
     const adminsNames = existingData.admins.map(admin => admin.name);
     if (adminsNames.length === 0) {
@@ -129,19 +131,42 @@ exports.getAdmins = (req, res) => {
     return res.status(200).json({data : adminsNames});
 }
 
-exports.changeSubscriberInfo = (req, res) => {
+exports.changeSubscriberInfo = async (req, res) => {
     const email = req.body.email;
-    const existingData = getUsersData();
-    for(let user of existingData.subscribers) {
-        if (user.email === email) {
-            user.name = req.body.name;
-            user.phone = req.body.phone;
-            user.address = req.body.address;
-        }
+    const existingData = await getUsersData();
+    const user = existingData.subscribers.find(u => u.email === email);
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
     }
+    if (!req.body.id) {
+        return res.status(400).json({ message: "Invalid user ID" });
+    }
+    if (req.body.id !== user.id) {
+        return res.status(403).json({ message: "Access denied" });
+    }
+
+    if (user) {
+        user.name = req.body.name || user.name;
+        user.fullName = req.body.fullName || user.fullName;
+        user.gender = req.body.gender || user.gender;
+        user.address = req.body.address || user.address;
+        user.dob = req.body.dob || user.dob;
+    }
+    
+    try {
+        await rewriteUserData(existingData);
+    } catch (err) {
+        return res.status(500).json({ message: "Error updating user data" });
+    }
+
+    return res.status(200).json({ message: "User data updated successfully" });
 }
 
 exports.removeSubscriberAccount = async (req, res) => {
+    if (req.userType !== "admin") {
+        return res.status(403).json({ message: "Access denied" });
+    }
+
     const id = req.params.id;
     if (!id) {
         return res.status(400).json({message : "Invalid email!"})
