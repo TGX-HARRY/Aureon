@@ -1,10 +1,9 @@
 const fs = require("fs").promises;
 const bcrypt = require("bcrypt");
-const { json } = require("express");
 const path = require("path");
 
-const filePath = path.join(__dirname, "../data/users.json");
-const moviesFilePath = path.join(__dirname, "../data/movies.json");
+const filePath = path.join(__dirname, "../../data/users.json");
+const moviesFilePath = path.join(__dirname, "../../data/movies.json");
 
 async function getUsersData() {
     try {
@@ -29,7 +28,11 @@ async function writeUserData(data) {
     const newUser = {
         id: data.id,
         name: data.name || "user",
+        fullName: data.fullName || "",
         email: data.email,
+        gender: data.gender || "",
+        address: data.address || "",
+        dob: data.dob || "",
         movies: data.movies || [],
         password: hashedPassword, 
         role: data.role
