@@ -12,7 +12,7 @@ router.post("/users/subscribers/register", controllers.addSubscriber);
 router.post("/users/admins/register", controllers.addAdmin);
 router.post("/users/subscribers/login", controllers.fetchSubscriber);
 // router.patch("/admins/changeinfo/:email", controllers.changeAdminInfo);
-// router.patch("/customers/changeinfo/:email", controllers.changeSubscriberInfo);
+router.patch("/users/subscribers/changeinfo", controllers.changeSubscriberInfo);
 // router.patch("/admins/changepassword/:email", controllers.changeAdminPassword);
 // router.patch("/customers/changepassword/:email", controllers.changeSubscriberPassword);
 router.delete("/users/subscribers/remove/:id", controllers.removeSubscriberAccount);
