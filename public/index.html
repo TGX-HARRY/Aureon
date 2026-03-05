@@ -14,39 +14,39 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
-                const storedData = localStorage.getItem("sessionData");
+            const storedData = localStorage.getItem("sessionData");
 
-                const username = document.getElementById("uname");
-                const logoutBtn = document.getElementById("logout");
-                const loginLink = document.getElementById("loginLink");
-                const loginStatus = document.getElementById("loginStatus");
+            const username = document.getElementById("uname");
+            const logoutBtn = document.getElementById("logout");
+            const loginLink = document.getElementById("loginLink");
+            const loginStatus = document.getElementById("loginStatus");
 
-                if (storedData) {
+            if (storedData) {
 
-                    const user = JSON.parse(storedData);
+                const user = JSON.parse(storedData);
 
-                    // Hide login button only
-                    loginLink.style.display = "none";
+                // Hide login button only
+                loginLink.style.display = "none";
 
-                    // Show username
-                    username.style.display = "inline-block";
-                    username.textContent = user.name;
+                // Show username
+                username.style.display = "inline-block";
+                username.textContent = user.name;
 
-                    // Enable dropdown
-                    loginStatus.classList.add("dropdown");
-                }
+                // Enable dropdown
+                loginStatus.classList.add("dropdown");
+            }
 
-                // Logout functionality
-                logoutBtn.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    localStorage.removeItem("sessionData");
-                    localStorage.setItem("isLoggedIn", "false");
-                    window.location.reload();
-                });
-
+            // Logout functionality
+            logoutBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sessionData");
+                localStorage.setItem("isLoggedIn", "false");
+                window.location.reload();
             });
+
+        });
     </script>
-    
+
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">Aureon</div>
@@ -73,12 +73,12 @@
             </li>
             <li><a href="#">Movies</a></li>
             <li><a href="#">Shows</a></li>
-            <li><a href="#">My List</a></li>
+            <li><a href="./myList.html">My List</a></li>
             <li id="loginStatus">
                 <a href="./login.html" id="loginLink">Login</a>
-            
+
                 <a href="#" id="uname" style="display:none;"></a>
-            
+
                 <ul class="dropdown-menu">
                     <li><a href="./profile.html">Edit Profile</a></li>
                     <li id="logout"><a href="#">Log Out</a></li>
@@ -100,7 +100,7 @@
             </div>
         </div>
     </section>
-    
+
     <script src="./JS/Homepage.js"></script>
     <div id="moviesContainer"></div>
 
@@ -146,8 +146,7 @@
                         <li>Matthew Modin</li>
                     </ul>
                     <br>
-                    <button onclick="playMovie()" class="btn-play"><i
-                            class="fa fa-play"></i> Watch Now</button>
+                    <button onclick="playMovie()" class="btn-play"><i class="fa fa-play"></i> Watch Now</button>
                 </div>
             </div>
         </div>
@@ -246,4 +245,5 @@
         });
     </script>
 </body>
+
 </html>
