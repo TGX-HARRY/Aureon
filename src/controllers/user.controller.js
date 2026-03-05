@@ -78,8 +78,16 @@ exports.fetchSubscriber = async (req, res) => {
 };
 
 exports.addAdmin = async (req, res) => {
+    const id = req.body.id;
+    if (!id) {
+        return res.status(400).json({message : "No ID provided!"});
+    }
+    const validID = await userLookupWithID(id, "admin");
+    if (!validID) {
+        return res.status(401).json({message : "Access Denied!"});
+    }
 
-    const present = checkUserData(req.body, "admin");
+    const present = await checkUserData(req.body.email, "admin");
 
     if (present) {
         return res.status(400).json({
@@ -89,7 +97,8 @@ exports.addAdmin = async (req, res) => {
 
     const newAdmin = {
         id: crypto.randomUUID(),
-        ...req.body
+        ...req.body,
+        role : "admin"
     };
 
     await writeUserData(newAdmin);
@@ -100,9 +109,15 @@ exports.addAdmin = async (req, res) => {
 };
 
 
-exports.getCustomers = (req, res) => {
-    if (req.userType !== "admin") {
-        return res.status(403).json({ message: "Access denied" });
+exports.getSubscribers = async (req, res) => {
+    const adminid = req.params.id;
+    if (!adminid) {
+        return res.status(400).json({message : "ID not provided!"});
+    }
+
+    const validID = await userLookupWithID(adminid, "admin");
+    if (!validID) {
+        return res.status(401).json({message : "Permission Denied"});
     }
 
     const existingData = getUsersData();
@@ -118,9 +133,15 @@ exports.getCustomers = (req, res) => {
     return res.status(200).json({data : customersDataWithoutPassword});
 }
 
-exports.getAdmins = (req, res) => {
-    if (req.userType !== "admin") {
-        return res.status(403).json({ message: "Access denied" });
+exports.getAdmins = async (req, res) => {
+    const adminid = req.params.id;
+    if (!adminid) {
+        return res.status(400).json({message : "ID not provided!"});
+    }
+    
+    const validID = await userLookupWithID(adminid, "admin");
+    if (!validID) {
+        return res.status(401).json({message : "Permission Denied"});
     }
 
     const existingData = getUsersData();
@@ -169,7 +190,7 @@ exports.removeSubscriberAccount = async (req, res) => {
 
     const id = req.params.id;
     if (!id) {
-        return res.status(400).json({message : "Invalid email!"})
+        return res.status(400).json({message : "Invalid ID!"})
     }
     const isPresent = await userLookupWithID(id, "subscriber");
     if (!isPresent) {
@@ -212,4 +233,31 @@ exports.getUsersDataByID = async (req, res) => {
 exports.fetchUserMovieList = async (req, res) => {
     const response = await getUserMovies(req.params.id);
     return res.status(200).json({movieList : response}); 
+}
+
+exports.changeSubscriberPassword = async (req, res) => {
+    const email = req.body.email;
+    if (!email) {
+        return res.status(400).json({message : "User email not found!"});
+    }
+
+    const existingUserData = await getUsersData();
+    const user = existingUserData.subscribers.find(u => u.email === email);
+    if (!user) {
+        return res.status(400).json({message : "User not found!"})
+    }
+
+    if (user) {
+        user.password = await bcrypt.hash(req.body.password, 10);
+    }
+        
+    try {
+        await rewriteUserData(existingUserData);
+    }
+    catch (err) {
+        res.status(400).json({messae: "Could rewrite data, due to error : " + err});
+    }
+
+    // if no error
+    return res.status(200).json({message :  "User password changed successfully!"});
 }
