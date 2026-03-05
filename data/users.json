@@ -10,7 +10,7 @@
       "address": "#123, Test Street, Test City, Test Country",
       "dob": "2012-12-12",
       "movies": [],
-      "password": "$2b$10$TVXRkl3sCTEkVPdHGKtr7ercC3cnH.xtaV/GYo8N7jFkuCWiBpXuq",
+      "password": "$2b$10$3PuVPoleW3Eb3vMisF08WemmFQep0DWeHK4YasrGQIrmMewRGBpv.",
       "role": "subscriber"
     },
     {
@@ -40,5 +40,18 @@
       "role": "subscriber"
     }
   ],
-  "admins": []
+  "admins": [
+    {
+      "id": "d4319d42-457f-4406-ba4e-fa3d47892b73",
+      "name": "user",
+      "fullName": "",
+      "email": "hemang@gmail.com",
+      "gender": "",
+      "address": "",
+      "dob": "",
+      "movies": [],
+      "password": "$2b$10$/1BIKeb/k1mA0fS5SCZh1.zxQbzNERhW9ovqeG8hscwf04cKiKR32",
+      "role": "admin"
+    }
+  ]
 }
