@@ -38,6 +38,18 @@
       "movies": [],
       "password": "$2b$10$oYHfTnMDrVGjK5LZcIgkfujfGUYYaWZkKdFnEmgrrz8tEqPxXpE1G",
       "role": "subscriber"
+    },
+    {
+      "id": "7b239bf3-07f1-4191-acf2-0ed234a370d7",
+      "name": "user",
+      "fullName": "",
+      "email": "manvigarg2707@gmail.com",
+      "gender": "",
+      "address": "",
+      "dob": "",
+      "movies": [],
+      "password": "$2b$10$uiWiZj9pIWsP7OA/RbqQhOj2LEoNIglYrSQsvGEdDqyrEPQab5mlW",
+      "role": "subscriber"
     }
   ],
   "admins": [
