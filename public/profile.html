@@ -54,25 +54,29 @@
     });
 
     // Only numbers in phone
-    document.addEventListener("DOMContentLoaded", () => {
-        const phone = document.getElementById("phone");
-        phone.addEventListener("input", function () {
-            this.value = this.value.replace(/[^0-9]/g, '');
-        });
+   document.addEventListener("DOMContentLoaded", () => {
 
-        const submitBtn = document.getElementById("submitButton");
-        submitBtn.addEventListener("click", async (e) => {
-            e.preventDefault();
-            const updatedData = {
-                id: userID,
-                name: document.getElementById("uname").value,
-                fullName: document.getElementById("fullname").value,
-                email: document.getElementById("email").value,
-                gender: document.getElementById("gender").value,
-                address: document.getElementById("address").value,
-                dob: document.getElementById("dob").value
-            };
+    const phone = document.getElementById("phone");
+    phone.addEventListener("input", function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
 
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const updatedData = {
+            id: userID,
+            name: document.getElementById("uname").value,
+            fullName: document.getElementById("fullname").value,
+            email: document.getElementById("email").value,
+            gender: document.getElementById("gender").value,
+            address: document.getElementById("address").value,
+            dob: document.getElementById("dob").value
+        };
+
+        try {
             const response = await fetch(`/api/users/subscribers/changeinfo`, {
                 method: "PATCH",
                 headers: {
@@ -81,20 +85,26 @@
                 body: JSON.stringify(updatedData)
             });
 
-            if (!response.ok) {
-                throw new Error("Failed to update user data");
-            }
-
             const result = await response.json();
-            // console.log(result.message);
-        });
+            alert("Profile updated successfully!");
+            window.location.href = "./index.html";
+
+        } catch (error) {
+            console.error(error);
+        }
     });
+
+});
 </script>
 
 <div class="container">
     <div class="form-card">
         <h1>Edit Profile</h1>
         <form>
+            <!-- Full Name --> 
+             <div class="input-group"> <input type="text" id="fullname" placeholder=" " required>
+                <label>Full Name</label>
+            </div>
             <!-- Username -->
             <div class="input-group">
                 <input type="text" id="uname" placeholder=" " required>
