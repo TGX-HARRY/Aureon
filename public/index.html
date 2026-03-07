@@ -12,33 +12,50 @@
 
 <body>
     <script>
-       document.addEventListener("DOMContentLoaded", () => {
+       document.addEventListener("DOMContentLoaded", async () => {
 
     const storedData = localStorage.getItem("sessionData");
     const loginStatus = document.getElementById("loginStatus");
 
-    if (storedData) {
-        const user = JSON.parse(storedData);
+    if (!storedData) return;
 
-        loginStatus.innerHTML = `
-            <a href="#">
-                <i class="fa fa-user"></i> ${user.name}
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="./profile.html">Edit Profile</a></li>
-                <li id="logout"><a href="#">Log Out</a></li>
-            </ul>
-        `;
+    const user = JSON.parse(storedData);
 
-        loginStatus.classList.add("dropdown");
+    let avatar = "./images/avatar1.jpg"; // default avatar
 
-        const logoutBtn = document.getElementById("logout");
-        logoutBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            localStorage.removeItem("sessionData");
-            window.location.reload();
-        });
+    try {
+        const response = await fetch(`/api/users/subscribers/${user.id}`);
+        const data = await response.json();
+
+        if (data.fetchedData && data.fetchedData.avatar) {
+            avatar = data.fetchedData.avatar;
+        }
+
+    } catch (err) {
+        console.log("Could not fetch avatar");
     }
+
+    loginStatus.innerHTML = `
+        <a href="#" class="user-profile">
+            <img src="${avatar}" class="nav-avatar">
+            ${user.name}
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="./profile.html">Edit Profile</a></li>
+            <li id="logout"><a href="#">Log Out</a></li>
+        </ul>
+    `;
+
+    loginStatus.classList.add("dropdown");
+
+    const logoutBtn = document.getElementById("logout");
+
+    logoutBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("sessionData");
+        window.location.reload();
+    });
+
 });
     </script>
 
