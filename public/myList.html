@@ -76,20 +76,69 @@
         .btn-explore:hover {
             background-color: #b71c1c;
         }
+
+        .nav-avatar{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.user-profile{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
     </style>
 </head>
 
 <body>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const storedData = localStorage.getItem("sessionData");
+        document.addEventListener("DOMContentLoaded", async () => {
 
-            if (storedData) {
-                const user = JSON.parse(storedData);
-                const loginLink = document.getElementById("loginStatus");
-                loginLink.innerHTML = `<a href="./profile.html"><i class="fa fa-user"></i> ${user.name}</a>`;
-            }
-        });
+    const storedData = localStorage.getItem("sessionData");
+    const loginStatus = document.getElementById("loginStatus");
+
+    if (!storedData) return;
+
+    const user = JSON.parse(storedData);
+
+    let avatar = "./images/avatar1.jpg"; // default avatar
+
+    try {
+        const response = await fetch(`/api/users/subscribers/${user.id}`);
+        const data = await response.json();
+
+        if (data.fetchedData && data.fetchedData.avatar) {
+            avatar = data.fetchedData.avatar;
+        }
+
+    } catch (err) {
+        console.log("Avatar fetch failed");
+    }
+
+    loginStatus.innerHTML = `
+        <a href="#" class="user-profile">
+            <img src="${avatar}" class="nav-avatar">
+            ${user.name}
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="./profile.html">Edit Profile</a></li>
+            <li id="logout"><a href="#">Log Out</a></li>
+        </ul>
+    `;
+
+    loginStatus.classList.add("dropdown");
+
+    const logoutBtn = document.getElementById("logout");
+
+    logoutBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("sessionData");
+        window.location.reload();
+    });
+
+});
     </script>
 
     <!-- Navbar -->
