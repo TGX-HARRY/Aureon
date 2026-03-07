@@ -92,7 +92,8 @@ async function loadMovies() {
 async function handleMovieClick(movie) {
   const sessionData = JSON.parse(localStorage.getItem("sessionData"));
   if (!sessionData) {
-    window.location.href = "/login";
+    alert("Please log in to watch the movie.");
+    window.location.href = "/login.html";
   }
   
   else {
