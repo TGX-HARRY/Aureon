@@ -16,20 +16,21 @@
     }
 
     async function getData() {
-        const response = await fetch(`/api/subscribers/${userID}`);
-        if (!response.ok) return;
+    const response = await fetch(`/api/users/subscribers/${userID}`);
 
-        const data = await response.json();
-        return {
-            name: data.fetchedData.name,
-            email: data.fetchedData.email,
-            phone: data.fetchedData.phone,
-            fullName: data.fetchedData.fullName,
-            gender: data.fetchedData.gender,
-            address: data.fetchedData.address,
-            dob: data.fetchedData.dob
-        };
+    console.log("Response status:", response.status);
+
+    if (!response.ok) {
+        console.log("Failed to fetch user data");
+        return null;
     }
+
+    const data = await response.json();
+    console.log("API data:", data);
+
+    const user = data.fetchedData;
+    return user;
+}
 
     document.addEventListener("DOMContentLoaded", async () => {
         const userData = await getData();
@@ -94,11 +95,6 @@
     <div class="form-card">
         <h1>Edit Profile</h1>
         <form>
-            <!-- Full Name -->
-            <div class="input-group">
-                <input type="text" id="fullname" placeholder=" " required>
-                <label>Full Name</label>
-            </div>
             <!-- Username -->
             <div class="input-group">
                 <input type="text" id="uname" placeholder=" " required>

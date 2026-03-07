@@ -12,39 +12,34 @@
 
 <body>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
+       document.addEventListener("DOMContentLoaded", () => {
 
-            const storedData = localStorage.getItem("sessionData");
+    const storedData = localStorage.getItem("sessionData");
+    const loginStatus = document.getElementById("loginStatus");
 
-            const username = document.getElementById("uname");
-            const logoutBtn = document.getElementById("logout");
-            const loginLink = document.getElementById("loginLink");
-            const loginStatus = document.getElementById("loginStatus");
+    if (storedData) {
+        const user = JSON.parse(storedData);
 
-            if (storedData) {
+        loginStatus.innerHTML = `
+            <a href="./profile.html">
+                <i class="fa fa-user"></i> ${user.name}
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="./profile.html">Edit Profile</a></li>
+                <li id="logout"><a href="#">Log Out</a></li>
+            </ul>
+        `;
 
-                const user = JSON.parse(storedData);
+        loginStatus.classList.add("dropdown");
 
-                // Hide login button only
-                loginLink.style.display = "none";
-
-                // Show username
-                username.style.display = "inline-block";
-                username.textContent = user.name;
-
-                // Enable dropdown
-                loginStatus.classList.add("dropdown");
-            }
-
-            // Logout functionality
-            logoutBtn.addEventListener("click", (e) => {
-                e.preventDefault();
-                localStorage.removeItem("sessionData");
-                localStorage.setItem("isLoggedIn", "false");
-                window.location.reload();
-            });
-
+        const logoutBtn = document.getElementById("logout");
+        logoutBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("sessionData");
+            window.location.reload();
         });
+    }
+});
     </script>
 
     <!-- Navbar -->
@@ -75,15 +70,8 @@
             <li><a href="#">Shows</a></li>
             <li><a href="./myList.html">My List</a></li>
             <li id="loginStatus">
-                <a href="./login.html" id="loginLink">Login</a>
-
-                <i class="fa fa-user"></i><a href="#" id="uname" style="display:none;"></a>
-
-                <ul class="dropdown-menu">
-                    <li><a href="./profile.html">Edit Profile</a></li>
-                    <li id="logout"><a href="#">Log Out</a></li>
-                </ul>
-            </li>
+    <a href="./login.html">Login</a>
+</li>
         </ul>
     </nav>
 

@@ -25,7 +25,7 @@ async function userLookupWithID(id, role) {
 
 exports.addSubscriber = async (req, res) => {
 
-    const present = await checkUserData(req.body, "subscriber");
+    const present = await checkUserData(req.body.email, "subscriber");
 
     if (present) {
         return res.status(400).json({

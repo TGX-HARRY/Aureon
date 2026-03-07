@@ -149,7 +149,7 @@ form.addEventListener('submit', async function(e) {
             headers: {
             "Content-Type": "application/json"
             },
-            body : JSON.stringify({email, password})
+            body : JSON.stringify({name, email, password})
         });
 
         if (!response.ok) {

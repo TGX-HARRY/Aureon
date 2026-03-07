@@ -124,8 +124,8 @@ input:focus + label,
 input:not(:placeholder-shown) + label,
 select:focus + label,
 select:valid + label {
-    top: -8px;
-    left: 10px;
+    top: -20px;
+    left: 0px;
     font-size: 12px;
     transform: none;
     color: #e50914;
@@ -187,6 +187,12 @@ select {
 .save:hover {
     box-shadow: 0 0 12px rgba(229,9,20,0.6);
     transform: translateY(-2px);
+}
+
+.fixed-label {
+    top: -20px !important;
+    transform: none !important;
+    left: -1px !important;
 }
 
 /* Animations */

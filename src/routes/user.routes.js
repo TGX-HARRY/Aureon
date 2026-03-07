@@ -3,7 +3,7 @@ const controllers = require("../controllers/user.controller");
 
 const router = express.Router();
 
-router.get("/users/subscribers/:id", controllers.getSubscribers);
+router.get("/users/subscribers/:id", controllers.getUsersDataByID);
 router.get("/users/admins/:id", controllers.getAdmins);
 router.get("/movies/mylist/:id", controllers.fetchUserMovieList);
 router.get("/movies", controllers.fetchMoviesData);
