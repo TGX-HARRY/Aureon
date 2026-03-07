@@ -195,6 +195,71 @@ select {
     left: -1px !important;
 }
 
+/* Avatar section */
+.avatar-section{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+/* Preview avatar */
+.avatar-preview{
+    width:90px;
+    height:90px;
+    margin:auto;
+    margin-bottom:15px;
+}
+
+.avatar-preview img{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    border:3px solid #e50914;
+}
+
+/* Carousel layout */
+.avatar-carousel{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* Slider window */
+.avatar-slider{
+    display:flex;
+    gap:10px;
+    overflow:hidden;
+    width:200px;
+}
+
+/* Avatar images */
+.avatar-option{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    cursor:pointer;
+    border:2px solid transparent;
+    flex-shrink:0;
+    transition:0.2s;
+}
+
+.avatar-option:hover{
+    transform:scale(1.1);
+}
+
+.avatar-option.selected{
+    border:3px solid #e50914;
+}
+
+/* Arrow buttons */
+.avatar-btn{
+    background:none;
+    border:none;
+    color:white;
+    font-size:22px;
+    cursor:pointer;
+    padding:6px;
+}
+
 /* Animations */
 @keyframes fadeUp {
     from {

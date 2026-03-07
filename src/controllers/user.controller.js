@@ -167,13 +167,14 @@ exports.changeSubscriberInfo = async (req, res) => {
     }
 
     if (user) {
-        user.name = req.body.name || user.name;
-        user.phone = req.body.phone || user.phone;
-        user.fullName = req.body.fullName || user.fullName;
-        user.gender = req.body.gender || user.gender;
-        user.address = req.body.address || user.address;
-        user.dob = req.body.dob || user.dob;
-    }
+    user.name = req.body.name || user.name;
+    user.phone = req.body.phone || user.phone;
+    user.fullName = req.body.fullName || user.fullName;
+    user.gender = req.body.gender || user.gender;
+    user.address = req.body.address || user.address;
+    user.dob = req.body.dob || user.dob;
+    user.avatar = req.body.avatar || user.avatar; // ⭐ ADD THIS
+}
     
     try {
         await rewriteUserData(existingData);

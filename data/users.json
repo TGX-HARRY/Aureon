@@ -50,7 +50,8 @@
       "movies": [],
       "password": "$2b$10$RNmvSCxra7rZgvnPXVE7OuwEDJrIrFpmwhbMDLzryMVMmaDOFp3na",
       "role": "subscriber",
-      "phone": "9877636077"
+      "phone": "9877636077",
+      "avatar": "./images/avatar4.jpg"
     }
   ],
   "admins": [

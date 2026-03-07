@@ -8,6 +8,7 @@
 </head>
 <body>
 <script>
+
     const sessionData = localStorage.getItem("sessionData");
     const userID = sessionData ? JSON.parse(sessionData).id : null;
 
@@ -33,28 +34,83 @@
 }
 
     document.addEventListener("DOMContentLoaded", async () => {
-        const userData = await getData();
-        if (!userData) return;
 
-        document.getElementById("uname").value = userData.name || "";
-        document.getElementById("email").value = userData.email || "";
-        document.getElementById("fullname").value = userData.fullName || "";
-        document.getElementById("phone").value = userData.phone || "";
-        document.getElementById("address").value = userData.address || "";
-        document.getElementById("dob").value = userData.dob || "";
-        if (userData.gender) {
-            const genderSelect = document.getElementById("gender");
-            for (let i = 0; i < genderSelect.options.length; i++) {
-                if (genderSelect.options[i].text === userData.gender) {
-                    genderSelect.selectedIndex = i;
-                    break;
-                }
+    const userData = await getData();
+    if (!userData) return;
+
+    document.getElementById("uname").value = userData.name || "";
+    document.getElementById("email").value = userData.email || "";
+    document.getElementById("fullname").value = userData.fullName || "";
+    document.getElementById("phone").value = userData.phone || "";
+    document.getElementById("address").value = userData.address || "";
+    document.getElementById("dob").value = userData.dob || "";
+
+    if (userData.gender) {
+        const genderSelect = document.getElementById("gender");
+        for (let i = 0; i < genderSelect.options.length; i++) {
+            if (genderSelect.options[i].text === userData.gender) {
+                genderSelect.selectedIndex = i;
+                break;
             }
-        }     
+        }
+    }
+
+    /* ⭐ Avatar loading logic */
+
+    const avatarPreview = document.getElementById("avatarPreview");
+    const avatarHidden = document.getElementById("avatarUrl");
+    const avatars = document.querySelectorAll(".avatar-option");
+
+    const userAvatar = userData.avatar || "./images/avatar1.jpg";
+
+    avatarPreview.src = userAvatar;
+    avatarHidden.value = userAvatar;
+
+    avatars.forEach(a => {
+        if (a.getAttribute("src") === userAvatar) {
+            a.classList.add("selected");
+        } else {
+            a.classList.remove("selected");
+        }
     });
+
+});
 
     // Only numbers in phone
    document.addEventListener("DOMContentLoaded", () => {
+    // Avatar selection
+let selectedAvatar = "images/avatar1.png";
+
+const avatars = document.querySelectorAll(".avatar-option");
+const preview = document.getElementById("avatarPreview");
+const slider = document.getElementById("avatarSlider");
+
+avatars.forEach(avatar => {
+
+    avatar.addEventListener("click", () => {
+
+        avatars.forEach(a => a.classList.remove("selected"));
+
+        avatar.classList.add("selected");
+
+        selectedAvatar = avatar.getAttribute("src");
+
+        preview.src = selectedAvatar;
+
+        document.getElementById("avatarUrl").value = selectedAvatar;
+
+    });
+
+});
+
+// Slider buttons
+document.getElementById("rightBtn").addEventListener("click", () => {
+    slider.scrollBy({ left: 120, behavior: "smooth" });
+});
+
+document.getElementById("leftBtn").addEventListener("click", () => {
+    slider.scrollBy({ left: -120, behavior: "smooth" });
+});
 
     const phone = document.getElementById("phone");
     phone.addEventListener("input", function () {
@@ -69,6 +125,7 @@
         const updatedData = {
             id: userID,
             name: document.getElementById("uname").value,
+            avatar: document.getElementById("avatarUrl").value,
             fullName: document.getElementById("fullname").value,
             email: document.getElementById("email").value,
             phone: document.getElementById("phone").value,
@@ -102,6 +159,31 @@
     <div class="form-card">
         <h1>Edit Profile</h1>
         <form>
+           <!-- Avatar Selection -->
+            <div class="avatar-section">
+
+                <div class="avatar-preview">
+                    <img id="avatarPreview" src="./images/avatar1.jpg">
+                </div>
+
+                <div class="avatar-carousel">
+
+                    <button type="button" class="avatar-btn" id="leftBtn">&#10094;</button>
+
+                    <div class="avatar-slider" id="avatarSlider">
+                        <img src="./images/avatar1.jpg" class="avatar-option selected">
+                        <img src="./images/avatar2.jpg" class="avatar-option">
+                        <img src="./images/avatar3.jpg" class="avatar-option">
+                        <img src="./images/avatar4.jpg" class="avatar-option">
+                    </div>
+
+                    <button type="button" class="avatar-btn" id="rightBtn">&#10095;</button>
+
+                </div>
+
+                <input type="hidden" id="avatarUrl" value="./images/avatar1.jpg">
+
+            </div>
             <!-- Full Name --> 
              <div class="input-group"> <input type="text" id="fullname" placeholder=" " required>
                 <label>Full Name</label>
