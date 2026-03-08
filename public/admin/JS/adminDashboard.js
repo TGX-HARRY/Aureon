@@ -1,5 +1,5 @@
 async function getMovieCount() {
-    const response = await fetch("/api/movies/count");
+    const response = await fetch("/api/admin/movies/count");
     if (!response.ok) {
         throw new Error("Failed to fetch movie count");
     }
@@ -7,7 +7,6 @@ async function getMovieCount() {
     const element = document.getElementById("mcount");
     element.innerHTML = data.count;
 }
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
