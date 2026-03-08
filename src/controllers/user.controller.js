@@ -1,4 +1,4 @@
-const {getUsersData, writeUserData, rewriteUserData, getMoviesData, getUserMovies} = require("../utils/file.utils");
+const {getUsersData, writeUserData, rewriteUserData, getMoviesData, getUserMovies, getMovieCount} = require("../utils/file.utils");
 const bcrypt = require("bcrypt");
 
 let sessionID;
@@ -262,4 +262,14 @@ exports.changeSubscriberPassword = async (req, res) => {
 
     // if no error
     return res.status(200).json({message :  "User password changed successfully!"});
+}
+
+exports.getMovieCount = async (req, res) => {
+    const movieCount = await getMovieCount();
+    if(!movieCount) {
+        res.status(400).json({message : "Error fetching movie count!"});
+    }
+    else {
+        return res.status(200).json({count : movieCount});
+    }
 }
