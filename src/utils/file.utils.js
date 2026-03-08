@@ -93,4 +93,19 @@ async function getUserMovies(id) {
     const userdata = data.find(u => u.id === id);
     return userdata.movies;
 }
-module.exports = { getUsersData, writeUserData, rewriteUserData , getMoviesData, getUserMovies};
+
+async function getMovieCount() {
+    try {
+        const data = await fs.readFile(moviesFilePath, 'utf-8');
+        if (!data) {
+            return null;
+        }
+        const movieCount = JSON.parse(data).sections.flatMap(s => s.movies).length;
+        return movieCount;
+    }
+    catch (err) {
+        console.error("Error reading file:", err);
+        return null;
+    }
+}
+module.exports = { getUsersData, writeUserData, rewriteUserData , getMoviesData, getUserMovies, getMovieCount};
