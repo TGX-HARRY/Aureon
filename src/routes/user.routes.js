@@ -7,6 +7,7 @@ router.get("/users/subscribers/:id", controllers.getUsersDataByID);
 router.get("/users/admins/:id", controllers.getAdmins);
 router.get("/movies/mylist/:id", controllers.fetchUserMovieList);
 router.get("/movies", controllers.fetchMoviesData);
+router.get("/movies/count", controllers.getMovieCount);
 router.post("/users/subscribers/register", controllers.addSubscriber);
 router.post("/users/admins/register", controllers.addAdmin);
 router.post("/users/subscribers/login", controllers.fetchSubscriber);
