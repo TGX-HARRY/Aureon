@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Aureon</title>
+    <link rel="icon" href="../images/Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="./CSS/adminDashboard.css">
+</head>
+
+<body>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const storedData = localStorage.getItem("sessionData");
+            const loginLink = document.getElementById("loginStatus");
+
+            if (storedData) {
+                const user = JSON.parse(storedData);
+                loginLink.innerHTML = `<a href="./profile.html"><i class="fa fa-user"></i> ${user.name}</a>`;
+            }
+        });
+    </script>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Aureon <span
+                style="font-size: 14px; color: #ccc; font-weight: normal; vertical-align: middle;">Admin</span></div>
+
+        <ul class="nav-links">
+            <li><a href="./index.html">View Site</a></li>
+            <li><a href="./adminDashboard.html">Dashboard</a></li>
+            <li id="loginStatus"><a href="./login.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">Dashboard Overview</h1>
+            <button class="add-btn"><i class="fa fa-plus"></i> Add Content</button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa fa-users"></i></div>
+                <div class="stat-details">
+                    <h3>Total Users</h3>
+                    <p id="ucount">-</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa fa-film"></i></div>
+                <div class="stat-details">
+                    <h3>Total Movies</h3>
+                    <p id="mcount">-</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa fa-tv"></i></div>
+                <div class="stat-details">
+                    <h3>Total Shows</h3>
+                    <p id="scount">-</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa fa-eye"></i></div>
+                <div class="stat-details">
+                    <h3>Active Views</h3>
+                    <p>8,904</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="management-section">
+            <h2>Recent Uploads / Content Management</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Genre</th>
+                        <th>Rating</th>
+                        <th>Date Added</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Stranger Things</td>
+                        <td>Show</td>
+                        <td>Sci-Fi</td>
+                        <td>4.8</td>
+                        <td>2025-03-01</td>
+                        <td>
+                            <button class="action-btn edit-btn" title="Edit"><i class="fa fa-edit"></i></button>
+                            <button class="action-btn delete-btn" title="Delete"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Inception</td>
+                        <td>Movie</td>
+                        <td>Sci-Fi</td>
+                        <td>4.8</td>
+                        <td>2025-02-28</td>
+                        <td>
+                            <button class="action-btn edit-btn" title="Edit"><i class="fa fa-edit"></i></button>
+                            <button class="action-btn delete-btn" title="Delete"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>The Dark Knight</td>
+                        <td>Movie</td>
+                        <td>Action</td>
+                        <td>4.9</td>
+                        <td>2025-02-25</td>
+                        <td>
+                            <button class="action-btn edit-btn" title="Edit"><i class="fa fa-edit"></i></button>
+                            <button class="action-btn delete-btn" title="Delete"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Breaking Bad</td>
+                        <td>Show</td>
+                        <td>Drama</td>
+                        <td>4.9</td>
+                        <td>2025-02-20</td>
+                        <td>
+                            <button class="action-btn edit-btn" title="Edit"><i class="fa fa-edit"></i></button>
+                            <button class="action-btn delete-btn" title="Delete"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: auto;">
+        <div class="footer-content">
+            <p>&copy; 2025 Aureon Admin Panel</p>
+        </div>
+    </footer>
+    <script src="./JS/adminDashboard.js"></script>
+</body>
+
+</html>
