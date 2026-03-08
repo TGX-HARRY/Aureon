@@ -11,21 +11,21 @@ function generateSessionID (){
     return sessionID;
 } 
 
-async function checkUserData(email, role) {
+async function checkUserData(email) {
     const existingData = await getUsersData();
-    const userGroup = (role === "admin") ? existingData.admins : existingData.subscribers;
+    const userGroup = existingData.subscribers;
     return userGroup.find(u => u.email === email) || null;
 }
 
-async function userLookupWithID(id, role) {
+async function userLookupWithID(id) {
     const existingData = await getUsersData();
-    const userGroup = (role === "admin") ? existingData.admins : existingData.subscribers;
+    const userGroup = existingData.subscribers;
     return userGroup.find(u => u.id === id) || null;
 }
 
 exports.addSubscriber = async (req, res) => {
 
-    const present = await checkUserData(req.body.email, "subscriber");
+    const present = await checkUserData(req.body.email);
 
     if (present) {
         return res.status(400).json({
@@ -53,7 +53,7 @@ exports.addSubscriber = async (req, res) => {
 };
 
 exports.fetchSubscriber = async (req, res) => {
-    const isEmailPresent = await checkUserData(req.body.email, "subscriber");
+    const isEmailPresent = await checkUserData(req.body.email);
 
     if (isEmailPresent) {
         // Email match found, now trying to match hash
@@ -122,7 +122,7 @@ exports.changeSubscriberInfo = async (req, res) => {
     user.gender = req.body.gender || user.gender;
     user.address = req.body.address || user.address;
     user.dob = req.body.dob || user.dob;
-    user.avatar = req.body.avatar || user.avatar; // ⭐ ADD THIS
+    user.avatar = req.body.avatar || user.avatar;
 }
     
     try {
@@ -135,15 +135,11 @@ exports.changeSubscriberInfo = async (req, res) => {
 }
 
 exports.removeSubscriberAccount = async (req, res) => {
-    if (req.userType !== "admin") {
-        return res.status(403).json({ message: "Access denied" });
-    }
-
     const id = req.params.id;
     if (!id) {
         return res.status(400).json({message : "Invalid ID!"})
     }
-    const isPresent = await userLookupWithID(id, "subscriber");
+    const isPresent = await userLookupWithID(id);
     if (!isPresent) {
         return res.status(400).json({message : "User does not exist!"});
     }
