@@ -191,14 +191,14 @@
       cursor: pointer;
       z-index: 1001;
       margin-top: 4px;
-      margin-left: -195px;
+      margin-left: -175px;
       transition: transform 0.3s ease;
   }
 
   /* Search bar */
   .search-bar {
       position: absolute;
-      left: -200px;
+      left: -175px;
       right: 0;
       top: 0;
       display: flex;
