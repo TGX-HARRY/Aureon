@@ -9,7 +9,7 @@ async function loadMovies() {
     const data = await response.json();
 
     // If your API returns { sections: [...] }
-    const filteredSections = data.data.sections;
+    const filteredSections = data.sections;
 
     const container = document.getElementById("moviesContainer");
     container.innerHTML = ""; // Clear existing content
