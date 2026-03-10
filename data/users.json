@@ -65,6 +65,18 @@
       "movies": [],
       "password": "$2b$10$/1BIKeb/k1mA0fS5SCZh1.zxQbzNERhW9ovqeG8hscwf04cKiKR32",
       "role": "admin"
+    },
+    {
+      "id": "b73c2e9c-83c6-4f63-96d6-7c32a63a2b90",
+      "name": "Mahesh Singla",
+      "fullName": "",
+      "email": "maheshsingla2007@gmail.com",
+      "gender": "",
+      "address": "",
+      "dob": "",
+      "movies": [],
+      "password": "$2b$10$Anl36h5zQo8NXnFlV9Go8u/6ire//6.UylWjKiz8c94LeSY9BOyBm",
+      "role": "admin"
     }
   ]
 }

@@ -94,7 +94,7 @@ async function getUserMovies(id) {
     return userdata.movies;
 }
 
-async function getMovieCount() {
+async function getMoviesCount() {
     try {
         const data = await fs.readFile(moviesFilePath, 'utf-8');
         if (!data) {
@@ -108,4 +108,31 @@ async function getMovieCount() {
         return null;
     }
 }
-module.exports = { getUsersData, writeUserData, rewriteUserData , getMoviesData, getUserMovies, getMovieCount};
+
+async function userLookupWithID(id, role) {
+    const data = await getUsersData();
+
+    if (role === "admin") {
+        return data.admins.find(user => user.id === id) || null;
+    }
+
+    if (role === "subscriber") {
+        return data.subscribers.find(user => user.id === id) || null;
+    }
+
+    return null;
+}
+
+async function checkUserData(email, role) {
+    const data = await getUsersData();
+
+    if (role === "admin") {
+        return data.admins.find(user => user.email === email);
+    }
+
+    if (role === "subscriber") {
+        return data.subscribers.find(user => user.email === email);
+    }
+}
+
+module.exports = { getUsersData, writeUserData, rewriteUserData , getMoviesData, getUserMovies, getMoviesCount, userLookupWithID, checkUserData};
