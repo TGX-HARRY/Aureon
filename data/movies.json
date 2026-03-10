@@ -651,9 +651,17 @@
       "title": "Sci-Fi",
       "movies": [
         {
+          "id": "interstellar",
+          "title": "Interstellar",
+          "img": "https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg",
+          "genre": "Sci-Fi • Adventure",
+          "rating": "★★★★★",
+          "trailer": "https://www.youtube.com/embed/zSWdZVtXT7E"
+        },
+        {
           "id": "dark",
           "title": "Dark",
-          "img": "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",
+          "img": "https://image.tmdb.org/t/p/w500/apbrbWs8M9lyOpJYU5WXrpFbk1Z.jpg",
           "genre": "Mystery • Thriller",
           "rating": "★★★★★",
           "trailer": "https://www.youtube.com/embed/ESEUoa-mz2c"
