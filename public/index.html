@@ -215,6 +215,9 @@
             }
 
             function filterMovies() {
+
+                const movieCards = Array.from(document.querySelectorAll('.movie-card'));
+
                 const term = (searchInput?.value || '').toLowerCase().trim();
 
                 movieCards.forEach(card => {
@@ -228,7 +231,6 @@
                     card.style.display = match ? '' : 'none';
                 });
 
-                // Hide whole section if it has no visible cards
                 document.querySelectorAll('.movie-section').forEach(section => {
                     const cards = Array.from(section.querySelectorAll('.movie-card'));
                     const anyVisible = cards.some(c => getComputedStyle(c).display !== 'none');

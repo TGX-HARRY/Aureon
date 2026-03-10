@@ -441,6 +441,7 @@
       display: flex;
       gap: 25px;
       overflow-x: auto;
+      justify-content: flex-start;
       padding: 20px 0;
   }
 
@@ -460,8 +461,8 @@
 
   .movie-card {
       min-width: 200px;
-      margin-left: auto;
-      height: 230px;
+    margin-left: 0;
+    height: 230px;
       background: #1a1a1a;
       border-radius: 15px;
       position: relative;
