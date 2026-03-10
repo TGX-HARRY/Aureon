@@ -103,18 +103,18 @@
 
     const user = JSON.parse(storedData);
 
-    let avatar = "./images/avatar1.jpg"; // default avatar
+    let avatar = "./images/avatar1.jpg";
 
     try {
         const response = await fetch(`/api/users/subscribers/${user.id}`);
         const data = await response.json();
 
-        if (data.fetchedData && data.fetchedData.avatar) {
-            avatar = data.fetchedData.avatar;
+        if (data && data.avatar) {
+            avatar = data.avatar;
         }
 
     } catch (err) {
-        console.log("Avatar fetch failed");
+        console.log("Could not fetch avatar");
     }
 
     loginStatus.innerHTML = `
@@ -212,8 +212,8 @@
                 myList = [
                     { title: "Inception", genre: "Sci-Fi", rating: "4.8", img: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg" },
                     { title: "The Dark Knight", genre: "Action", rating: "4.9", img: "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg" },
-                    { title: "Interstellar", genre: "Sci-Fi", rating: "4.7", img: "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDItN2IxOS00NTZkLWE3MzktMjFmMTZhOTJiODg0XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UX1000_.jpg" },
-                    { title: "Breaking Bad", genre: "Drama", rating: "4.9", img: "https://m.media-amazon.com/images/M/MV5BMjhiMzgxZTctNDc1Ni00OTIxLTlhMTYtZTA3ZWFkODRkNmE2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" }
+                    { title: "Interstellar", genre: "Sci-Fi", rating: "4.7", img: "https://m.media-amazon.com/images/I/61wrhEawgQL._AC_UF894,1000_QL80_.jpg" },
+                    { title: "Breaking Bad", genre: "Drama", rating: "4.9", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNCn-pH2JTRCPoyddkjXxW2ZXlyQEwLL3tzA&s" }
                 ];
                 // localStorage.setItem('myList', JSON.stringify(myList)); // Un-comment to actually save
             }
