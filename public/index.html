@@ -21,14 +21,14 @@
 
     const user = JSON.parse(storedData);
 
-    let avatar = "./images/avatar1.jpg"; // default avatar
+    let avatar = "./images/avatar1.jpg";
 
     try {
         const response = await fetch(`/api/users/subscribers/${user.id}`);
         const data = await response.json();
 
-        if (data.fetchedData && data.fetchedData.avatar) {
-            avatar = data.fetchedData.avatar;
+        if (data && data.avatar) {
+            avatar = data.avatar;
         }
 
     } catch (err) {
