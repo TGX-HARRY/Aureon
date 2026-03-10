@@ -27,19 +27,6 @@
       "role": "subscriber"
     },
     {
-      "id": "7e009091-ce42-432b-a1d7-547c97220d62",
-      "name": "user",
-      "fullName": "",
-      "email": "maheshsingla2007@gmail.com",
-      "phone": "",
-      "gender": "",
-      "address": "",
-      "dob": "",
-      "movies": [],
-      "password": "$2b$10$oYHfTnMDrVGjK5LZcIgkfujfGUYYaWZkKdFnEmgrrz8tEqPxXpE1G",
-      "role": "subscriber"
-    },
-    {
       "id": "09ce9580-f5ee-4f65-82f0-704b17a6ee0e",
       "name": "Manvi Garg",
       "fullName": "Manvi Garg",
