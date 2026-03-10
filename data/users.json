@@ -1,6 +1,20 @@
 {
   "subscribers": [
     {
+      "id": "09ce9580-f5ee-4f65-82f0-704b17a6ee0e",
+      "name": "Manvi Garg",
+      "fullName": "Manvi Garg",
+      "email": "manvigarg2707@gmail.com",
+      "gender": "Female",
+      "address": "Chitkara University",
+      "dob": "2026-04-01",
+      "movies": [],
+      "password": "$2b$10$RNmvSCxra7rZgvnPXVE7OuwEDJrIrFpmwhbMDLzryMVMmaDOFp3na",
+      "role": "subscriber",
+      "phone": "9877636077",
+      "avatar": "./images/avatar4.jpg"
+    },
+    {
       "id": "9b370175-c977-4376-b5ea-037aa56b7335",
       "name": "testchange2",
       "fullName": "testchange2",
@@ -25,20 +39,6 @@
       "movies": [],
       "password": "$2b$10$wqNyDnSQfkZLZxA4.8tDK.jD1vpn1UKxt8KTEnuN.ptEy7wpKMyTW",
       "role": "subscriber"
-    },
-    {
-      "id": "09ce9580-f5ee-4f65-82f0-704b17a6ee0e",
-      "name": "Manvi Garg",
-      "fullName": "Manvi Garg",
-      "email": "manvigarg2707@gmail.com",
-      "gender": "Female",
-      "address": "Chitkara University",
-      "dob": "2026-04-01",
-      "movies": [],
-      "password": "$2b$10$RNmvSCxra7rZgvnPXVE7OuwEDJrIrFpmwhbMDLzryMVMmaDOFp3na",
-      "role": "subscriber",
-      "phone": "9877636077",
-      "avatar": "./images/avatar4.jpg"
     }
   ],
   "admins": [
