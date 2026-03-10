@@ -39,6 +39,18 @@
       "movies": [],
       "password": "$2b$10$wqNyDnSQfkZLZxA4.8tDK.jD1vpn1UKxt8KTEnuN.ptEy7wpKMyTW",
       "role": "subscriber"
+    },
+    {
+      "id": "8fd52609-7f6f-4a2b-85a2-a922c5e97df4",
+      "name": "Mahesh Singla",
+      "fullName": "",
+      "email": "mahesh12@gmail.com",
+      "gender": "",
+      "address": "",
+      "dob": "",
+      "movies": [],
+      "password": "$2b$10$OIHKICclC/QUScXheN7OU.KtyqjNP5RGYHi77CQdxxRKKz977.R9y",
+      "role": "subscriber"
     }
   ],
   "admins": [
