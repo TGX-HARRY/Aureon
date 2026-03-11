@@ -112,7 +112,7 @@ const changeSubscriberInfo = async (req, res) => {
         return res.status(400).json({ message: "Invalid user ID" });
     }
     if (req.body.id !== user.id) {
-        return res.status(403).json({ message: "Access denied" });
+        return res.status(401).json({ message: "Access denied" });
     }
 
     if (user) {
