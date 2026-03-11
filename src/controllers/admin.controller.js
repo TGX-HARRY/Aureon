@@ -1,4 +1,6 @@
-const {getUsersData, writeUserData, rewriteUserData, getMovieCount} = require("../utils/file.utils");
+const {getUsersData, writeUserData, rewriteUserData, getMoviesCount, userLookupWithID, checkUserData} = require("../utils/file.utils");
+
+const crypto = require("crypto");
 
 exports.addAdmin = async (req, res) => {
     const id = req.body.id;
@@ -32,7 +34,7 @@ exports.addAdmin = async (req, res) => {
 };
 
 exports.getAdmins = async (req, res) => {
-    const adminid = req.body.id;
+    const adminid = req.params.id;
     if (!adminid) {
         return res.status(400).json({message : "ID not provided!"});
     }
@@ -42,8 +44,8 @@ exports.getAdmins = async (req, res) => {
         return res.status(401).json({message : "Permission Denied"});
     }
 
-    const existingData = getUsersData();
-    const adminsNames = existingData.admins.map(admin => admin.name);
+    const existingData = await getUsersData();
+    const adminsNames = (existingData.admins || []).map(admin => admin.name);
     if (adminsNames.length === 0) {
         return res.status(404).json({ message: "No admins found" });
     }
@@ -51,7 +53,7 @@ exports.getAdmins = async (req, res) => {
 }
 
 exports.getMovieCount = async (req, res) => {
-    const movieCount = await getMovieCount();
+    const movieCount = await getMoviesCount();
     if(!movieCount) {
         res.status(400).json({message : "Error fetching movie count!"});
     }
@@ -67,7 +69,7 @@ exports.checkAdminID = async (req, res) => {
     }
 
     const data = await getUsersData();
-    const presence = data.find(u => u.id === id) || null;
+    const presence = data.admins.find(u => u.id === id) || null;
     if (!presence) {
         return res.status(401).json({message : "Access denied!"});
     }
