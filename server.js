@@ -1,8 +1,10 @@
-const http = require("http");
+const dotenv = require("dotenv");
+dotenv.config(); // 🔥 FIRST
+
 const app = require("./src/app");
 
-const port = 1212;
+const PORT = process.env.PORT;
 
-app.listen(port, () => {
-    console.log("API and Webpage live at http://localhost:1212");
-})
+app.listen(PORT, () => {
+  console.log(`API and Webpage live at http://localhost:${PORT}`);
+});
