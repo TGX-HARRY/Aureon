@@ -1,6 +1,6 @@
 async function loadMovies() {
   try {
-    const response = await fetch("/api/movies");
+    const response = await fetch("/api/movies/");
 
     if (!response.ok) {
       throw new Error("Failed to fetch movies");
