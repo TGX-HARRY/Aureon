@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 dotenv.config(); // 🔥 FIRST
 
-const app = require("./src/app");
+const app = require("./backend/app");
 
 const PORT = process.env.PORT;
 

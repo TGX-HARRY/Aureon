@@ -2,7 +2,7 @@
 
 AUREON is a basic movie streaming website built using HTML, CSS, JavaScript, Node.js, and Express.
 
-This project demonstrates full-stack fundamentals including frontend rendering, backend API development, and basic server-side routing.
+This project demonstrates full-stack fundamentals including frontend rendering, backend API development, managing databses and basic server-side routing.
 
 ---
 
@@ -33,19 +33,71 @@ This project demonstrates full-stack fundamentals including frontend rendering, 
 ## 📂 Project Structure
 
 <pre>
-AUREON
-├── public
-│   ├── index.html
-│   ├── styles.css
-│   └── script.js
-├── routes
-│   └── movieRoutes.js
-├── data
-│   └── movies.json
-├── app.js
-├── package.json
-└── README.md
+backend/
+│
+├── config/                  # App configuration (DB, env setup)
+│   └── db.js                # MongoDB connection setup
+│
+├── controllers/             # Handle request/response logic
+│   ├── auth.controller.js   # Authentication (login/signup)
+│   ├── user.controller.js   # User operations (profile, watchlist)
+│   ├── movie.controller.js  # Movie CRUD operations
+│   └── admin.controller.js  # Admin-specific actions
+│
+├── services/                # Business logic layer
+│   ├── auth.service.js      # Auth logic (JWT, hashing)
+│   ├── user.service.js      # User-related logic
+│   └── movie.service.js     # Movie-related logic
+│
+├── models/                  # Database schemas (Mongoose)
+│   ├── user.model.js        # User schema
+│   └── movie.model.js       # Movie schema
+│
+├── routes/                  # API route definitions
+│   ├── auth.routes.js       # Auth endpoints
+│   ├── user.routes.js       # User endpoints
+│   ├── movie.routes.js      # Movie endpoints
+│   └── admin.routes.js      # Admin endpoints
+│
+├── middleware/              # Custom middleware
+│   ├── auth.middleware.js   # JWT authentication
+│   ├── error.middleware.js  # Central error handler
+│   ├── validate.middleware.js # Request validation
+│   └── upload.middleware.js # File uploads (Multer)
+│
+├── validators/              # Request validation schemas
+│   ├── auth.validator.js    # Auth validation rules
+│   ├── user.validator.js    # User validation rules
+│   └── movie.validator.js   # Movie validation rules
+│
+├── utils/                   # Helper utilities
+│   ├── file.utils.js        # File handling helpers
+│   └── asyncHandler.js      # Async error wrapper
+│
+├── data/                    # Static/mock data
+│   ├── movies.json
+│   └── users.json
+│
+├── app.js                   # Express app setup (middlewares, routes)
+├── server.js                # Server entry point
+│
+├── .env                     # Environment variables
+├── .env.example             # Sample env file
+├── package.json             # Dependencies & scripts
+└── README.md                # Project documentation
 </pre>
+
+---
+
+## 🏗️ Architecture Overview
+
+- **Controllers** → Handle HTTP layer (req/res)
+- **Services** → Contain business logic
+- **Models** → Define database structure
+- **Routes** → Define API endpoints
+- **Middleware** → Reusable request processing logic
+- **Validators** → Ensure incoming data is valid
+- **Utils** → Shared helper functions
 
 ---
 

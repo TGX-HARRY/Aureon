@@ -1,21 +1,5 @@
-const { getUsersData, writeUserData, rewriteUserData, getMoviesData, getUserMovies } = require("../utils/file.utils");
+const { getUsersData, writeUserData, rewriteUserData } = require("../utils/file.utils");
 const bcrypt = require("bcrypt");
-
-let sessionID;
-const getSessionID = () => {
-    return sessionID;
-}
-
-function generateSessionID() {
-    sessionID = crypto.randomUUID();
-    return sessionID;
-}
-
-async function checkUserData(email) {
-    const existingData = await getUsersData();
-    const userGroup = existingData.subscribers;
-    return userGroup.find(u => u.email === email) || null;
-}
 
 async function userLookupWithID(id) {
     const existingData = await getUsersData();
@@ -25,8 +9,7 @@ async function userLookupWithID(id) {
 
 const addSubscriber = async (req, res) => {
 
-    const present = await checkUserData(req.body.email);
-
+    const present = await checkUserByEmail(req.body.email);
     if (present) {
         return res.status(400).json({
             message: "Account already exists!"
@@ -53,24 +36,25 @@ const addSubscriber = async (req, res) => {
 };
 
 const fetchSubscriber = async (req, res) => {
-    const isEmailPresent = await checkUserData(req.body.email);
+    const {email, password} = req.body;
+    const user = await getUser(email, password);
 
-    if (isEmailPresent) {
-        // Email match found, now trying to match hash
-        const isMatch = await bcrypt.compare(req.body.password, isEmailPresent.password);
-        if (isMatch) {
-            // Hash matched, user logged in succesfully
-            const sessionData = {
-                "name": isEmailPresent.name,
-                "id": isEmailPresent.id,
-                "userType": "subscriber",
-                "sessionID": generateSessionID()
-            };
-            return res.status(200).json({ sessionData });
-        }
-        else {
-            return res.status(400).json({ message: "Incorrect password" });
-        }
+    if (user != null) {
+            const {userId, username} = user;
+            // create token
+            const token = jwt.sign(
+                { userId, username },
+                process.env.JWT_SECRET,
+                { expiresIn: "1d" }
+            );
+
+            // set cookie
+            res.cookie("token", token, {
+                httpOnly: true,       // prevents JS access (XSS protection)
+                secure: false,        // true in production (HTTPS)
+                sameSite: "lax",      // or "none" for cross-site
+                maxAge: 24 * 60 * 60 * 1000 // 1 day
+            });
     }
     else {
         return res.status(400).json({ message: "No account found with the provided email!" });
@@ -161,10 +145,6 @@ const removeSubscriberAccount = async (req, res) => {
     return res.json("Subscriber removed successfully!");
 }
 
-const fetchMoviesData = async (req, res) => {
-    const data = await getMoviesData();
-    return (!data) ? res.status(400).json({ message: "Movies not found" }) : res.json(data);
-}
 
 const getUsersDataByID = async (req, res) => {
     const id = req.params.id;
@@ -176,11 +156,6 @@ const getUsersDataByID = async (req, res) => {
         return res.status(400).json({ message: "Data couldn't be fetched!" });
     }
     return res.json(data);
-}
-
-const fetchUserMovieList = async (req, res) => {
-    const movies = await getUserMovies(req.params.id);
-    return res.json(movies);
 }
 
 const changeSubscriberPassword = async (req, res) => {
@@ -210,4 +185,12 @@ const changeSubscriberPassword = async (req, res) => {
     return res.status(200).json({ message: "User password changed successfully!" });
 }
 
-module.exports = {addSubscriber, fetchSubscriber, getSubscribers, changeSubscriberInfo, removeSubscriberAccount, fetchMoviesData, getUsersDataByID, fetchUserMovieList, changeSubscriberPassword, getSessionID};
+module.exports = {
+    addSubscriber, 
+    fetchSubscriber, 
+    getSubscribers, 
+    changeSubscriberInfo, 
+    removeSubscriberAccount, 
+    getUsersDataByID, 
+    changeSubscriberPassword
+};

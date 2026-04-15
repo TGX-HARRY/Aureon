@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const path = require("path");
 
 const filePath = path.join(__dirname, "../../data/users.json");
-const moviesFilePath = path.join(__dirname, "../../data/movies.json");
 
 async function getUsersData() {
     try {
@@ -74,25 +73,6 @@ async function rewriteUserData(data) {
     }
 }
 
-async function getMoviesData() {
-    try {
-        const data = await fs.readFile(moviesFilePath, 'utf-8');
-        if (!data) {
-            return null;
-        }
-        return JSON.parse(data);
-    }
-    catch (err) {
-        console.error("Error reading file:", err);
-        return null;
-    }
-}
-
-async function getUserMovies(id) {
-    const data = await getUsersData();
-    const userdata = data.find(u => u.id === id);
-    return userdata.movies;
-}
 
 async function getMoviesCount() {
     try {
@@ -135,4 +115,4 @@ async function checkUserData(email, role) {
     }
 }
 
-module.exports = { getUsersData, writeUserData, rewriteUserData , getMoviesData, getUserMovies, getMoviesCount, userLookupWithID, checkUserData};
+module.exports = { getUsersData, writeUserData, rewriteUserData , getMoviesCount, userLookupWithID, checkUserData};
