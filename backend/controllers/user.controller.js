@@ -1,36 +1,38 @@
+const { findUserByEmail, getUser, addUser, getUserById} = require("../services/user.service");
 const { getUsersData, writeUserData, rewriteUserData } = require("../utils/file.utils");
 const bcrypt = require("bcrypt");
-
-async function userLookupWithID(id) {
-    const existingData = await getUsersData();
-    const userGroup = existingData.subscribers;
-    return userGroup.find(u => u.id === id) || null;
-}
+const jwt = require('jsonwebtoken');
 
 const addSubscriber = async (req, res) => {
+    const {email, password} = req.body;
+    if (!email || !password) {
+        console.log("user.controller.js -> data not found!");
+        return res
+        .status(400)
+        .json({
+            message: "Fields Missing!"
+        });
+    }
 
-    const present = await checkUserByEmail(req.body.email);
+    const present = await findUserByEmail(email);
     if (present) {
-        return res.status(400).json({
+        return res
+        .status(400)
+        .json({
             message: "Account already exists!"
         });
     }
-
-    const newUser = {
-        id: crypto.randomUUID(),
-        ...req.body,
-        role: "subscriber"
-    };
-
-    try {
-        await writeUserData(newUser);
-    } catch (err) {
-        return res.status(500).json({
-            message: "Error creating user"
-        });
+    
+    const uploadStatus = await addUser(email, password);
+    if (!uploadStatus) {
+        return res
+        .status(500)
+        .json({ message : "Unable to add user, please try again later on!"});
     }
 
-    return res.status(201).json({
+    return res
+    .status(201)
+    .json({
         message: "User created successfully"
     });
 };
@@ -49,12 +51,15 @@ const fetchSubscriber = async (req, res) => {
             );
 
             // set cookie
-            res.cookie("token", token, {
+            return res
+            .status(200)
+            .cookie("token", token, {
                 httpOnly: true,       // prevents JS access (XSS protection)
                 secure: false,        // true in production (HTTPS)
-                sameSite: "lax",      // or "none" for cross-site
+                sameSite: "lax",      
                 maxAge: 24 * 60 * 60 * 1000 // 1 day
-            });
+            })
+            .json({message : "Logged in!"});
     }
     else {
         return res.status(400).json({ message: "No account found with the provided email!" });
@@ -147,15 +152,16 @@ const removeSubscriberAccount = async (req, res) => {
 
 
 const getUsersDataByID = async (req, res) => {
-    const id = req.params.id;
+    const id = req.userId;
     if (!id) {
         return res.status(400).json({ message: "Invalid ID!" })
     }
-    const data = await userLookupWithID(id, "subscriber");
+    const data = await getUserById(id, "subscriber");
     if (!data) {
+        console.log("user.controller.js -> data not found!");
         return res.status(400).json({ message: "Data couldn't be fetched!" });
     }
-    return res.json(data);
+    return res.status(200).json(data);
 }
 
 const changeSubscriberPassword = async (req, res) => {
