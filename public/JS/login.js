@@ -6,20 +6,18 @@ async function validateForm(event) {
     const errorMessage = document.getElementById('error-message');
 
     const response = await fetch("/api/users/subscribers/login", {
-        method: "POST",   
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email, password })
-    });
-
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password }),
+            credentials: "include"
+        });
     const data = await response.json();
-    console.log(data);
-    if (data && data.sessionData) {
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("sessionData", JSON.stringify(data.sessionData));
-        window.location.href = "/";
-    } else {
+    if (response.ok) {
+        window.location.replace("/"); 
+    } 
+    else {
         errorMessage.innerHTML = '<span style="color:red;">*Invalid email or password.</span>';
     }
 }
