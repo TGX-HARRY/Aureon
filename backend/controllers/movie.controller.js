@@ -1,7 +1,12 @@
-const { getMoviesData, getUserMovies } = require("../services/movie.service");
+const { getAllMovies, getSectionsAndMovies, getUserMovies } = require("../services/movie.service");
 
-const fetchMoviesData = async (req, res) => {
-    const data = await getMoviesData();
+const fetchSectionsAndMoviesData = async (req, res) => {
+    const data = await getSectionsAndMovies();
+    return (!data) ? res.status(400).json({ message: "Movies not found" }) : res.status(200).json(data);
+}
+
+const fetchAllMoviesData = async (req, res) => {
+    const data = await getAllMovies();
     return (!data) ? res.status(400).json({ message: "Movies not found" }) : res.status(200).json(data);
 }
 
@@ -10,4 +15,4 @@ const fetchUserMovieList = async (req, res) => {
     return res.status(200).json(movies);
 }
 
-module.exports = { fetchMoviesData, fetchUserMovieList };
+module.exports = { fetchSectionsAndMoviesData, fetchUserMovieList, fetchAllMoviesData };
