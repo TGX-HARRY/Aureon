@@ -1,20 +1,18 @@
+import { clearUser, setUser, getUser } from "./Auth.js";
+
 async function loadMovies() {
   try {
-    const response = await fetch("/api/movies/");
+    const response = await fetch("/api/movies/sections");
 
     if (!response.ok) {
       throw new Error("Failed to fetch movies");
     }
-
-    const data = await response.json();
-
-    // If your API returns { sections: [...] }
-    const filteredSections = data.sections;
+    const fetchedData = await response.json();
 
     const container = document.getElementById("moviesContainer");
     container.innerHTML = ""; // Clear existing content
 
-    filteredSections.forEach(section => {
+    fetchedData.forEach(section => {
       if (section.movies && section.movies.length > 0) {
 
         const sectionDiv = document.createElement("div");
@@ -89,6 +87,7 @@ async function loadMovies() {
     console.error("Error loading movies:", error);
   }
 }
+
 async function handleMovieClick(movie) {
   const sessionData = JSON.parse(localStorage.getItem("sessionData"));
   if (!sessionData) {
@@ -116,5 +115,66 @@ async function handleMovieClick(movie) {
     }
   }
 }
+
 // Run it
 loadMovies();
+
+async function postLogin() {
+  try {
+    const response = await fetch("/api/users/subscribers/me", {
+      credentials: "include"
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      clearUser();
+      return null;
+    }
+
+    setUser(data);
+
+    return data;
+
+  } catch (error) {
+    clearUser();
+    return null;
+  }
+}
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const user = await postLogin();
+  const loginStatus = document.getElementById("loginStatus");
+  if (!user) {
+    console.log("No user logged in");
+    return;
+  }
+  
+  loginStatus.innerHTML = `
+    <a href="#" class="user-profile">
+        <img src="${user.avatar}" class="nav-avatar">
+        ${user.username}
+    </a>
+    <ul class="dropdown-menu">
+        <li><a href="./profile.html">Edit Profile</a></li>
+        <li id="logout"><a href="#">Log Out</a></li>
+    </ul>
+  `;
+
+  loginStatus.classList.add("dropdown");
+
+  const logoutBtn = document.getElementById("logout");
+
+  logoutBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    await fetch("/api/users/logout", {
+      method: "POST",
+      credentials: "include"
+    });
+
+    clearUser();
+    window.location.href = "/login.html";
+  });
+});
