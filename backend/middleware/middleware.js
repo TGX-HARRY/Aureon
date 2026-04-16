@@ -7,7 +7,7 @@ const protect = (req, res, next) => {
         return;
     }
     try {
-        const verification = jwt.verify(token, process.env.SECRET_KEY);
+        const verification = jwt.verify(token, process.env.JWT_SECRET);
         req.userId = verification.userId;
         req.username = verification.username; 
         next();
