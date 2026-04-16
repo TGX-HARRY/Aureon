@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
-    name: {
+    username: {
       type: String,
       trim: true,
+      required: true,
     },
 
     email: {
@@ -23,7 +24,7 @@ const UserSchema = new mongoose.Schema(
 
     avatar: {
       type: String,
-      default: "",
+      default: "./images/avatar1",
     },
 
     role: {
