@@ -2,12 +2,13 @@ const { default: mongoose } = require("mongoose");
 const userModel = require("../models/user.model");
 const bcrypt = require("bcrypt");
 
-async function addUser(email, password) {
-    if (!email || !password) return false;
+async function addUser(username, email, password) {
+    if (!username || !email || !password) return false;
     
     const hashedPassword = await bcrypt.hash(password, 10);
     try {
         const upload = await userModel.insertOne({
+            username,
             email,
             password : hashedPassword,
         });
@@ -37,19 +38,19 @@ async function getUser(email, password) {
     const getId = await findUserByEmail(email);
     if (!getId) return null;
 
-    const user = await userModel.findById(getId);
-    
-    
+    const user = await userModel.findById(getId).select("password");
+    if (!user) return null;
+
     if (user != null) {
         const matchPasswords = await bcrypt.compare(password, user.password);
         if (!matchPasswords) {
             return res
-            .status(401)
-            .json({message: "Incorrect Password!"});
+            .status(400)
+            .json({ message: "Invalid credentials" });
         }
         const fetchedUser = {
             userId: user._id,
-            username: user.name
+            username: user.username
         }
         return fetchedUser;
     }
@@ -65,4 +66,27 @@ async function getUserById(id) {
     return userdata;
 }
 
-module.exports = {addUser, findUserByEmail, getUser, getUserById}
+function getChangedFields(oldUser, newUser) {
+  const result = {};
+
+  Object.keys(newUser).forEach(key => {
+    if (newUser[key] !== oldUser[key]) {
+      result[key] = newUser[key];
+    }
+  });
+
+  return result;
+}
+
+async function changeUserData(id, oldData, newData) {
+    if (!id || !mongoose.isValidObjectId(id)) return false;
+    const updatedData = getChangedFields(oldData, newData);
+    
+    try {
+        await userModel.findByIdAndUpdate(id, updatedData, { returnDocument: "after", runValidators: true });
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+module.exports = {addUser, findUserByEmail, getUser, getUserById, changeUserData}
