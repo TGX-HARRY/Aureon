@@ -1,11 +1,12 @@
-const { findUserByEmail, getUser, addUser, getUserById} = require("../services/user.service");
+const { findUserByEmail, getUser, addUser, getUserById, changeUserData} = require("../services/user.service");
 const { getUsersData, writeUserData, rewriteUserData } = require("../utils/file.utils");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
+const userModel = require("../models/user.model");
 
 const addSubscriber = async (req, res) => {
-    const {email, password} = req.body;
-    if (!email || !password) {
+    const {username, email, password} = req.body;
+    if (!username || !email || !password) {
         console.log("user.controller.js -> data not found!");
         return res
         .status(400)
@@ -23,7 +24,7 @@ const addSubscriber = async (req, res) => {
         });
     }
     
-    const uploadStatus = await addUser(email, password);
+    const uploadStatus = await addUser(username, email, password);
     if (!uploadStatus) {
         return res
         .status(500)
@@ -39,6 +40,11 @@ const addSubscriber = async (req, res) => {
 
 const fetchSubscriber = async (req, res) => {
     const {email, password} = req.body;
+    if (!email || !password) {
+        return res
+        .status(400)
+        .json({ message: "Fields Missing!" });
+    }
     const user = await getUser(email, password);
 
     if (user != null) {
@@ -91,36 +97,41 @@ const getSubscribers = async (req, res) => {
 }
 
 const changeSubscriberInfo = async (req, res) => {
-    const email = req.body.email;
-    const existingData = await getUsersData();
-    const user = existingData.subscribers.find(u => u.email === email);
+    const id = req.userId;
+    if (!id) {
+         return res
+        .status(401)
+        .json({ message: "Invalid user ID" });
+    }
+
+    const user = await getUserById(id);
     if (!user) {
-        return res.status(404).json({ message: "User not found" });
-    }
-    if (!req.body.id) {
-        return res.status(400).json({ message: "Invalid user ID" });
-    }
-    if (req.body.id !== user.id) {
-        return res.status(401).json({ message: "Access denied" });
+        return res
+        .status(404)
+        .json({ message: "User not found" });
     }
 
+    const newUser = {};
     if (user) {
-        user.name = req.body.name || user.name;
-        user.phone = req.body.phone || user.phone;
-        user.fullName = req.body.fullName || user.fullName;
-        user.gender = req.body.gender || user.gender;
-        user.address = req.body.address || user.address;
-        user.dob = req.body.dob || user.dob;
-        user.avatar = req.body.avatar || user.avatar;
+        newUser.username = req.body.name || user.name;
+        newUser.phone = req.body.phone || user.phone;
+        newUser.fullName = req.body.fullName || user.fullName;
+        newUser.gender = req.body.gender || user.gender;
+        newUser.address = req.body.address || user.address;
+        newUser.dob = req.body.dob || user.dob;
+        newUser.avatar = req.body.avatar || user.avatar;
     }
 
-    try {
-        await rewriteUserData(existingData);
-    } catch (err) {
-        return res.status(500).json({ message: "Error updating user data" });
+    const uploadStatus = await changeUserData(id, user, newUser);
+    if (!uploadStatus) {
+        return res
+        .status(500)
+        .json({message : "Unsuccessful update, internal server issue!"})
     }
 
-    return res.status(200).json({ message: "User data updated successfully" });
+    return res
+    .status(200)
+    .json({ message: "User data updated successfully" });
 }
 
 const removeSubscriberAccount = async (req, res) => {
