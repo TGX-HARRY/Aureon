@@ -35,6 +35,7 @@ const UserSchema = new mongoose.Schema(
     gender: {
       type: String,
       enum: ["male", "female", "other"],
+      default: "null",
     },
 
     phone: {
@@ -53,7 +54,7 @@ const UserSchema = new mongoose.Schema(
     },
 
     dob: {
-      type: Date,
+      type: String,
       default: null, 
     },
   },
