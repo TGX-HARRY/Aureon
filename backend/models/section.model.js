@@ -14,7 +14,7 @@ const sectionSchema = mongoose.Schema({
     },
     movies: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Movie", // 🔥 enables populate
+            ref: "Movie",
         }]
 });
 
