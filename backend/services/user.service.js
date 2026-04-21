@@ -5,12 +5,11 @@ const bcrypt = require("bcrypt");
 async function addUser(username, email, password) {
     if (!username || !email || !password) return false;
     
-    const hashedPassword = await bcrypt.hash(password, 10);
     try {
         const upload = await userModel.insertOne({
             username,
             email,
-            password : hashedPassword,
+            password,
         });
 
         return true;
@@ -44,9 +43,7 @@ async function getUser(email, password) {
     if (user != null) {
         const matchPasswords = await bcrypt.compare(password, user.password);
         if (!matchPasswords) {
-            return res
-            .status(400)
-            .json({ message: "Invalid credentials" });
+            return null;
         }
         const fetchedUser = {
             userId: user._id,
@@ -86,7 +83,23 @@ async function changeUserData(id, oldData, newData) {
         await userModel.findByIdAndUpdate(id, updatedData, { returnDocument: "after", runValidators: true });
         return true;
     } catch (error) {
+        console.log("Error in user.service.js, changeUserData method ->" + error);
         return false;
     }
 }
-module.exports = {addUser, findUserByEmail, getUser, getUserById, changeUserData}
+
+async function deleteUserAccount(id) {
+    if (!id || !mongoose.isValidObjectId(id)) {
+        return false;
+    }
+
+    try {
+        await userModel.findByIdAndDelete(id);
+        return true;
+    } catch(error) {
+        console.log("Error in user.service.js, deleteAccountById method ->" + error);
+        return false;
+    }
+}
+
+module.exports = {addUser, findUserByEmail, getUser, getUserById, changeUserData, deleteUserAccount}
