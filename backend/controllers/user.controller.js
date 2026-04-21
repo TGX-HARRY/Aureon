@@ -1,4 +1,4 @@
-const { findUserByEmail, getUser, addUser, getUserById, changeUserData} = require("../services/user.service");
+const { findUserByEmail, getUser, addUser, getUserById, changeUserData, deleteUserAccount} = require("../services/user.service");
 const { getUsersData, writeUserData, rewriteUserData } = require("../utils/file.utils");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
@@ -24,7 +24,8 @@ const addSubscriber = async (req, res) => {
         });
     }
     
-    const uploadStatus = await addUser(username, email, password);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const uploadStatus = await addUser(username, email, HashedPassword);
     if (!uploadStatus) {
         return res
         .status(500)
@@ -45,8 +46,8 @@ const fetchSubscriber = async (req, res) => {
         .status(400)
         .json({ message: "Fields Missing!" });
     }
-    const user = await getUser(email, password);
 
+    const user = await getUser(email, password);
     if (user != null) {
             const {userId, username} = user;
             // create token
@@ -71,30 +72,6 @@ const fetchSubscriber = async (req, res) => {
         return res.status(400).json({ message: "No account found with the provided email!" });
     }
 };
-
-const getSubscribers = async (req, res) => {
-    const adminid = req.params.id;
-    if (!adminid) {
-        return res.status(400).json({ message: "ID not provided!" });
-    }
-
-    const validID = await userLookupWithID(adminid, "admin");
-    if (!validID) {
-        return res.status(401).json({ message: "Permission Denied" });
-    }
-
-    const existingData = getUsersData();
-    const customersDataWithoutPassword = existingData.subscribers.map(subscriber => {
-        return {
-            name: subscriber.name,
-            email: subscriber.email
-        }
-    });
-    if (customersDataWithoutPassword.length === 0) {
-        return res.status(404).json({ message: "No subscribers found" });
-    }
-    return res.status(200).json({ data: customersDataWithoutPassword });
-}
 
 const changeSubscriberInfo = async (req, res) => {
     const id = req.userId;
@@ -140,25 +117,22 @@ const removeSubscriberAccount = async (req, res) => {
         return res.status(400).json({ message: "Invalid ID!" })
     }
 
-    const isPresent = await userLookupWithID(id);
+    const isPresent = await getUserById(id);
     if (!isPresent) {
         return res.status(400).json({ message: "User does not exist!" });
     }
 
-    const data = await getUsersData();
-
-    const filteredData = data.subscribers.filter(u => u.id !== id);
-
-    try {
-        await rewriteUserData({
-            ...data,
-            subscribers: filteredData
-        });
+    const isDeleted = await deleteUserAccount(id);
+    if (!isDeleted) {
+        return res
+        .status(500)
+        .json({message: "Server Error"});
     }
-    catch (err) {
-        return res.status(400).json({ message: "Data write failed!" });
-    }
-    return res.json("Subscriber removed successfully!");
+
+    
+    return res
+    .status(200)
+    .json("Subscriber removed successfully!");
 }
 
 
@@ -167,7 +141,7 @@ const getUsersDataByID = async (req, res) => {
     if (!id) {
         return res.status(400).json({ message: "Invalid ID!" })
     }
-    const data = await getUserById(id, "subscriber");
+    const data = await getUserById(id);
     if (!data) {
         console.log("user.controller.js -> data not found!");
         return res.status(400).json({ message: "Data couldn't be fetched!" });
@@ -178,34 +152,46 @@ const getUsersDataByID = async (req, res) => {
 const changeSubscriberPassword = async (req, res) => {
     const email = req.body.email;
     if (!email) {
-        return res.status(400).json({ message: "User email not found!" });
+        return res
+        .status(400)
+        .json({ message: "User email not found!" });
     }
 
-    const existingUserData = await getUsersData();
-    const user = existingUserData.subscribers.find(u => u.email === email);
+    const userId = await findUserByEmail(email);
+    if (!userId) {
+        return res
+        .status(400)
+        .json({ message: "User not found!" })
+    }
+    const user = await getUserById(userId);
     if (!user) {
-        return res.status(400).json({ message: "User not found!" })
+        return res
+        .status(500)
+        .json({message : "Unable to fetch user!"});
     }
+    // console.log(user);
 
-    if (user) {
-        user.password = await bcrypt.hash(req.body.password, 10);
-    }
-
-    try {
-        await rewriteUserData(existingUserData);
-    }
-    catch (err) {
-        return res.status(400).json({ message: "Could not rewrite data, due to error : " + err });
+    // create new user object which contains all previous data of user and change password and change it
+    const newUser = user;
+    newUser.password = await bcrypt.hash(req.body.password, 10);
+    // console.log(newUser);
+    
+    const uploadStatus = await changeUserData(userId, user, newUser);
+    if (!uploadStatus) {
+        return res
+        .status(500)
+        .json({message : "Unable to change password at this time, please try again after few minutes!"})
     }
 
     // if no error
-    return res.status(200).json({ message: "User password changed successfully!" });
+    return res
+    .status(200)
+    .json({ message: "User password changed successfully!" });
 }
 
 module.exports = {
     addSubscriber, 
     fetchSubscriber, 
-    getSubscribers, 
     changeSubscriberInfo, 
     removeSubscriberAccount, 
     getUsersDataByID, 
