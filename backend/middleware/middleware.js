@@ -1,3 +1,6 @@
+const jwt = require("jsonwebtoken");
+const userModel = require("../models/user.model");
+
 // this function checks if the user is logged in
 const protect = (req, res, next) => {
     // get token from cookies
@@ -21,6 +24,12 @@ const protect = (req, res, next) => {
     catch (error) {
         return res.status(401).json({ message: "Session expired or invalid token!" });
     }
+}
+
+// this function checks if the user is an admin
+const isAdmin = async (req, res, next) => {
+    // get token from cookies
+    const token = req.cookies.token;
 }
 
 module.exports=protect;
