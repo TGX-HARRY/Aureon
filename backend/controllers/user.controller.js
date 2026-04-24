@@ -90,7 +90,7 @@ const changeSubscriberInfo = async (req, res) => {
 
     const newUser = {};
     if (user) {
-        newUser.username = req.body.name || user.name;
+        newUser.username = req.body.name || user.username;
         newUser.phone = req.body.phone || user.phone;
         newUser.fullName = req.body.fullName || user.fullName;
         newUser.gender = req.body.gender || user.gender;
