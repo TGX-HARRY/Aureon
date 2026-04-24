@@ -74,3 +74,15 @@ exports.getMovieCount = async (req, res) => {
         return res.status(200).json({count : movieCount});
     }
 }
+
+exports.adminLogin = async (req, res) => {
+    const { email, password } = req.body;
+    
+    // 1. check if fields are missing
+    if (!email || !password) {
+        return res.status(400).json({ message: "Fields Missing!" });
+    }
+
+    // 2. find admin by email
+    const admin = await userModel.findOne({ email });
+}
