@@ -129,12 +129,10 @@ const removeSubscriberAccount = async (req, res) => {
         .json({message: "Server Error"});
     }
 
-    
-    return res
+        return res
     .status(200)
     .json("Subscriber removed successfully!");
 }
-
 
 const getUsersDataByID = async (req, res) => {
     const id = req.userId;
