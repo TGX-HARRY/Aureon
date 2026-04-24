@@ -167,10 +167,11 @@ const changeSubscriberPassword = async (req, res) => {
         .json({message : "Unable to fetch user!"});
     }
 
-    // copy existing user data and update password safely
+    // copy existing user data and update password safely (using spread operator)
     const newUser = { ...user._doc }; 
     newUser.password = await bcrypt.hash(req.body.password, 10);
     
+    // Save the updated user data to database
     const uploadStatus = await changeUserData(userId, user, newUser);
     if (!uploadStatus) {
         return res
