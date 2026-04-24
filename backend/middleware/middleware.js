@@ -57,4 +57,4 @@ const isAdmin = async (req, res, next) => {
     }
 }
 
-module.exports=protect;
+module.exports = { protect, isAdmin };
