@@ -110,7 +110,7 @@ async function deleteUserAccount(id) {
     }
 }
 
-module.exports = { addUser, findUserByEmail, getUser, getUserById, changeUserData, deleteUserAccount }
+module.exports = { addUser, findUserByEmail, getUser, getUserById, changeUserData, deleteUserAccount, countSubscribers }
 // --- Statistics ---
 
 async function countSubscribers() {
