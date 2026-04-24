@@ -30,6 +30,19 @@ const protect = (req, res, next) => {
 const isAdmin = async (req, res, next) => {
     // get token from cookies
     const token = req.cookies.token;
+
+    // if no token, send error message
+    if (!token) {
+        return res.status(401).json({ message: "Please login first!" });
+    }
+
+    try {
+        // check if token is valid
+        const verification = jwt.verify(token, process.env.JWT_SECRET);
+    }
+    catch (error) {
+        return res.status(401).json({ message: "Session expired or invalid token!" });
+    }
 }
 
 module.exports=protect;
