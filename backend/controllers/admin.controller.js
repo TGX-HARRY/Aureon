@@ -103,4 +103,15 @@ exports.adminLogin = async (req, res) => {
         process.env.JWT_SECRET,
         { expiresIn: "1d" }
     );
+
+    // 6. set cookie and send response
+    return res
+    .status(200)
+    .cookie("token", token, {
+        httpOnly: true,
+        secure: false, // set to true in production
+        sameSite: "lax",
+        maxAge: 24 * 60 * 60 * 1000 // 1 day
+    })
+    .json({ message: "Admin logged in successfully!" });
 }
