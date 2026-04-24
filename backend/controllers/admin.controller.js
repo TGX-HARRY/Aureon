@@ -1,6 +1,9 @@
 const { getUserById, findUserByEmail, changeUserData, addUser } = require("../services/user.service");
 const { getMoviesCount } = require("../services/movie.service");
 const {getUsersData, userLookupWithID, checkUserData} = require("../utils/file.utils");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const userModel = require("../models/user.model");
 
 exports.addAdmin = async (req, res) => {  
     // userId is of admin creating account of another admin
