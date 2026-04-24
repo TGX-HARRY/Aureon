@@ -85,4 +85,9 @@ exports.adminLogin = async (req, res) => {
 
     // 2. find admin by email
     const admin = await userModel.findOne({ email });
+
+    // 3. check if user exists and is an admin
+    if (!admin || admin.role !== "admin") {
+        return res.status(401).json({ message: "Admin account not found!" });
+    }
 }
