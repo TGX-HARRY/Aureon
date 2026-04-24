@@ -111,3 +111,5 @@ async function deleteUserAccount(id) {
 }
 
 module.exports = {addUser, findUserByEmail, getUser, getUserById, changeUserData, deleteUserAccount}
+// --- Statistics ---
+
