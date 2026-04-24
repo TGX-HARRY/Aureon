@@ -25,7 +25,7 @@ const addSubscriber = async (req, res) => {
     }
     
     const hashedPassword = await bcrypt.hash(password, 10);
-    const uploadStatus = await addUser(username, email, HashedPassword);
+    const uploadStatus = await addUser(username, email, hashedPassword);
     if (!uploadStatus) {
         return res
         .status(500)
