@@ -131,7 +131,7 @@ const removeSubscriberAccount = async (req, res) => {
 
         return res
     .status(200)
-    .json("Subscriber removed successfully!");
+    .json({ message: "Subscriber removed successfully!" });
 }
 
 const getUsersDataByID = async (req, res) => {
