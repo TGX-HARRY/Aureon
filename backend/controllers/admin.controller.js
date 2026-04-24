@@ -1,36 +1,46 @@
-const {getUsersData, writeUserData, rewriteUserData, getMoviesCount, userLookupWithID, checkUserData} = require("../utils/file.utils");
+const { getUserById, findUserByEmail, changeUserData, addUser } = require("../services/user.service");
+const { getMoviesCount } = require("../services/movie.service");
+const {getUsersData, userLookupWithID, checkUserData} = require("../utils/file.utils");
 
-const crypto = require("crypto");
-
-exports.addAdmin = async (req, res) => {
-    const id = req.body.id;
+exports.addAdmin = async (req, res) => {  
+    // userId is of admin creating account of another admin
+    const id = req.userId; // userId is attached to request by middleware
     if (!id) {
-        return res.status(400).json({message : "No ID provided!"});
-    }
-    const validID = await userLookupWithID(id, "admin");
-    if (!validID) {
-        return res.status(401).json({message : "Access Denied!"});
+        return res.status(401).json({message : "No ID provided!"});
     }
 
-    const present = await checkUserData(req.body.email, "admin");
-
+    const {username, fullName, email, password} = req.body;
+    const present = await findUserByEmail(email);
     if (present) {
-        return res.status(400).json({
-            message: "Account already exists!"
-        });
+        const adminData = await getUserById(present);
+        const newAdmin = {};
+        newAdmin.username = username || adminData.username;
+        newAdmin.fullName = fullName || adminData.fullName;
+        newAdmin.role = "admin";
+        const changeStatus = await changeUserData(present, adminData, newAdmin);
+        if (!changeStatus) {
+            return res
+            .status(500)
+            .json({ message : "Request cannot be handled at this moment, please try again later on!"});
+        }
+    }
+    const newAdmin = {
+        username,
+        fullName,
+        email,
+        password,
+        role: "admin"
+    };
+    const uploadStatus = await addUser(username, email, password, "admin");
+    if (!uploadStatus) {
+        return res
+        .status(500)
+        .json({ message : "Request cannot be handled at this moment, please try again later on! create "});
     }
 
-    const newAdmin = {
-        id: crypto.randomUUID(),
-        ...req.body,
-        role : "admin"
-    };
-
-    await writeUserData(newAdmin);
-
-    return res.status(200).json({
-        message : "Admin created successfully!"
-    })
+    return res
+    .status(200)
+    .json({ message : "Admin created successfully!" });
 };
 
 exports.getAdmins = async (req, res) => {
@@ -60,19 +70,4 @@ exports.getMovieCount = async (req, res) => {
     else {
         return res.status(200).json({count : movieCount});
     }
-}
-
-exports.checkAdminID = async (req, res) => {
-    const id = req.params.id;
-    if (!id) {
-        return res.status(400).json({message : "ID not provided!"});
-    }
-
-    const data = await getUsersData();
-    const presence = data.admins.find(u => u.id === id) || null;
-    if (!presence) {
-        return res.status(401).json({message : "Access denied!"});
-    }
-
-    return res.status(200).json({message : "Admin verified successfully!"});
 }
