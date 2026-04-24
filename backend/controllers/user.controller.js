@@ -143,7 +143,6 @@ const getUsersDataByID = async (req, res) => {
     }
     const data = await getUserById(id);
     if (!data) {
-        console.log("user.controller.js -> data not found!");
         return res.status(400).json({ message: "Data couldn't be fetched!" });
     }
     return res.status(200).json(data);
@@ -169,12 +168,10 @@ const changeSubscriberPassword = async (req, res) => {
         .status(500)
         .json({message : "Unable to fetch user!"});
     }
-    // console.log(user);
 
     // copy existing user data and update password safely
     const newUser = { ...user._doc }; 
     newUser.password = await bcrypt.hash(req.body.password, 10);
-    // console.log(newUser);
     
     const uploadStatus = await changeUserData(userId, user, newUser);
     if (!uploadStatus) {
