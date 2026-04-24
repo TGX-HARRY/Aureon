@@ -171,8 +171,8 @@ const changeSubscriberPassword = async (req, res) => {
     }
     // console.log(user);
 
-    // create new user object which contains all previous data of user and change password and change it
-    const newUser = user;
+    // copy existing user data and update password safely
+    const newUser = { ...user._doc }; 
     newUser.password = await bcrypt.hash(req.body.password, 10);
     // console.log(newUser);
     
