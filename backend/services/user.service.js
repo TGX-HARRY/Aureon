@@ -113,10 +113,7 @@ async function deleteUserAccount(id) {
 module.exports = { addUser, findUserByEmail, getUser, getUserById, changeUserData, deleteUserAccount, countSubscribers }
 // --- Statistics ---
 
-/**
- * Counts the total number of users who are not admins.
- * Useful for displaying subscriber stats on the admin dashboard.
- */
+
 async function countSubscribers() {
     try {
         const count = await userModel.countDocuments({ role: "user" });
