@@ -6,7 +6,7 @@ async function addUser(username, email, password, role) {
     if (!username || !email || !password) return false;
     try {
         if (role == "admin") {
-            const upload = await userModel.insertOne({
+            const upload = await userModel.create({
                 username,
                 email,
                 password, 
@@ -14,7 +14,7 @@ async function addUser(username, email, password, role) {
             });
             return true;
         }
-        const upload = await userModel.insertOne({
+        const upload = await userModel.create({
             username,
             email,
             password,

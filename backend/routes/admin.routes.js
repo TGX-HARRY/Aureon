@@ -8,6 +8,7 @@ router.get("/getadmins/:id", controllers.getAdmins);
 router.get("/movies/count", isAdmin, controllers.getMovieCount);
 // router.get("/verify/:id", controllers.checkAdminID);
 router.post("/register", isAdmin, controllers.addAdmin);
+router.post("/login", controllers.adminLogin);
 // router.delete("/remove/:email", controllers.removeAdminAccount);
 // router.patch("/changepassword/:email", controllers.changeAdminPassword);
 // router.patch("/changeinfo/:email", controllers.changeAdminInfo);

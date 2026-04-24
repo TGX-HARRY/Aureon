@@ -37,17 +37,17 @@ async function getUserMovies(id) {
 }
 
 async function appendMovieDb(movie) {
-    const {slug, title, img, genre, trailer} = movie;
+    const { slug, title, img, genre, trailer } = movie;
     if (!slug || !title || !img || !genre || !trailer) {
         return "movie.service.js -> Details missing!"
     }
 
     try {
         const upload = movieModel.insertOne({
-            slug, 
-            title, 
-            genre, 
-            img, 
+            slug,
+            title,
+            genre,
+            img,
             trailer
         });
         return "success";
@@ -56,4 +56,13 @@ async function appendMovieDb(movie) {
     }
 }
 
-module.exports = { getAllMovies, getSectionsAndMovies, getUserMovies, appendMovieDb };
+async function getMoviesCount() {
+    try {
+        const count = await movieModel.countDocuments();
+        return count;
+    } catch (err) {
+        return 0;
+    }
+}
+
+module.exports = { getAllMovies, getSectionsAndMovies, getUserMovies, appendMovieDb, getMoviesCount };

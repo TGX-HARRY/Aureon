@@ -1,76 +1,161 @@
 const { getUserById, findUserByEmail, changeUserData, addUser } = require("../services/user.service");
 const { getMoviesCount } = require("../services/movie.service");
-const {getUsersData, userLookupWithID, checkUserData} = require("../utils/file.utils");
-const bcrypt = require("bcrypt");
+const { getUsersData, userLookupWithID } = require("../utils/file.utils");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/user.model");
 
+// ADD ADMIN
 exports.addAdmin = async (req, res) => {  
-    // userId is of admin creating account of another admin
-    const id = req.userId; // userId is attached to request by middleware
-    if (!id) {
-        return res.status(401).json({message : "No ID provided!"});
-    }
+    try {
+        const id = req.userId;
 
-    const {username, fullName, email, password} = req.body;
-    const present = await findUserByEmail(email);
-    if (present) {
-        const adminData = await getUserById(present);
-        const newAdmin = {};
-        newAdmin.username = username || adminData.username;
-        newAdmin.fullName = fullName || adminData.fullName;
-        newAdmin.role = "admin";
-        const changeStatus = await changeUserData(present, adminData, newAdmin);
-        if (!changeStatus) {
-            return res
-            .status(500)
-            .json({ message : "Request cannot be handled at this moment, please try again later on!"});
+        if (!id) {
+            return res.status(401).json({ message: "Unauthorized!" });
         }
-    }
-    const newAdmin = {
-        username,
-        fullName,
-        email,
-        password,
-        role: "admin"
-    };
-    const uploadStatus = await addUser(username, email, password, "admin");
-    if (!uploadStatus) {
-        return res
-        .status(500)
-        .json({ message : "Request cannot be handled at this moment, please try again later on! create "});
-    }
 
-    return res
-    .status(200)
-    .json({ message : "Admin created successfully!" });
+        const { username, fullName, email, password } = req.body;
+
+        if (!email || !username) {
+            return res.status(400).json({ message: "Required fields missing!" });
+        }
+
+        const present = await findUserByEmail(email);
+
+        // If user exists → make admin
+        if (present) {
+            const adminData = await getUserById(present);
+
+            const newAdmin = {
+                username: username || adminData.username,
+                fullName: fullName || adminData.fullName,
+                role: "admin"
+            };
+
+            const changeStatus = await changeUserData(present, adminData, newAdmin);
+
+            if (!changeStatus) {
+                return res.status(500).json({
+                    message: "Failed to update user!"
+                });
+            }
+
+            return res.status(200).json({
+                message: "User upgraded to admin successfully!"
+            });
+        }
+
+        // New admin creation
+        if (!password) {
+            return res.status(400).json({ message: "Password required!" });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const uploadStatus = await addUser(username, email, hashedPassword, "admin");
+
+        if (!uploadStatus) {
+            return res.status(500).json({
+                message: "Failed to create admin!"
+            });
+        }
+
+        return res.status(200).json({
+            message: "Admin created successfully!"
+        });
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
 };
 
+
+// GET ADMINS
 exports.getAdmins = async (req, res) => {
-    const adminid = req.params.id;
-    if (!adminid) {
-        return res.status(400).json({message : "ID not provided!"});
-    }
-    
-    const validID = await userLookupWithID(adminid, "admin");
-    if (!validID) {
-        return res.status(401).json({message : "Permission Denied"});
-    }
+    try {
+        const adminid = req.params.id;
 
-    const existingData = await getUsersData();
-    const adminsNames = (existingData.admins || []).map(admin => admin.name);
-    if (adminsNames.length === 0) {
-        return res.status(404).json({ message: "No admins found" });
-    }
-    return res.status(200).json({data : adminsNames});
-}
+        if (!adminid) {
+            return res.status(400).json({ message: "ID not provided!" });
+        }
 
+        const validID = await userLookupWithID(adminid, "admin");
+
+        if (!validID) {
+            return res.status(403).json({ message: "Permission Denied" });
+        }
+
+        const existingData = await getUsersData();
+
+        const adminsNames = (existingData.admins || []).map(admin => admin.name);
+
+        if (adminsNames.length === 0) {
+            return res.status(404).json({ message: "No admins found" });
+        }
+
+        return res.status(200).json({ data: adminsNames });
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+
+// MOVIE COUNT
 exports.getMovieCount = async (req, res) => {
-    const movieCount = await getMoviesCount();
-    if(!movieCount) {
-        res.status(400).json({message : "Error fetching movie count!"});
+    try {
+        const movieCount = await getMoviesCount();
+
+        if (!movieCount) {
+            return res.status(400).json({ message: "Error fetching movie count!" });
+        }
+
+        return res.status(200).json({ count: movieCount });
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
     }
-    else {
-        return res.status(200).json({count : movieCount});
+};
+
+
+// ADMIN LOGIN
+exports.adminLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: "Fields Missing!" });
+        }
+
+        const admin = await userModel.findOne({ email });
+
+        if (!admin || admin.role !== "admin") {
+            return res.status(401).json({ message: "Admin not found!" });
+        }
+
+        const isMatch = await bcrypt.compare(password, admin.password);
+
+        if (!isMatch) {
+            return res.status(401).json({ message: "Invalid credentials!" });
+        }
+
+        const token = jwt.sign(
+            { userId: admin._id, username: admin.username, role: "admin" },
+            process.env.JWT_SECRET,
+            { expiresIn: "1d" }
+        );
+
+        return res
+            .status(200)
+            .cookie("token", token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                sameSite: "lax",
+                maxAge: 24 * 60 * 60 * 1000
+            })
+            .json({ message: "Admin logged in successfully!" });
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
     }
-}
+};
