@@ -1,16 +1,15 @@
 const { default: mongoose } = require("mongoose");
 const userModel = require("../models/user.model");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
 async function addUser(username, email, password, role) {
     if (!username || !email || !password) return false;
     try {
-        const hashedPassword = await bcrypt.hash(password, 10);
         if (role == "admin") {
             const upload = await userModel.create({
                 username,
                 email,
-                password: hashedPassword, 
+                password, 
                 role: "admin"
             });
             return true;
@@ -18,7 +17,7 @@ async function addUser(username, email, password, role) {
         const upload = await userModel.create({
             username,
             email,
-            password: hashedPassword,
+            password,
         });
 
         return true;
@@ -41,28 +40,26 @@ async function findUserByEmail(email) {
 }
 
 async function getUser(email, password) {
-    try {
-        if (!email || !password) return null;
+    if (!email || !password) return null;
 
-        // 1. Find user by email (include password for comparison)
-        const user = await userModel.findOne({ email });
-        if (!user) return null;
+    const getId = await findUserByEmail(email);
+    if (!getId) return null;
 
-        // 2. Compare passwords
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return null;
+    const user = await userModel.findById(getId).select("password");
+    if (!user) return null;
 
-        // 3. Return user data (without password)
-        return {
+    if (user != null) {
+        const matchPasswords = await bcrypt.compare(password, user.password);
+        if (!matchPasswords) {
+            return null;
+        }
+        const fetchedUser = {
             userId: user._id,
-            username: user.username,
-            email: user.email,
-            role: user.role
-        };
-    } catch (error) {
-        console.error("Error in getUser service:", error);
-        return null;
+            username: user.username
+        }
+        return fetchedUser;
     }
+    else return null;
 }
 
 async function getUserById(id) {
