@@ -1,4 +1,4 @@
-const { getAllMovies, getSectionsAndMovies, getUserMovies, appendMovieDb } = require("../services/movie.service");
+const { getAllMovies, getSectionsAndMovies, getUserMovies, appendMovieDb, addToMyList, removeFromMyList } = require("../services/movie.service");
 
 const fetchSectionsAndMoviesData = async (req, res) => {
     const data = await getSectionsAndMovies();
@@ -24,4 +24,39 @@ const addMovie = async (req, res) => {
     }
 }
 
-module.exports = { fetchSectionsAndMoviesData, fetchUserMovieList, fetchAllMoviesData, addMovie };
+const addToList = async (req, res) => {
+    const { movieId } = req.body;
+    const userId = req.userId; // Provided by protect middleware
+    
+    if (!movieId) return res.status(400).json({ message: "Movie ID missing!" });
+    
+    const status = await addToMyList(userId, movieId);
+    if (status === "success") {
+        return res.status(200).json({ message: "Added to list!" });
+    } else {
+        return res.status(400).json({ message: status });
+    }
+}
+
+const removeFromList = async (req, res) => {
+    const { movieId } = req.body;
+    const userId = req.userId;
+    
+    if (!movieId) return res.status(400).json({ message: "Movie ID missing!" });
+    
+    const status = await removeFromMyList(userId, movieId);
+    if (status === "success") {
+        return res.status(200).json({ message: "Removed from list!" });
+    } else {
+        return res.status(400).json({ message: status });
+    }
+}
+
+module.exports = { 
+    fetchSectionsAndMoviesData, 
+    fetchUserMovieList, 
+    fetchAllMoviesData, 
+    addMovie,
+    addToList,
+    removeFromList
+};
