@@ -56,6 +56,13 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: null, 
     },
+    
+    mylist: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Movie",
+      },
+    ],
   },
   {
     timestamps: true, 

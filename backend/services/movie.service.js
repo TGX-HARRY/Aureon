@@ -12,7 +12,7 @@ async function getAllMovies() {
         if (!data) {
             return "Data not found";
         }
-        return data; 
+        return data;
     } catch (err) {
         return err;
     }
@@ -31,9 +31,14 @@ async function getSectionsAndMovies() {
 }
 
 async function getUserMovies(id) {
-    const data = await userModel.findById(id).select();
-    if (!data) return [];
-    return data.movies || [];
+    try {
+        const user = await userModel.findById(id).populate("mylist");
+        if (!user) return [];
+        return user.mylist || [];
+    } catch (error) {
+        console.error("Error in getUserMovies service:", error);
+        return [];
+    }
 }
 
 async function appendMovieDb(movie) {
@@ -68,4 +73,41 @@ async function getMoviesCount() {
     }
 }
 
-module.exports = { getAllMovies, getSectionsAndMovies, getUserMovies, appendMovieDb, getMoviesCount };
+// --- My List Features ---
+async function addToMyList(userId, movieId) {
+    try {
+        const user = await userModel.findById(userId);
+        if (!user) return "User not found";
+        
+        if (user.mylist.includes(movieId)) {
+            return "Movie already in list!";
+        }
+        
+        user.mylist.push(movieId);
+        await user.save();
+        return "success";
+    } catch (error) {
+        return error.message;
+    }
+}
+
+async function removeFromMyList(userId, movieId) {
+    try {
+        await userModel.findByIdAndUpdate(userId, {
+            $pull: { mylist: movieId }
+        });
+        return "success";
+    } catch (error) {
+        return error.message;
+    }
+}
+
+module.exports = { 
+    getAllMovies, 
+    getSectionsAndMovies, 
+    getUserMovies, 
+    appendMovieDb, 
+    getMoviesCount,
+    addToMyList,
+    removeFromMyList
+};
