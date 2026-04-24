@@ -88,16 +88,16 @@ const changeSubscriberInfo = async (req, res) => {
         .json({ message: "User not found" });
     }
 
-    const newUser = {};
-    if (user) {
-        newUser.username = req.body.name || user.username;
-        newUser.phone = req.body.phone || user.phone;
-        newUser.fullName = req.body.fullName || user.fullName;
-        newUser.gender = req.body.gender || user.gender;
-        newUser.address = req.body.address || user.address;
-        newUser.dob = req.body.dob || user.dob;
-        newUser.avatar = req.body.avatar || user.avatar;
-    }
+    // Create a clean object for the update
+    const newUser = {
+        username: req.body.username || user.username,
+        phone: req.body.phone || user.phone,
+        fullName: req.body.fullName || user.fullName,
+        gender: req.body.gender || user.gender,
+        address: req.body.address || user.address,
+        dob: req.body.dob || user.dob,
+        avatar: req.body.avatar || user.avatar
+    };
 
     const uploadStatus = await changeUserData(id, user, newUser);
     if (!uploadStatus) {
