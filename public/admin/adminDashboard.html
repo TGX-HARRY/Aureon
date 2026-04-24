@@ -10,32 +10,7 @@
    <link rel="stylesheet" href="./CSS/adminDashboard.css">
 </head>
 
-<body>
-    <script type="module">
-         const id = JSON.parse(localStorage.getItem("sessionData")).id || null;
-            if (!id) {
-                alert("User not logged in, redirecting to login page!");
-                window.location.href = "/login.html";
-            }
-
-            const isAdmin = await fetch(`/admins/verify/${id}`);
-            if (!isAdmin.ok) {
-                alert("Invalid ID, access denied!");
-                window.location.href = "/"
-            }
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const storedData = localStorage.getItem("sessionData");
-            const loginLink = document.getElementById("loginStatus");
-
-            if (storedData) {
-                const user = JSON.parse(storedData);
-                loginLink.innerHTML = `<a href="./profile.html"><i class="fa fa-user"></i> ${user.name}</a>`;
-            }
-        });
-    </script>
-
+<body>     
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">Aureon <span
@@ -155,7 +130,7 @@
             <p>&copy; 2025 Aureon Admin Panel</p>
         </div>
     </footer>
-    <script src="./JS/adminDashboard.js"></script>
+    <script src="./JS/adminDashboard.js" type="module"></script>
 </body>
 
 </html>
