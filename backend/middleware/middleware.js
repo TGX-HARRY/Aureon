@@ -3,8 +3,7 @@ const jwt = require("jsonwebtoken");
 const protect = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) {
-        window.location.replace("/login");
-        return;
+        return res.status(401).json({ message: "Please login first!" });
     }
     try {
         const verification = jwt.verify(token, process.env.JWT_SECRET);
