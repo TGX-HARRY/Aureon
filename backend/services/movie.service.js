@@ -60,3 +60,13 @@ async function appendMovieDb(movie) {
 }
 
 module.exports = { getAllMovies, getSectionsAndMovies, getUserMovies, appendMovieDb };
+// --- My List Features ---
+async function addToMyList(userId, movieId) {
+    try {
+        const user = await userModel.findById(userId);
+        if (user.mylist.includes(movieId)) {
+            return "Movie already in list!";
+        }
+    } catch (error) {
+    }
+}
