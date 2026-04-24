@@ -37,22 +37,25 @@ async function getUserMovies(id) {
 }
 
 async function appendMovieDb(movie) {
-    const {slug, title, img, genre, trailer} = movie;
+    const { slug, title, img, genre, trailer, rating } = movie;
+    
     if (!slug || !title || !img || !genre || !trailer) {
-        return "movie.service.js -> Details missing!"
+        return "Details missing!";
     }
 
     try {
-        const upload = movieModel.insertOne({
+        await movieModel.create({
             slug, 
             title, 
             genre, 
             img, 
-            trailer
+            trailer,
+            rating: rating || "0"
         });
         return "success";
     } catch (error) {
-        return error;
+        console.error("Error in movie.service.js ->", error);
+        return error.message;
     }
 }
 
