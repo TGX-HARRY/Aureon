@@ -4,7 +4,6 @@ const { protect } = require("../middleware/middleware");
 
 const router = express.Router();
 
-// router.get("/users/subscribers/:id", controllers.getUsersDataByID);
 router.get("/subscribers/me", protect, controllers.getUsersDataByID)
 router.post("/subscribers/register", controllers.addSubscriber);
 router.post("/subscribers/login", controllers.fetchSubscriber);
