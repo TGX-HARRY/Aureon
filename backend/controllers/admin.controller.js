@@ -96,4 +96,11 @@ exports.adminLogin = async (req, res) => {
     if (!isMatch) {
         return res.status(401).json({ message: "Invalid credentials!" });
     }
+
+    // 5. create token
+    const token = jwt.sign(
+        { userId: admin._id, username: admin.username, role: "admin" },
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" }
+    );
 }
