@@ -74,3 +74,13 @@ async function addToMyList(userId, movieId) {
         return error.message;
     }
 }
+async function removeFromMyList(userId, movieId) {
+    try {
+        await userModel.findByIdAndUpdate(userId, {
+            $pull: { mylist: movieId }
+        });
+        return "success";
+    } catch (error) {
+        return error.message;
+    }
+}
