@@ -12,7 +12,7 @@ async function getAllMovies() {
         if (!data) {
             return "Data not found";
         }
-        return JSON.parse(data);
+        return data; 
     } catch (err) {
         return err;
     }
@@ -32,27 +32,30 @@ async function getSectionsAndMovies() {
 
 async function getUserMovies(id) {
     const data = await userModel.findById(id).select();
-    const userdata = data.find(u => u.id === id);
-    return userdata.movies;
+    if (!data) return [];
+    return data.movies || [];
 }
 
 async function appendMovieDb(movie) {
-    const { slug, title, img, genre, trailer } = movie;
+    const { slug, title, img, genre, trailer, rating } = movie;
+    
     if (!slug || !title || !img || !genre || !trailer) {
-        return "movie.service.js -> Details missing!"
+        return "Details missing!";
     }
 
     try {
-        const upload = movieModel.insertOne({
-            slug,
-            title,
-            genre,
-            img,
-            trailer
+        await movieModel.create({
+            slug, 
+            title, 
+            genre, 
+            img, 
+            trailer,
+            rating: rating || "0"
         });
         return "success";
     } catch (error) {
-        return error;
+        console.error("Error in movie.service.js ->", error);
+        return error.message;
     }
 }
 

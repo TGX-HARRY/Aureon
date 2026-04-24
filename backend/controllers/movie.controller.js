@@ -1,4 +1,4 @@
-const { getAllMovies, getSectionsAndMovies, getUserMovies } = require("../services/movie.service");
+const { getAllMovies, getSectionsAndMovies, getUserMovies, appendMovieDb } = require("../services/movie.service");
 
 const fetchSectionsAndMoviesData = async (req, res) => {
     const data = await getSectionsAndMovies();
@@ -15,4 +15,13 @@ const fetchUserMovieList = async (req, res) => {
     return res.status(200).json(movies);
 }
 
-module.exports = { fetchSectionsAndMoviesData, fetchUserMovieList, fetchAllMoviesData };
+const addMovie = async (req, res) => {
+    const status = await appendMovieDb(req.body);
+    if (status === "success") {
+        return res.status(201).json({ message: "Movie added successfully!" });
+    } else {
+        return res.status(400).json({ message: status });
+    }
+}
+
+module.exports = { fetchSectionsAndMoviesData, fetchUserMovieList, fetchAllMoviesData, addMovie };
