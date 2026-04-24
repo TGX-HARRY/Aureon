@@ -6,13 +6,15 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/user.model");
 
 exports.addAdmin = async (req, res) => {  
-    // userId is of admin creating account of another admin
-    const id = req.userId; // userId is attached to request by middleware
+    // 1. Get the current admin's ID from the middleware
+    const id = req.userId; 
     if (!id) {
         return res.status(401).json({message : "No ID provided!"});
     }
 
     const {username, fullName, email, password} = req.body;
+    
+    // 2. Check if the user already exists
     const present = await findUserByEmail(email);
     if (present) {
         const adminData = await getUserById(present);
