@@ -420,12 +420,63 @@ tr:hover {
   }
 
   /* === Animations === */
-  @keyframes fadeIn {
-      from {
-          opacity: 0;
-      }
-
-      to {
-          opacity: 1;
-      }
+  /* === Modal Styles === */
+  .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      backdrop-filter: blur(5px);
   }
+
+  .modal-content {
+      background-color: #1a1a1a;
+      margin: 10% auto;
+      padding: 30px;
+      border: 1px solid #333;
+      width: 400px;
+      border-radius: 15px;
+      color: white;
+  }
+
+  .close-btn {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+  }
+
+  .close-btn:hover {
+      color: white;
+  }
+
+  .modal form .input-group {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .modal form input {
+      padding: 10px;
+      background: #333;
+      border: 1px solid #444;
+      color: white;
+      border-radius: 5px;
+      margin-top: 5px;
+  }
+
+  .save-btn {
+      width: 100%;
+      padding: 12px;
+      background: #e50914;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+  }

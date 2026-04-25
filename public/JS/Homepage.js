@@ -143,6 +143,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         ${user.username}
     </a>
     <ul class="dropdown-menu">
+        ${user.role === 'admin' ? '<li><a href="./admin/adminDashboard.html">Admin Dashboard</a></li>' : ''}
         <li><a href="./profile.html">Edit Profile</a></li>
         <li id="logout"><a href="#">Log Out</a></li>
     </ul>

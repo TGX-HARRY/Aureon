@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get("/getadmins/:id", controllers.getAdmins);
 router.get("/movies/count", isAdmin, controllers.getMovieCount);
+router.get("/users/count", isAdmin, controllers.getUserCount);
 // router.get("/verify/:id", controllers.checkAdminID);
 router.post("/register", isAdmin, controllers.addAdmin);
 router.post("/login", controllers.adminLogin);

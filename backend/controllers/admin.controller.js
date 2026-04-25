@@ -101,17 +101,19 @@ exports.getAdmins = async (req, res) => {
 };
 
 
-// MOVIE COUNT
 exports.getMovieCount = async (req, res) => {
     try {
         const movieCount = await getMoviesCount();
-
-        if (!movieCount) {
-            return res.status(400).json({ message: "Error fetching movie count!" });
-        }
-
         return res.status(200).json({ count: movieCount });
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
 
+exports.getUserCount = async (req, res) => {
+    try {
+        const count = await userModel.countDocuments();
+        return res.status(200).json({ count });
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
