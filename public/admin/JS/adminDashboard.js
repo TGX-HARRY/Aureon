@@ -71,7 +71,8 @@ function setupModal() {
             genre: document.getElementById("mGenre").value,
             rating: document.getElementById("mRating").value,
             img: document.getElementById("mImg").value,
-            trailer: document.getElementById("mTrailer").value
+            trailer: document.getElementById("mTrailer").value,
+            sectionTitle: document.getElementById("mSection").value || "Recently Added"
         };
 
         const res = await fetch("/api/movies/add", {
