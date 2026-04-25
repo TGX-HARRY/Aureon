@@ -22,6 +22,29 @@ async function validateForm(event) {
     }
 }
 
+async function handleCredentialResponse(response) {
+    try {
+        const body = { token: response.credential };
+        const res = await fetch("/api/users/subscribers/google", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body),
+            credentials: "include"
+        });
+
+        if (res.ok) {
+            window.location.replace("/");
+        } else {
+            console.error("Google Login Failed");
+            document.getElementById('error-message').innerHTML = '<span style="color:red;">*Google Sign-In failed.</span>';
+        }
+    } catch (err) {
+        console.error("Error during Google Login:", err);
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("loginForm");
     loginForm.addEventListener("submit", validateForm);

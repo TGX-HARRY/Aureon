@@ -8,6 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./CSS/login.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        .google-btn-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -40,6 +48,22 @@
                 </div>
 
                 <button type="submit" class="login-btn">Sign In</button>
+
+                <div class="google-btn-container">
+                    <div id="g_id_onload"
+                        data-client_id="270879117388-n34sv9rn6uhcg6bbu1nc6b4q8if5jvq6.apps.googleusercontent.com"
+                        data-callback="handleCredentialResponse"
+                        data-auto_prompt="false">
+                    </div>
+                    <div class="g_id_signin"
+                        data-type="standard"
+                        data-size="large"
+                        data-theme="outline"
+                        data-text="sign_in_with"
+                        data-shape="rectangular"
+                        data-logo_alignment="left">
+                    </div>
+                </div>
 
             </form>
         <div id="error-message" class="error-message"></div>
