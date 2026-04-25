@@ -27,7 +27,7 @@ const googleLogin = async (req, res) => {
         // 3. Generate JWT
         const jwtToken = jwt.sign(
             { userId: user._id, username: name },
-            process.env.JWT_SECRET,
+            process.env.JWT_SECRET || "aureon_jwt_secret",
             { expiresIn: "1d" }
         );
 
@@ -95,7 +95,7 @@ const fetchSubscriber = async (req, res) => {
             // create token
             const token = jwt.sign(
                 { userId, username },
-                process.env.JWT_SECRET,
+                process.env.JWT_SECRET || "aureon_jwt_secret",
                 { expiresIn: "1d" }
             );
 

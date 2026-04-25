@@ -13,7 +13,7 @@ const protect = (req, res, next) => {
 
     try {
         // check if token is valid
-        const verification = jwt.verify(token, process.env.JWT_SECRET);
+        const verification = jwt.verify(token, process.env.JWT_SECRET || "aureon_jwt_secret");
         
         // save user info in request for later use
         req.userId = verification.userId;
@@ -38,7 +38,7 @@ const isAdmin = async (req, res, next) => {
 
     try {
         // check if token is valid
-        const verification = jwt.verify(token, process.env.JWT_SECRET);
+        const verification = jwt.verify(token, process.env.JWT_SECRET || "aureon_jwt_secret");
         
         // find user in database to check their role
         const user = await userModel.findById(verification.userId);

@@ -141,7 +141,7 @@ exports.adminLogin = async (req, res) => {
 
         const token = jwt.sign(
             { userId: admin._id, username: admin.username, role: "admin" },
-            process.env.JWT_SECRET,
+            process.env.JWT_SECRET || "aureon_jwt_secret",
             { expiresIn: "1d" }
         );
 

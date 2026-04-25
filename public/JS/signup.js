@@ -163,3 +163,31 @@ form.addEventListener('submit', async function(e) {
         window.location.href = "/login.html";
     }
 });
+
+// ─── Google OAuth ───────────────────────────────────────────────────────────
+
+function triggerGoogleSignIn() {
+    // Programmatically trigger the hidden Google sign-in flow
+    google.accounts.id.prompt();
+}
+
+async function handleCredentialResponse(response) {
+    try {
+        const res = await fetch("/api/users/subscribers/google", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token: response.credential }),
+            credentials: "include"
+        });
+
+        if (res.ok) {
+            window.location.replace("/");
+        } else {
+            const data = await res.json();
+            alert(data.message || "Google Sign-Up failed. Please try again.");
+        }
+    } catch (err) {
+        console.error("Google Sign-Up Error:", err);
+        alert("Something went wrong. Please try again.");
+    }
+}

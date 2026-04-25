@@ -185,3 +185,57 @@ textarea {
 input:invalid {
     border: 1px solid #ff4d4d;
 }
+
+/* ================= GOOGLE BUTTON ================= */
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.google-btn {
+    width: 100%;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 4px;
+}
+
+.google-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(229, 9, 20, 0.5);
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.15);
+    transform: translateY(-2px);
+    color: white;
+}
+
+.google-btn svg {
+    flex-shrink: 0;
+}
+

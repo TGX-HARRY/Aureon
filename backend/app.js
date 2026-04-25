@@ -8,7 +8,7 @@ const movieRoutes = require("./routes/movie.routes");
 
 const app = express();
 app.use(express.json());
-app.use(cookieparser(process.env.COOKIE_SECRET));
+app.use(cookieparser());
 app.use(express.static("public"));
 dbconfig.connectDB();
 app.use("/api/users", userRoutes);

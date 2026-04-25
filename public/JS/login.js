@@ -22,6 +22,10 @@ async function validateForm(event) {
     }
 }
 
+function triggerGoogleSignIn() {
+    google.accounts.id.prompt();
+}
+
 async function handleCredentialResponse(response) {
     try {
         const body = { token: response.credential };
