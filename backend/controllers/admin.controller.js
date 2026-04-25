@@ -117,3 +117,17 @@ exports.adminLogin = async (req, res) => {
     })
     .json({ message: "Admin logged in successfully!" });
 }
+
+exports.checkAdminID = async (req, res) => {
+    try {
+        const adminid = req.params.id;
+        const isValid = await userLookupWithID(adminid, "admin");
+        if (isValid) {
+            return res.status(200).json({ valid: true });
+        } else {
+            return res.status(401).json({ valid: false, message: "Invalid Admin ID" });
+        }
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
