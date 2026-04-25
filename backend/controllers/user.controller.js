@@ -3,6 +3,48 @@ const { getUsersData, writeUserData, rewriteUserData } = require("../utils/file.
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const userModel = require("../models/user.model");
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+const googleLogin = async (req, res) => {
+    const { token } = req.body;
+    try {
+        // 1. Verify Google Token
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: process.env.GOOGLE_CLIENT_ID
+        });
+        const { name, email, picture } = ticket.getPayload();
+
+        // 2. Find or Create User
+        let user = await findUserByEmail(email);
+        if (!user) {
+            const tempPassword = Math.random().toString(36).slice(-8); // Random password for OAuth
+            await addUser(name, email, tempPassword);
+            user = await findUserByEmail(email);
+        }
+
+        // 3. Generate JWT
+        const jwtToken = jwt.sign(
+            { userId: user._id, username: name },
+            process.env.JWT_SECRET,
+            { expiresIn: "1d" }
+        );
+
+        return res
+            .status(200)
+            .cookie("token", jwtToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                sameSite: "lax"
+            })
+            .json({ message: "Google Login Successful", user: { name, email, picture } });
+
+    } catch (error) {
+        console.error("Google Auth Error:", error);
+        return res.status(401).json({ message: "Invalid Google Token" });
+    }
+};
 
 const addSubscriber = async (req, res) => {
     const {username, email, password} = req.body;
@@ -191,5 +233,6 @@ module.exports = {
     changeSubscriberInfo, 
     removeSubscriberAccount, 
     getUsersDataByID, 
-    changeSubscriberPassword
+    changeSubscriberPassword,
+    googleLogin
 };
