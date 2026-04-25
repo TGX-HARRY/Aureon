@@ -13,5 +13,6 @@ router.delete("/subscribers/remove/:id", protect, controllers.removeSubscriberAc
 router.post("/subscribers/register", controllers.addSubscriber);
 router.post("/subscribers/login", controllers.fetchSubscriber);
 router.patch("/subscribers/changepassword", controllers.changeSubscriberPassword);
+router.post("/subscribers/google", controllers.googleLogin);
 
 module.exports = router;
