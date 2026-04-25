@@ -87,5 +87,19 @@
   </footer>
   
   <script src="./JS/signup.js"></script>
+  <!-- Hidden real Google button — clicked programmatically by our custom button -->
+  <div id="hidden-google-btn" style="position:absolute;opacity:0;pointer-events:none;"></div>
+  <script>
+      window.onload = function () {
+          google.accounts.id.initialize({
+              client_id: "270879117388-n34sv9rn6uhcg6bbu1nc6b4q8if5jvq6.apps.googleusercontent.com",
+              callback: handleCredentialResponse
+          });
+          google.accounts.id.renderButton(
+              document.getElementById("hidden-google-btn"),
+              { theme: "outline", size: "large" }
+          );
+      };
+  </script>
 </body>
 </html>

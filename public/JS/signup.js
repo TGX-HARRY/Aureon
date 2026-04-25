@@ -167,8 +167,12 @@ form.addEventListener('submit', async function(e) {
 // ─── Google OAuth ───────────────────────────────────────────────────────────
 
 function triggerGoogleSignIn() {
-    // Programmatically trigger the hidden Google sign-in flow
-    google.accounts.id.prompt();
+    const hiddenBtn = document.querySelector('#hidden-google-btn iframe');
+    if (hiddenBtn) {
+        hiddenBtn.click();
+    } else {
+        google.accounts.id.prompt(); // fallback
+    }
 }
 
 async function handleCredentialResponse(response) {

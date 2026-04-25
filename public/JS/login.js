@@ -22,8 +22,14 @@ async function validateForm(event) {
     }
 }
 
+// Render real Google button into hidden container, then click it on custom button press
 function triggerGoogleSignIn() {
-    google.accounts.id.prompt();
+    const hiddenBtn = document.querySelector('#hidden-google-btn iframe');
+    if (hiddenBtn) {
+        hiddenBtn.click();
+    } else {
+        google.accounts.id.prompt(); // fallback
+    }
 }
 
 async function handleCredentialResponse(response) {
