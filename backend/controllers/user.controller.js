@@ -227,6 +227,11 @@ const changeSubscriberPassword = async (req, res) => {
     .json({ message: "User password changed successfully!" });
 }
 
+const logoutUser = async (req, res) => {
+    res.clearCookie("token");
+    return res.status(200).json({ message: "Logged out successfully!" });
+};
+
 module.exports = {
     addSubscriber, 
     fetchSubscriber, 
@@ -234,5 +239,6 @@ module.exports = {
     removeSubscriberAccount, 
     getUsersDataByID, 
     changeSubscriberPassword,
-    googleLogin
+    googleLogin,
+    logoutUser
 };

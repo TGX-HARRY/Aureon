@@ -17,14 +17,16 @@ async function getMovieData() {
 }
 
 async function playMovie() {
-  const sessionData = localStorage.getItem("sessionData");
-  if (!sessionData) {
+  const mainData = await getMovieData().catch(err => {
+    console.error(err);
+    return null;
+  });
+
+  if (!mainData) {
     alert("Please log in to watch the movie!");
     window.location.href = "/login.html";
     return;
   }
-
-  const mainData = await getMovieData();
 
   // Get movie ID from URL
   const params = new URLSearchParams(window.location.search);
