@@ -6,30 +6,24 @@ async function validateForm(event) {
     const errorMessage = document.getElementById('error-message');
 
     const response = await fetch("/api/users/subscribers/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ email, password }),
-            credentials: "include"
-        });
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password }),
+                credentials: "include"
+            });
     const data = await response.json();
     if (response.ok) {
-        window.location.replace("/"); 
-    } 
+        window.location.replace("/");  
+    }  
     else {
         errorMessage.innerHTML = '<span style="color:red;">*Invalid email or password.</span>';
     }
 }
 
-// Render real Google button into hidden container, then click it on custom button press
 function triggerGoogleSignIn() {
-    const hiddenBtn = document.querySelector('#hidden-google-btn iframe');
-    if (hiddenBtn) {
-        hiddenBtn.click();
-    } else {
-        google.accounts.id.prompt(); // fallback
-    }
+    google.accounts.id.prompt();
 }
 
 async function handleCredentialResponse(response) {
