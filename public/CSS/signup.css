@@ -239,3 +239,19 @@ input:invalid {
     flex-shrink: 0;
 }
 
+/* Wrapper for Google's rendered button — makes it full width */
+.google-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+.google-btn-wrapper > div {
+    width: 100% !important;
+}
+
+.google-btn-wrapper iframe {
+    width: 100% !important;
+    border-radius: 10px !important;
+}
+
