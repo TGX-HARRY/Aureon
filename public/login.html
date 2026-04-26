@@ -71,15 +71,28 @@
     </footer>
     <script src="./JS/login.js"></script>
     <script>
-        window.addEventListener("load", function () {
-            google.accounts.id.initialize({
-                client_id: process.env.CLIENT_ID ,
-                callback: handleCredentialResponse
-            });
-            google.accounts.id.renderButton(
-                document.getElementById("google-signin-btn"),
-                { theme: "outline", size: "large", width: 350, text: "signin_with" }
-            );
+        window.addEventListener("load", async function () {
+            try {
+                // Fetch the client ID from the server
+                const configResponse = await fetch("/api/config/google-client-id");
+                const { clientId } = await configResponse.json();
+
+                if (!clientId) {
+                    console.error("Google Client ID not found in configuration.");
+                    return;
+                }
+
+                google.accounts.id.initialize({
+                    client_id: clientId,
+                    callback: handleCredentialResponse
+                });
+                google.accounts.id.renderButton(
+                    document.getElementById("google-signin-btn"),
+                    { theme: "outline", size: "large", width: 350, text: "signin_with" }
+                );
+            } catch (error) {
+                console.error("Error initializing Google Sign-In:", error);
+            }
         });
     </script>
 </body>

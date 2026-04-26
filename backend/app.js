@@ -15,4 +15,8 @@ app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/movies", movieRoutes);
 
+app.get("/api/config/google-client-id", (req, res) => {
+    res.json({ clientId: process.env.CLIENT_ID });
+});
+
 module.exports = app;

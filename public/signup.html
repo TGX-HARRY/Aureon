@@ -79,16 +79,23 @@
 
   <script src="./JS/signup.js"></script>
   <script>
-      window.addEventListener("load", function () {
-          google.accounts.id.initialize({
-              client_id: "270879117388-n34sv9rn6uhcg6bbu1nc6b4q8if5jvq6.apps.googleusercontent.com",
-              callback: handleCredentialResponse
-          });
-          google.accounts.id.renderButton(
-              document.getElementById("google-signin-btn"),
-              { theme: "outline", size: "large", width: 350, text: "signup_with" }
-          );
-      });
+    window.addEventListener("load", async function () {
+      try {
+        const configResponse = await fetch("/api/config/google-client-id");
+        const { clientId } = await configResponse.json();
+
+        google.accounts.id.initialize({
+          client_id: clientId,
+          callback: handleCredentialResponse
+        });
+        google.accounts.id.renderButton(
+          document.getElementById("google-signin-btn"),
+          { theme: "outline", size: "large", width: 350, text: "signup_with" }
+        );
+      } catch (error) {
+        console.error("Error initializing Google Sign-In:", error);
+      }
+    });
   </script>
 </body>
 
