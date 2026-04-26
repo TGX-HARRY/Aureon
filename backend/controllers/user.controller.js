@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const userModel = require("../models/user.model");
 const { OAuth2Client } = require("google-auth-library");
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const client = new OAuth2Client(process.env.CLIENT_ID);
 
 const googleLogin = async (req, res) => {
     const { token } = req.body;
@@ -12,7 +12,7 @@ const googleLogin = async (req, res) => {
         // 1. Verify Google Token
         const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: process.env.GOOGLE_CLIENT_ID
+            audience: process.env.CLIENT_ID
         });
         const { name, email, picture } = ticket.getPayload();
 
