@@ -121,6 +121,17 @@ async function removeFromMyList(userId, movieId) {
     }
 }
 
+async function deleteMovieDb(movieId) {
+    try {
+        await movieModel.findByIdAndDelete(movieId);
+        // Also remove from all sections
+        await sectionModel.updateMany({}, { $pull: { movies: movieId } });
+        return "success";
+    } catch (error) {
+        return error.message;
+    }
+}
+
 module.exports = { 
     getAllMovies, 
     getSectionsAndMovies, 
@@ -128,5 +139,6 @@ module.exports = {
     appendMovieDb, 
     getMoviesCount,
     addToMyList,
-    removeFromMyList
+    removeFromMyList,
+    deleteMovieDb
 };

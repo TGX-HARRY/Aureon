@@ -52,11 +52,22 @@ const removeFromList = async (req, res) => {
     }
 }
 
+const deleteMovie = async (req, res) => {
+    const { id } = req.params;
+    const status = await deleteMovieDb(id);
+    if (status === "success") {
+        return res.status(200).json({ message: "Movie deleted successfully!" });
+    } else {
+        return res.status(400).json({ message: status });
+    }
+}
+
 module.exports = { 
     fetchSectionsAndMoviesData, 
     fetchUserMovieList, 
     fetchAllMoviesData, 
     addMovie,
     addToList,
-    removeFromList
+    removeFromList,
+    deleteMovie
 };

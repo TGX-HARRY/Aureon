@@ -1,6 +1,6 @@
 import { clearUser, setUser, getUser } from "./Auth.js";
 
-async function loadMovies() {
+async function loadMovies(user = null) {
   try {
     const response = await fetch("/api/movies/sections");
 
@@ -75,6 +75,27 @@ async function loadMovies() {
           movieCard.appendChild(img);
           movieCard.appendChild(info);
 
+          // Add delete button for admins
+          if (user && user.role === 'admin') {
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "delete-movie-btn";
+            deleteBtn.innerHTML = '<i class="fa fa-trash"></i>';
+            deleteBtn.title = "Delete Movie";
+            deleteBtn.onclick = async (e) => {
+              e.stopPropagation(); // Don't trigger movie click
+              if (confirm(`Are you sure you want to delete "${movie.title}"?`)) {
+                const res = await fetch(`/api/movies/delete/${movie._id}`, { method: "DELETE" });
+                if (res.ok) {
+                  alert("Movie deleted!");
+                  loadMovies(user); // Reload
+                } else {
+                  alert("Failed to delete movie.");
+                }
+              }
+            };
+            movieCard.appendChild(deleteBtn);
+          }
+
           movieRow.appendChild(movieCard);
         });
 
@@ -101,7 +122,8 @@ async function handleMovieClick(movie) {
 }
 
 // Run it
-loadMovies();
+// Remove initial call, will be called in DOMContentLoaded
+// loadMovies();
 
 async function postLogin() {
   try {
@@ -143,7 +165,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         ${user.username}
     </a>
     <ul class="dropdown-menu">
-        ${user.role === 'admin' ? '<li><a href="./admin/adminDashboard.html">Admin Dashboard</a></li>' : ''}
+        ${user.role === 'admin' ? '<li><a href="./adminDashboard.html">Admin Dashboard</a></li>' : ''}
         <li><a href="./profile.html">Edit Profile</a></li>
         <li id="logout"><a href="#">Log Out</a></li>
     </ul>
@@ -164,4 +186,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     clearUser();
     window.location.href = "/login.html";
   });
+
+  // Load movies with user info (to show admin features)
+  loadMovies(user);
 });
