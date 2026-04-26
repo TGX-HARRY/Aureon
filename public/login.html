@@ -73,7 +73,7 @@
     <script>
         window.addEventListener("load", function () {
             google.accounts.id.initialize({
-                client_id: "270879117388-n34sv9rn6uhcg6bbu1nc6b4q8if5jvq6.apps.googleusercontent.com",
+                client_id: process.env.CLIENT_ID ,
                 callback: handleCredentialResponse
             });
             google.accounts.id.renderButton(
