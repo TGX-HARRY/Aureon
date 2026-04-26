@@ -9,6 +9,7 @@ async function addUser(username, email, password, role) {
             username,
             email,
             password,
+            role: role || "user"
         });
 
         return true;
