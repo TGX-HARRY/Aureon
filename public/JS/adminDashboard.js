@@ -64,11 +64,35 @@ async function fetchRecentMovies() {
                 <td>${movie.rating}</td>
                 <td>${movie.createdAt ? new Date(movie.createdAt).toLocaleDateString() : "N/A"}</td>
                 <td>
+                    <button class="action-btn edit-btn" onclick="editMovie('${movie._id}')" title="Edit"><i class="fa fa-edit"></i></button>
                     <button class="action-btn delete-btn" onclick="deleteMovie('${movie._id}')" title="Delete"><i class="fa fa-trash"></i></button>
                 </td>
             `;
             tbody.appendChild(tr);
         });
+    } catch (e) { console.error(e); }
+}
+
+window.editMovie = async (id) => {
+    try {
+        const response = await fetch("/api/movies/");
+        const movies = await response.json();
+        const movie = movies.find(m => m._id === id);
+        
+        if (!movie) return;
+        
+        // Fill modal
+        document.getElementById("modalTitle").textContent = "Edit Movie";
+        document.getElementById("modalSubmitBtn").textContent = "Save Changes";
+        document.getElementById("editingId").value = id;
+        document.getElementById("mTitle").value = movie.title;
+        document.getElementById("mGenre").value = movie.genre;
+        document.getElementById("mRating").value = movie.rating;
+        document.getElementById("mImg").value = movie.img;
+        document.getElementById("mTrailer").value = movie.trailer;
+        document.getElementById("sectionGroup").style.display = "none"; // Hide section for edits
+        
+        document.getElementById("addMovieModal").style.display = "block";
     } catch (e) { console.error(e); }
 }
 
@@ -103,33 +127,49 @@ function setupModal() {
     const closeBtn = document.querySelector(".close-btn");
     const form = document.getElementById("addMovieForm");
 
-    addBtn.onclick = () => modal.style.display = "block";
+    addBtn.onclick = () => {
+        document.getElementById("modalTitle").textContent = "Add New Movie";
+        document.getElementById("modalSubmitBtn").textContent = "Add Movie";
+        document.getElementById("editingId").value = "";
+        form.reset();
+        document.getElementById("sectionGroup").style.display = "block";
+        modal.style.display = "block";
+    };
     closeBtn.onclick = () => modal.style.display = "none";
     window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
 
     form.onsubmit = async (e) => {
         e.preventDefault();
+        const editingId = document.getElementById("editingId").value;
         const movieData = {
             title: document.getElementById("mTitle").value,
             genre: document.getElementById("mGenre").value,
             rating: document.getElementById("mRating").value,
             img: document.getElementById("mImg").value,
-            trailer: document.getElementById("mTrailer").value,
-            sectionTitle: document.getElementById("mSection").value || "Recently Added"
+            trailer: document.getElementById("mTrailer").value
         };
 
-        const res = await fetch("/api/movies/add", {
-            method: "POST",
+        if (!editingId) {
+            movieData.sectionTitle = document.getElementById("mSection").value || "Recently Added";
+        }
+
+        const url = editingId ? `/api/movies/update/${editingId}` : "/api/movies/add";
+        const method = editingId ? "PATCH" : "POST";
+
+        const res = await fetch(url, {
+            method: method,
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(movieData)
         });
 
         if (res.ok) {
-            alert("Movie added successfully!");
+            alert(editingId ? "Movie updated successfully!" : "Movie added successfully!");
             modal.style.display = "none";
+            fetchRecentMovies();
             getMovieCount();
         } else {
-            alert("Failed to add movie.");
+            const errData = await res.json();
+            alert("Operation failed: " + (errData.message || "Unknown error"));
         }
     };
 }

@@ -1,4 +1,4 @@
-const { getAllMovies, getSectionsAndMovies, getUserMovies, appendMovieDb, addToMyList, removeFromMyList } = require("../services/movie.service");
+const { getAllMovies, getSectionsAndMovies, getUserMovies, appendMovieDb, addToMyList, removeFromMyList, deleteMovieDb, updateMovieDb } = require("../services/movie.service");
 
 const fetchSectionsAndMoviesData = async (req, res) => {
     const data = await getSectionsAndMovies();
@@ -62,6 +62,16 @@ const deleteMovie = async (req, res) => {
     }
 }
 
+const updateMovie = async (req, res) => {
+    const { id } = req.params;
+    const status = await updateMovieDb(id, req.body);
+    if (status === "success") {
+        return res.status(200).json({ message: "Movie updated successfully!" });
+    } else {
+        return res.status(400).json({ message: status });
+    }
+}
+
 module.exports = { 
     fetchSectionsAndMoviesData, 
     fetchUserMovieList, 
@@ -69,5 +79,6 @@ module.exports = {
     addMovie,
     addToList,
     removeFromList,
-    deleteMovie
+    deleteMovie,
+    updateMovie
 };

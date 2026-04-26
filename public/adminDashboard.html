@@ -128,8 +128,9 @@
     <div id="addMovieModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <h2>Add New Movie</h2>
+            <h2 id="modalTitle">Add New Movie</h2>
             <form id="addMovieForm">
+                <input type="hidden" id="editingId">
                 <div class="input-group">
                     <label>Title</label>
                     <input type="text" id="mTitle" required>
@@ -150,11 +151,11 @@
                     <label>Trailer URL (YouTube Embed)</label>
                     <input type="text" id="mTrailer" required>
                 </div>
-                <div class="input-group">
+                <div id="sectionGroup" class="input-group">
                     <label>Section Title (e.g. Trending, New Releases)</label>
                     <input type="text" id="mSection" placeholder="Recently Added">
                 </div>
-                <button type="submit" class="save-btn">Add Movie</button>
+                <button type="submit" id="modalSubmitBtn" class="save-btn">Add Movie</button>
             </form>
         </div>
     </div>

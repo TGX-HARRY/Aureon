@@ -132,6 +132,21 @@ async function deleteMovieDb(movieId) {
     }
 }
 
+async function updateMovieDb(movieId, movieData) {
+    try {
+        const { title, img, genre, trailer, rating } = movieData;
+        const updateData = { title, img, genre, trailer, rating };
+        
+        // Remove undefined fields
+        Object.keys(updateData).forEach(key => updateData[key] === undefined && delete updateData[key]);
+        
+        await movieModel.findByIdAndUpdate(movieId, updateData, { runValidators: true });
+        return "success";
+    } catch (error) {
+        return error.message;
+    }
+}
+
 module.exports = { 
     getAllMovies, 
     getSectionsAndMovies, 
@@ -140,5 +155,6 @@ module.exports = {
     getMoviesCount,
     addToMyList,
     removeFromMyList,
-    deleteMovieDb
+    deleteMovieDb,
+    updateMovieDb
 };

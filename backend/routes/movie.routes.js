@@ -9,6 +9,7 @@ router.get("/sections", controllers.fetchSectionsAndMoviesData);
 router.get("/", controllers.fetchAllMoviesData);
 router.post("/add", isAdmin, controllers.addMovie);
 router.delete("/delete/:id", isAdmin, controllers.deleteMovie);
+router.patch("/update/:id", isAdmin, controllers.updateMovie);
 
 // My List Routes
 router.post("/mylist/add", protect, controllers.addToList);
