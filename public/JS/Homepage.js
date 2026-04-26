@@ -118,12 +118,9 @@ async function handleMovieClick(movie) {
   }
   
   // Navigate directly, the backend will verify the session via cookie
-  window.location.href = `movie.html?watch=${encodeURIComponent(movie.id)}`;
+  window.location.href = `movie.html?watch=${encodeURIComponent(movie._id)}`;
 }
 
-// Run it
-// Remove initial call, will be called in DOMContentLoaded
-// loadMovies();
 
 async function postLogin() {
   try {
