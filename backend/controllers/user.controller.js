@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const userModel = require("../models/user.model");
 const { OAuth2Client } = require("google-auth-library");
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const client = new OAuth2Client(process.env.CLIENT_ID);
 
 const googleLogin = async (req, res) => {
     const { token } = req.body;
@@ -12,7 +12,7 @@ const googleLogin = async (req, res) => {
         // 1. Verify Google Token
         const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: process.env.GOOGLE_CLIENT_ID
+            audience: process.env.CLIENT_ID
         });
         const { name, email, picture } = ticket.getPayload();
 
@@ -20,14 +20,21 @@ const googleLogin = async (req, res) => {
         let user = await findUserByEmail(email);
         if (!user) {
             const tempPassword = Math.random().toString(36).slice(-8); // Random password for OAuth
-            await addUser(name, email, tempPassword);
+            const success = await addUser(name, email, tempPassword);
+            if (!success) {
+                return res.status(500).json({ message: "Failed to create user from Google account" });
+            }
             user = await findUserByEmail(email);
+        }
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found after creation" });
         }
 
         // 3. Generate JWT
         const jwtToken = jwt.sign(
             { userId: user._id, username: name },
-            process.env.JWT_SECRET,
+            process.env.JWT_SECRET || "aureon_jwt_secret",
             { expiresIn: "1d" }
         );
 
@@ -45,6 +52,12 @@ const googleLogin = async (req, res) => {
         return res.status(401).json({ message: "Invalid Google Token" });
     }
 };
+
+const logoutUser = async (req, res) => {
+    res.clearCookie("token");
+    return res.status(200).json({ message: "Logged out successfully!" });
+};
+
 
 const addSubscriber = async (req, res) => {
     const {username, email, password} = req.body;
@@ -95,7 +108,7 @@ const fetchSubscriber = async (req, res) => {
             // create token
             const token = jwt.sign(
                 { userId, username },
-                process.env.JWT_SECRET,
+                process.env.JWT_SECRET || "aureon_jwt_secret",
                 { expiresIn: "1d" }
             );
 
@@ -234,5 +247,6 @@ module.exports = {
     removeSubscriberAccount, 
     getUsersDataByID, 
     changeSubscriberPassword,
-    googleLogin
+    googleLogin,
+    logoutUser
 };

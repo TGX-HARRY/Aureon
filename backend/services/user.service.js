@@ -6,7 +6,7 @@ async function addUser(username, email, password) {
     if (!username || !email || !password) return false;
     
     try {
-        const upload = await userModel.insertOne({
+        const upload = await userModel.create({
             username,
             email,
             password,
