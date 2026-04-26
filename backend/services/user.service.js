@@ -5,15 +5,6 @@ const bcrypt = require("bcrypt");
 async function addUser(username, email, password, role) {
     if (!username || !email || !password) return false;
     try {
-        if (role == "admin") {
-            const upload = await userModel.create({
-                username,
-                email,
-                password,
-                role: "admin"
-            });
-            return true;
-        }
         const upload = await userModel.create({
             username,
             email,

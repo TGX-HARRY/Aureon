@@ -20,8 +20,15 @@ const googleLogin = async (req, res) => {
         let user = await findUserByEmail(email);
         if (!user) {
             const tempPassword = Math.random().toString(36).slice(-8); // Random password for OAuth
-            await addUser(name, email, tempPassword);
+            const success = await addUser(name, email, tempPassword);
+            if (!success) {
+                return res.status(500).json({ message: "Failed to create user from Google account" });
+            }
             user = await findUserByEmail(email);
+        }
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found after creation" });
         }
 
         // 3. Generate JWT
@@ -45,6 +52,12 @@ const googleLogin = async (req, res) => {
         return res.status(401).json({ message: "Invalid Google Token" });
     }
 };
+
+const logoutUser = async (req, res) => {
+    res.clearCookie("token");
+    return res.status(200).json({ message: "Logged out successfully!" });
+};
+
 
 const addSubscriber = async (req, res) => {
     const {username, email, password} = req.body;
