@@ -10,32 +10,7 @@
    <link rel="stylesheet" href="./CSS/adminDashboard.css">
 </head>
 
-<body>
-    <script type="module">
-         const id = JSON.parse(localStorage.getItem("sessionData")).id || null;
-            if (!id) {
-                alert("User not logged in, redirecting to login page!");
-                window.location.href = "/login.html";
-            }
-
-            const isAdmin = await fetch(`/admins/verify/${id}`);
-            if (!isAdmin.ok) {
-                alert("Invalid ID, access denied!");
-                window.location.href = "/"
-            }
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const storedData = localStorage.getItem("sessionData");
-            const loginLink = document.getElementById("loginStatus");
-
-            if (storedData) {
-                const user = JSON.parse(storedData);
-                loginLink.innerHTML = `<a href="./profile.html"><i class="fa fa-user"></i> ${user.name}</a>`;
-            }
-        });
-    </script>
-
+<body>     
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">Aureon <span
@@ -149,13 +124,48 @@
         </div>
     </div>
 
+    <!-- Add Movie Modal -->
+    <div id="addMovieModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Add New Movie</h2>
+            <form id="addMovieForm">
+                <div class="input-group">
+                    <label>Title</label>
+                    <input type="text" id="mTitle" required>
+                </div>
+                <div class="input-group">
+                    <label>Genre</label>
+                    <input type="text" id="mGenre" required>
+                </div>
+                <div class="input-group">
+                    <label>Rating</label>
+                    <input type="number" step="0.1" id="mRating" required>
+                </div>
+                <div class="input-group">
+                    <label>Image URL</label>
+                    <input type="text" id="mImg" required>
+                </div>
+                <div class="input-group">
+                    <label>Trailer URL (YouTube Embed)</label>
+                    <input type="text" id="mTrailer" required>
+                </div>
+                <div class="input-group">
+                    <label>Section Title (e.g. Trending, New Releases)</label>
+                    <input type="text" id="mSection" placeholder="Recently Added">
+                </div>
+                <button type="submit" class="save-btn">Add Movie</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer" style="margin-top: auto;">
         <div class="footer-content">
             <p>&copy; 2025 Aureon Admin Panel</p>
         </div>
     </footer>
-    <script src="./JS/adminDashboard.js"></script>
+    <script src="./JS/adminDashboard.js" type="module"></script>
 </body>
 
 </html>

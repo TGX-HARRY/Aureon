@@ -80,7 +80,7 @@ const addSubscriber = async (req, res) => {
     }
     
     const hashedPassword = await bcrypt.hash(password, 10);
-    const uploadStatus = await addUser(username, email, hashedPassword);
+    const uploadStatus = await addUser(username, email, hashedPassword, null);
     if (!uploadStatus) {
         return res
         .status(500)
@@ -239,6 +239,11 @@ const changeSubscriberPassword = async (req, res) => {
     .status(200)
     .json({ message: "User password changed successfully!" });
 }
+
+const logoutUser = async (req, res) => {
+    res.clearCookie("token");
+    return res.status(200).json({ message: "Logged out successfully!" });
+};
 
 module.exports = {
     addSubscriber, 

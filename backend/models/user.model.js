@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema(
 
     avatar: {
       type: String,
-      default: "./images/avatar1",
+      default: "./images/avatar1.jpg",
     },
 
     role: {
@@ -33,8 +33,8 @@ const UserSchema = new mongoose.Schema(
 
     gender: {
       type: String,
-      enum: ["male", "female", "other", "not specified"],
-      default: "not specified",
+      enum: ["male", "female", "other", "none"],
+      default: "none",
     },
 
     phone: {

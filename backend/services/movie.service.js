@@ -42,14 +42,16 @@ async function getUserMovies(id) {
 }
 
 async function appendMovieDb(movie) {
-    const { slug, title, img, genre, trailer, rating } = movie;
+    const { title, img, genre, trailer, rating, sectionTitle } = movie;
     
-    if (!slug || !title || !img || !genre || !trailer) {
+    if (!title || !img || !genre || !trailer) {
         return "Details missing!";
     }
 
+    const slug = title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+
     try {
-        await movieModel.create({
+        const newMovie = await movieModel.create({
             slug, 
             title, 
             genre, 
@@ -57,6 +59,23 @@ async function appendMovieDb(movie) {
             trailer,
             rating: rating || "0"
         });
+
+        // Add to a section so it shows on homepage
+        const targetSectionTitle = sectionTitle || "Recently Added";
+        const sectionSlug = targetSectionTitle.toLowerCase().replace(/ /g, '-');
+
+        let section = await sectionModel.findOne({ slug: sectionSlug });
+        if (!section) {
+            section = await sectionModel.create({
+                slug: sectionSlug,
+                title: targetSectionTitle,
+                movies: []
+            });
+        }
+
+        section.movies.push(newMovie._id);
+        await section.save();
+
         return "success";
     } catch (error) {
         console.error("Error in movie.service.js ->", error);

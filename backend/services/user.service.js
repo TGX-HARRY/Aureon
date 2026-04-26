@@ -2,9 +2,8 @@ const { default: mongoose } = require("mongoose");
 const userModel = require("../models/user.model");
 const bcrypt = require("bcrypt");
 
-async function addUser(username, email, password) {
+async function addUser(username, email, password, role) {
     if (!username || !email || !password) return false;
-    
     try {
         const upload = await userModel.create({
             username,
@@ -13,7 +12,7 @@ async function addUser(username, email, password) {
         });
 
         return true;
-    } catch(error) {
+    } catch (error) {
         console.error("user.service.js -> " + error);
         return false;
     }
@@ -64,21 +63,21 @@ async function getUserById(id) {
 }
 
 function getChangedFields(oldUser, newUser) {
-  const result = {};
+    const result = {};
 
-  Object.keys(newUser).forEach(key => {
-    if (newUser[key] !== oldUser[key]) {
-      result[key] = newUser[key];
-    }
-  });
+    Object.keys(newUser).forEach(key => {
+        if (newUser[key] !== oldUser[key]) {
+            result[key] = newUser[key];
+        }
+    });
 
-  return result;
+    return result;
 }
 
 async function changeUserData(id, oldData, newData) {
     if (!id || !mongoose.isValidObjectId(id)) return false;
     const updatedData = getChangedFields(oldData, newData);
-    
+
     try {
         await userModel.findByIdAndUpdate(id, updatedData, { returnDocument: "after", runValidators: true });
         return true;
@@ -96,10 +95,24 @@ async function deleteUserAccount(id) {
     try {
         await userModel.findByIdAndDelete(id);
         return true;
-    } catch(error) {
+    } catch (error) {
         console.log("Error in user.service.js, deleteAccountById method ->" + error);
         return false;
     }
 }
 
-module.exports = {addUser, findUserByEmail, getUser, getUserById, changeUserData, deleteUserAccount}
+module.exports = { addUser, findUserByEmail, getUser, getUserById, changeUserData, deleteUserAccount, countSubscribers }
+// --- Statistics ---
+
+
+async function countSubscribers() {
+    try {
+        const count = await userModel.countDocuments({ role: "user" });
+        return count;
+    } catch (error) {
+        console.log("Error in user.service.js, countSubscribers method ->" + error);
+        return 0;
+    }
+}
+
+// End of User Service

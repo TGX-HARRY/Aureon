@@ -10,70 +10,58 @@
 <body>
 <script>
 
-    const sessionData = localStorage.getItem("sessionData");
-    const userID = sessionData ? JSON.parse(sessionData).id : null;
-
-    if (!userID) {
-        window.location.href = "./login.html";
-    }
-
     async function getData() {
-    const response = await fetch(`/api/users/subscribers/${userID}`);
+        const response = await fetch("/api/users/subscribers/me");
 
-    console.log("Response status:", response.status);
+        if (response.status === 401) {
+            window.location.href = "./login.html";
+            return null;
+        }
 
-    if (!response.ok) {
-        console.log("Failed to fetch user data");
-        return null;
+        if (!response.ok) {
+            console.log("Failed to fetch user data");
+            return null;
+        }
+
+        const data = await response.json();
+        console.log("API data:", data);
+        return data;
     }
-
-    const data = await response.json();
-    console.log("API data:", data);
-
-    const user = data;
-    return user;
-}
 
     document.addEventListener("DOMContentLoaded", async () => {
+        const userData = await getData();
+        if (!userData) return;
 
-    const userData = await getData();
-    if (!userData) return;
+        // Fill form fields
+        document.getElementById("uname").value = userData.username || "";
+        document.getElementById("email").value = userData.email || "";
+        document.getElementById("fullname").value = userData.fullName || "";
+        document.getElementById("phone").value = userData.phone || "";
+        document.getElementById("address").value = userData.address || "";
+        document.getElementById("dob").value = userData.dob || "";
 
-    document.getElementById("uname").value = userData.name || "";
-    document.getElementById("email").value = userData.email || "";
-    document.getElementById("fullname").value = userData.fullName || "";
-    document.getElementById("phone").value = userData.phone || "";
-    document.getElementById("address").value = userData.address || "";
-    document.getElementById("dob").value = userData.dob || "";
+        if (userData.gender) {
+            const genderSelect = document.getElementById("gender");
+            // Set selection based on value (lowercase)
+            genderSelect.value = userData.gender.charAt(0).toUpperCase() + userData.gender.slice(1);
+        }
 
-    if (userData.gender) {
-        const genderSelect = document.getElementById("gender");
-        for (let i = 0; i < genderSelect.options.length; i++) {
-            if (genderSelect.options[i].text === userData.gender) {
-                genderSelect.selectedIndex = i;
-                break;
+        const avatarPreview = document.getElementById("avatarPreview");
+        const avatarHidden = document.getElementById("avatarUrl");
+        const avatars = document.querySelectorAll(".avatar-option");
+
+        const userAvatar = userData.avatar || "./images/avatar1.jpg";
+        avatarPreview.src = userAvatar;
+        avatarHidden.value = userAvatar;
+
+        avatars.forEach(a => {
+            if (a.getAttribute("src") === userAvatar) {
+                a.classList.add("selected");
+            } else {
+                a.classList.remove("selected");
             }
-        }
-    }
-
-    const avatarPreview = document.getElementById("avatarPreview");
-    const avatarHidden = document.getElementById("avatarUrl");
-    const avatars = document.querySelectorAll(".avatar-option");
-
-    const userAvatar = userData.avatar || "./images/avatar1.jpg";
-
-    avatarPreview.src = userAvatar;
-    avatarHidden.value = userAvatar;
-
-    avatars.forEach(a => {
-        if (a.getAttribute("src") === userAvatar) {
-            a.classList.add("selected");
-        } else {
-            a.classList.remove("selected");
-        }
+        });
     });
-
-});
 
     // Only numbers in phone
    document.addEventListener("DOMContentLoaded", () => {
@@ -122,13 +110,12 @@ document.getElementById("leftBtn").addEventListener("click", () => {
         e.preventDefault();
 
         const updatedData = {
-            id: userID,
-            name: document.getElementById("uname").value,
+            username: document.getElementById("uname").value,
             avatar: document.getElementById("avatarUrl").value,
             fullName: document.getElementById("fullname").value,
             email: document.getElementById("email").value,
             phone: document.getElementById("phone").value,
-            gender: document.getElementById("gender").value,
+            gender: document.getElementById("gender").value.toLowerCase(),
             address: document.getElementById("address").value,
             dob: document.getElementById("dob").value
         };
@@ -142,12 +129,17 @@ document.getElementById("leftBtn").addEventListener("click", () => {
                 body: JSON.stringify(updatedData)
             });
 
-            const result = await response.json();
-            alert("Profile updated successfully!");
-            window.location.href = "./index.html";
+            if (response.ok) {
+                alert("Profile updated successfully!");
+                window.location.href = "./index.html";
+            } else {
+                const result = await response.json();
+                alert(result.message || "Failed to update profile.");
+            }
 
         } catch (error) {
             console.error(error);
+            alert("An error occurred while updating the profile.");
         }
     });
 

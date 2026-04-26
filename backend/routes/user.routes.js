@@ -14,5 +14,6 @@ router.post("/subscribers/register", controllers.addSubscriber);
 router.post("/subscribers/login", controllers.fetchSubscriber);
 router.patch("/subscribers/changepassword", controllers.changeSubscriberPassword);
 router.post("/subscribers/google", controllers.googleLogin);
+router.post("/logout", controllers.logoutUser);
 
 module.exports = router;

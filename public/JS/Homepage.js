@@ -89,31 +89,15 @@ async function loadMovies() {
 }
 
 async function handleMovieClick(movie) {
-  const sessionData = JSON.parse(localStorage.getItem("sessionData"));
-  if (!sessionData) {
+  const user = getUser();
+  if (!user) {
     alert("Please log in to watch the movie.");
     window.location.href = "/login.html";
+    return;
   }
   
-  else {
-    console.log("Session Data:", sessionData.sessionID);
-    try {
-      const response = await fetch( 
-        `/api/movies?watch=${encodeURIComponent(movie.id)}&sessionid=${encodeURIComponent(sessionData.sessionID)}`
-      );
-      const data = await response.json();
-
-      if (!data) {
-        throw new Error("Failed to fetch movie details");
-      }
-      else {
-        window.location.href = `movie.html?watch=${encodeURIComponent(movie.id)}&sessionid=${encodeURIComponent(sessionData.sessionID)}`;
-      }
-    }
-    catch (error) {
-      console.error("Error fetching movie details:", error);
-    }
-  }
+  // Navigate directly, the backend will verify the session via cookie
+  window.location.href = `movie.html?watch=${encodeURIComponent(movie.id)}`;
 }
 
 // Run it
@@ -129,10 +113,12 @@ async function postLogin() {
 
     if (!response.ok) {
       clearUser();
+      localStorage.removeItem("sessionData");
       return null;
     }
 
     setUser(data);
+    localStorage.removeItem("sessionData");
 
     return data;
 
@@ -157,6 +143,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         ${user.username}
     </a>
     <ul class="dropdown-menu">
+        ${user.role === 'admin' ? '<li><a href="./admin/adminDashboard.html">Admin Dashboard</a></li>' : ''}
         <li><a href="./profile.html">Edit Profile</a></li>
         <li id="logout"><a href="#">Log Out</a></li>
     </ul>

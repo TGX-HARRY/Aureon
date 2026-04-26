@@ -9,13 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./CSS/login.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <style>
-        .google-btn-container {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-        }
-    </style>
 </head>
 
 <body>
@@ -39,34 +32,27 @@
 
                 <div class="form-group">
                     <label for="email">Email or Username</label>
-                    <input id="email" type="text" placeholder="Enter your email or username" required autocomplete="email">
+                    <input id="email" type="text" placeholder="Enter your email or username" required
+                        autocomplete="email">
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input id="password" type="password" placeholder="Enter your password" required autocomplete="current-password">
+                    <input id="password" type="password" placeholder="Enter your password" required
+                        autocomplete="current-password">
                 </div>
 
                 <button type="submit" class="login-btn">Sign In</button>
 
-                <div class="google-btn-container">
-                    <div id="g_id_onload"
-                        data-client_id="270879117388-n34sv9rn6uhcg6bbu1nc6b4q8if5jvq6.apps.googleusercontent.com"
-                        data-callback="handleCredentialResponse"
-                        data-auto_prompt="false">
-                    </div>
-                    <div class="g_id_signin"
-                        data-type="standard"
-                        data-size="large"
-                        data-theme="outline"
-                        data-text="sign_in_with"
-                        data-shape="rectangular"
-                        data-logo_alignment="left">
-                    </div>
+                <div class="auth-divider">
+                    <span>or continue with</span>
                 </div>
 
+                <!-- Google renders its button here -->
+                <div id="google-signin-btn" class="google-btn-wrapper"></div>
+
             </form>
-        <div id="error-message" class="error-message"></div>
+            <div id="error-message" class="error-message"></div>
             <div class="signup-link">
                 New to Aureon? <a href="./signup.html">Sign up now</a>
             </div>
@@ -83,7 +69,19 @@
             <a href="/">Home</a>
         </div>
     </footer>
-    <script src = "./JS/login.js"></script>
+    <script src="./JS/login.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            google.accounts.id.initialize({
+                client_id: process.env.CLIENT_ID ,
+                callback: handleCredentialResponse
+            });
+            google.accounts.id.renderButton(
+                document.getElementById("google-signin-btn"),
+                { theme: "outline", size: "large", width: 350, text: "signin_with" }
+            );
+        });
+    </script>
 </body>
 
 </html>
