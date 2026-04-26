@@ -53,12 +53,6 @@ const googleLogin = async (req, res) => {
     }
 };
 
-const logoutUser = async (req, res) => {
-    res.clearCookie("token");
-    return res.status(200).json({ message: "Logged out successfully!" });
-};
-
-
 const addSubscriber = async (req, res) => {
     const {username, email, password} = req.body;
     if (!username || !email || !password) {
