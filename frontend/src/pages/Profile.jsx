@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Profile.css';
+import './profile.css';
 import { server_url } from './config/config';
 
 const AVATARS = [

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Signup.css";
+import "./signup.css";
 import Validate from "./Backend/Validation";
 import { server_url } from "./config/config";
 

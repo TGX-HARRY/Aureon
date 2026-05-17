@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import "./Login.css"
+import "./login.css"
 import { Link } from 'react-router-dom'
 import { server_url } from './config/config';
 
