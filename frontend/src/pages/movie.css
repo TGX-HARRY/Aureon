@@ -1,0 +1,257 @@
+/* Theme variables (keeps original dark palette) */
+:root{
+  --bg:#141414;
+  --panel: rgba(20,20,20,0.6);
+  --muted:#8c8c8c;
+  --text:#ffffff;
+  --accent:#46d369;
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.06);
+  --shadow: 0 10px 30px rgba(0,0,0,0.6);
+  --radius: 14px;
+  --nav-height: 84px; /* adjust if your header is taller/shorter */
+}
+
+/* Reset + base (kept) */
+html { 
+  scroll-behavior: smooth; 
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  /* Hide scrollbar */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Video container — cleaner card with rounded corners + shadow */
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.video-container iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* gradient fade at bottom of video */
+.video-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.75) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* now overlay movie details on video */
+.movie-details {
+  position: absolute;
+  bottom: 10%;
+  left: 4%;
+  z-index: 3;
+  color: var(--text);
+  max-width: 45%;
+  padding: 20px 0;
+  transition: transform 260ms ease, opacity 260ms ease, visibility 260ms;
+  will-change: transform, opacity;
+}
+
+/* hide details when video plays */
+.movie-details.hidden-details {
+  opacity: 0;
+  transform: translateY(18px);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ensure smooth re-appearance */
+.movie-details:not(.hidden-details) {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* on small screens keep behavior but layout adjusts */
+@media (max-width: 768px) {
+  .movie-details.hidden-details { transform: translateY(8px); }
+}
+
+.movie-details h1 {
+  font-size: clamp(36px, 5vw, 70px);
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: #fff;
+  text-shadow: 0 6px 20px rgba(0,0,0,0.85);
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.match-score {
+  color: var(--accent);
+  font-weight: 700;
+  background: rgba(70,211,105,0.15);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.year,
+.maturity-rating,
+.quality-badge {
+  color: #fff;
+  opacity: 0.9;
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+#movieOverview {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-top: 12px;
+  color: #ddd;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+/* ensure good spacing on mobile */
+@media (max-width: 768px) {
+  .movie-details {
+    bottom: 6%;
+    left: 5%;
+    max-width: 90%;
+  }
+  .movie-details h1 {
+    font-size: 30px;
+  }
+}
+
+
+/* Action buttons group */
+.action-buttons { display:flex; gap:14px; margin-top: 22px; margin-bottom: 36px; flex-wrap:wrap; }
+
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:12px 28px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight:700;
+  cursor:pointer;
+  transition: all 180ms ease;
+  border:none;
+  text-decoration:none;
+}
+
+/* Play button: white with subtle icon spacing */
+.btn-play {
+  background-color: #ffffff;
+  color: #000;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+  border-radius: 10px;
+}
+.btn-play:hover { transform: translateY(-4px); box-shadow: 0 18px 48px rgba(0,0,0,0.6); }
+
+.btn-info {
+  background-color: rgba(109,109,110,0.65);
+  color: var(--text);
+  border-radius: 10px;
+}
+.btn-info:hover { transform: translateY(-3px); }
+
+/* Back button: elevated and modern */
+.back-button {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color: var(--text);
+  text-decoration:none;
+  font-size: 16px;
+  font-weight:600;
+  padding:10px 18px;
+  border-radius: 10px;
+  border:1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  margin: 40px 4% 60px;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+}
+.back-button:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.12); }
+
+/* Metadata grid */
+.metadata-section {
+  display:grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px 32px;
+  max-width: 900px;
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.metadata-label { color: var(--muted); font-size:14px; font-weight:700; }
+.metadata-value { color: var(--text); font-size:14px; }
+
+/* small-screen adjustments */
+@media (max-width: 768px) {
+  .movie-details { margin-top: -64px; padding: 18px 6% 60px; border-radius: 10px; }
+  .movie-details h1 { font-size: 32px; margin-bottom: 12px; }
+  .info-row { gap:10px; font-size:15px; }
+  .movie-details p, #movieOverview { font-size: 16px; }
+  .action-buttons { flex-direction: column; width:100%; }
+  .btn { width:100%; justify-content:center; }
+  .metadata-section { grid-template-columns: 1fr; gap: 12px; }
+  .back-button { margin: 24px 6% 40px; width: auto; }
+}
+
+/* very small screens */
+@media (max-width: 480px) {
+  .video-container::after { height: 120px; }
+  .movie-details { margin-top: -72px; padding-bottom: 48px; }
+}
+
+/* Accessibility focus states */
+.movie-card:focus, .btn:focus, .back-button:focus, .btn-play:focus {
+  outline: 3px solid rgba(70,211,105,0.12);
+  outline-offset: 2px;
+}

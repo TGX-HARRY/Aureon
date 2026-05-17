@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #141414;
+    color: #fff;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+}
+
+
+.legal-container {
+    min-height: 100%;
+    /* background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(20, 20, 20, 0.8)),
+        radial-gradient(circle at center, #e50914, #141414); */
+    background-attachment: fixed;
+    padding: 100px 12%;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.legal-container h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: #e50914;
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+}
+
+.legal-container p.intro {
+    font-size: 18px;
+    color: #cccccc;
+    margin-bottom: 60px;
+    opacity: 0.9;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.legal-section {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    text-align: left;
+    /* backdrop-filter: blur(10px); */
+}
+
+.legal-section h2 {
+    color: #e50914;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.legal-section p,
+.legal-section ul li {
+    font-size: 16px;
+    color: #ddd;
+    opacity: 0.95;
+}
+
+.legal-section ul {
+    list-style: disc inside;
+    margin-top: 10px;
+}
+
+
+.legal-footer {
+    margin-top: 60px;
+    padding: 30px;
+    text-align: center;
+    color: #cccccc;
+    border-top: 2px solid #e50914;
+    font-size: 15px;
+}
+
+@media (max-width: 768px) {
+    .legal-container {
+        padding: 80px 6%;
+    }
+
+    .legal-container h1 {
+        font-size: 34px;
+    }
+
+    .legal-section {
+        padding: 25px;
+    }
+}
+
+/* ===========================
+   Scrollbar Styling (Optional)
+=========================== */
+.legal-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.legal-container::-webkit-scrollbar-thumb {
+    background: #e50914;
+    border-radius: 5px;
+}
+
+.legal-container::-webkit-scrollbar-track {
+    background: #111;
+}

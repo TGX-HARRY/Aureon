@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.signup-page {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB2aWV3Qm94PSIwIDAgMTkyMCAxMDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZGVmcz4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnR3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzE0MTQxNDtzdG9wLW9wYWNpdHk6MSIgLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZTUwOTE0O3N0b3Atb3BhY2l0eTowLjMiIC8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNDE0MTQ7c3RvcC1vcGFjaXR5OjEiIC8+CiAgPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiBmaWxsPSJ1cmwoI2JnR3JhZGllbnQpIi8+Cjwvc3ZnPgo=');
+}
+
+body {
+    /* background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB2aWV3Qm94PSIwIDAgMTkyMCAxMDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZGVmcz4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnR3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzE0MTQxNDtzdG9wLW9wYWNpdHk6MSIgLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZTUwOTE0O3N0b3Atb3BhY2l0eTowLjMiIC8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNDE0MTQ7c3RvcC1vcGFjaXR5OjEiIC8+CiAgPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiBmaWxsPSJ1cmwoI2JnR3JhZGllbnQpIi8+Cjwvc3ZnPgo='); */
+    background-size: cover;
+    color: white;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Signup Container */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    padding: 100px 20px 50px;
+}
+
+.signup-box {
+    background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.6));
+    border-radius: 20px;
+    padding: 60px 50px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.signup-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #e50914;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.form-group label {
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #ccc;
+}
+.form-group input {
+    padding: 16px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    outline: none;
+    transition: ease all 0.3s;
+}
+.form-group input:focus {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+
+.signup-btn {
+    width: 100%;
+    padding: 16px;
+    background: #e50914;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: ease all 0.3s;
+}
+.signup-btn:hover {
+    background: #b0060f;
+    transform: translateY(-2px);
+}
+
+.login-link {
+    margin-top: 20px;
+    text-align: center;
+    color: #ccc;
+}
+.login-link a {
+    color: #e50914;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.login-link a:hover {
+    text-decoration: underline;
+    color: #f40612;
+}
+
+@media (max-width: 768px) {
+    .signup-box {
+    padding: 40px 30px;
+    margin: 20px;
+    }
+}
+
+/* Keep autofill styling consistent with your design */
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #0d0d0d inset; /* match your background */
+    -webkit-text-fill-color: white; /* text color */
+    transition: background-color 5000s ease-in-out; /* prevent flash */
+}
+
+input,
+textarea {
+    background-color: #0d0d0d; /* same as your body */
+    color: white;
+}
+
+.error-msg {
+    color: #ff4d4d;
+    font-size: 13px;
+    margin-top: 5px;
+    display: block;
+}
+input:invalid {
+    border: 1px solid #ff4d4d;
+}

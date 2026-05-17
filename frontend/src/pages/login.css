@@ -1,0 +1,277 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.login-page {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB2aWV3Qm94PSIwIDAgMTkyMCAxMDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZGVmcz4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnR3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzE0MTQxNDtzdG9wLW9wYWNpdHk6MSIgLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZTUwOTE0O3N0b3Atb3BhY2l0eTowLjMiIC8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNDE0MTQ7c3RvcC1vcGFjaXR5OjEiIC8+CiAgPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiBmaWxsPSJ1cmwoI2JnR3JhZGllbnQpIi8+Cjwvc3ZnPgo=');
+}
+
+body {
+    background-color: #141414;
+    color: white;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    /* background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB2aWV3Qm94PSIwIDAgMTkyMCAxMDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZGVmcz4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnR3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzE0MTQxNDtzdG9wLW9wYWNpdHk6MSIgLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZTUwOTE0O3N0b3Atb3BhY2l0eTowLjMiIC8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNDE0MTQ7c3RvcC1vcGFjaXR5OjEiIC8+CiAgPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiBmaWxsPSJ1cmwoI2JnR3JhZGllbnQpIi8+Cjwvc3ZnPgo='); */
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    color: #e50914;
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: #e50914;
+    transform: translateY(-2px);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: #e50914;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+
+
+/* Login Form */
+.login-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px 50px;
+    margin-top: 50px;
+}
+
+.login-box {
+    background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,0,0,0.6));
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 60px 50px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.login-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #e50914;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #cccccc;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    background: rgba(0,0,0,0.3);
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #e50914;
+    background: rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(229,9,20,0.3);
+}
+
+.form-group textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.login-box .form-group input {
+    padding: 18px 20px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+}
+
+.login-box .form-group input:focus {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+}
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+
+.forgot-password {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.btn,
+.login-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, #e50914, #b71c1c);
+    color: white;
+    box-shadow: 0 4px 15px rgba(229,9,20,0.3);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    margin-bottom: 30px;
+}
+
+.login-btn:active {
+    transform: translateY(-1px);
+}
+
+.signup-link {
+    text-align: center;
+    color: #cccccc;
+}
+
+.signup-link a {
+    color: #e50914;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.signup-link a:hover {
+    color: #f40612;
+    text-decoration: underline;
+}
+
+
+
+.footer {
+    padding: 40px 50px;
+    text-align: center;
+    margin-top: 10px;
+    background: linear-gradient(to bottom, rgba(20,20,20,0.9), rgba(0,0,0,0.95));
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer p {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #cccccc;
+}
+
+.footer a {
+    margin: 0 15px;
+    font-size: 14px;
+    color: #999999;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+
+.footer a:hover {
+    color: #e50914;
+    transform: translateY(-2px);
+}
+
+.footer a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: #e50914;
+    transition: all 0.3s ease;
+}
+
+.footer a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/*
+@media (max-width: 768px) {
+    .login-box {
+        padding: 40px 30px;
+        margin: 20px;
+    }
+    
+    .social-buttons {
+        flex-direction: column;
+    }
+}
+*/
+
+/* Keep autofill styling consistent with your design */
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #0d0d0d inset; /* match your background */
+    -webkit-text-fill-color: white; /* text color */
+    transition: background-color 5000s ease-in-out; /* prevent flash */
+}
+
+input,
+textarea {
+    background-color: #0d0d0d; /* same as your body */
+    color: white;
+}
