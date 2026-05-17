@@ -114,7 +114,7 @@ function Home() {
       {/* MOVIE SECTIONS */}
       {filteredSections.map((section) => (
         section.movies.length > 0 && (
-          <div key={section._id || section.id || section.title} className="movie-section" id={section.id}>
+          <div key={section._id || section.id || section.title} className="movie-section" id={section.title ? section.title.toLowerCase().replace(/\s+/g, '-') : section.id}>
             <h2 className="section-title">{section.title}</h2>
             <div className="movie-row">
               {section.movies.map((movie) => (

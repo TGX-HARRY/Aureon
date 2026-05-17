@@ -66,87 +66,90 @@ function Navbar() {
         Aureon
       </div>
 
-      {/* Search container: when showSearch is true we render the input first so the icon
-          moves with the textarea (mirrors behaviour from homepage.html) */}
-      <div className={`search-container ${showSearch ? "active" : ""}`} ref={searchRef}>
-        {showSearch ? (
-          <>
-            <form
-              className={`search-bar ${showSearch ? "active" : ""}`}
-              action="#"
-              method="get"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const val = (e.target.search && e.target.search.value) ? e.target.search.value.trim() : '';
-                if (val) {
-                  window.location.href = `/?q=${encodeURIComponent(val)}`;
-                } else {
-                  window.location.href = '/';
-                }
-              }}
-            >
-              <input
-                type="text"
-                placeholder="Search movies, shows..."
-                name="search"
-                id="search-input"
-                autoFocus={showSearch}
-              />
-            </form>
+      {/* Search container: only show on Home page */}
+      {location.pathname === '/' && (
+        <div className={`search-container ${showSearch ? "active" : ""}`} ref={searchRef}>
+          {showSearch ? (
+            <>
+              <form
+                className={`search-bar ${showSearch ? "active" : ""}`}
+                action="#"
+                method="get"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const val = (e.target.search && e.target.search.value) ? e.target.search.value.trim() : '';
+                  if (val) {
+                    window.location.href = `/?q=${encodeURIComponent(val)}`;
+                  } else {
+                    window.location.href = '/';
+                  }
+                }}
+              >
+                <input
+                  type="text"
+                  placeholder="Search movies, shows..."
+                  name="search"
+                  id="search-input"
+                  autoFocus={showSearch}
+                />
+              </form>
 
-            <button
-              className={`search-toggle ${showSearch ? "active" : ""}`}
-              aria-expanded={showSearch}
-              onClick={() => setShowSearch(!showSearch)}
-            >
-              <i className="fa fa-search" style={{ fontSize: 22, color: "white" }}></i>
-            </button>
-          </>
-        ) : (
-          <>
-            <button
-              className={`search-toggle ${showSearch ? "active" : ""}`}
-              aria-expanded={showSearch}
-              onClick={() => setShowSearch(!showSearch)}
-            >
-              <i className="fa fa-search" style={{ fontSize: 22, color: "white" }}></i>
-            </button>
+              <button
+                className={`search-toggle ${showSearch ? "active" : ""}`}
+                aria-expanded={showSearch}
+                onClick={() => setShowSearch(!showSearch)}
+              >
+                <i className="fa fa-search" style={{ fontSize: 22, color: "white" }}></i>
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className={`search-toggle ${showSearch ? "active" : ""}`}
+                aria-expanded={showSearch}
+                onClick={() => setShowSearch(!showSearch)}
+              >
+                <i className="fa fa-search" style={{ fontSize: 22, color: "white" }}></i>
+              </button>
 
-            <form
-              className={`search-bar ${showSearch ? "active" : ""}`}
-              action="#"
-              method="get"
-            >
-              <input
-                type="text"
-                placeholder="Search movies, shows..."
-                name="search"
-                id="search-input"
-                autoFocus={showSearch}
-              />
-            </form>
-          </>
-        )}
-      </div>
+              <form
+                className={`search-bar ${showSearch ? "active" : ""}`}
+                action="#"
+                method="get"
+              >
+                <input
+                  type="text"
+                  placeholder="Search movies, shows..."
+                  name="search"
+                  id="search-input"
+                  autoFocus={showSearch}
+                />
+              </form>
+            </>
+          )}
+        </div>
+      )}
 
       {/* Navbar Links */}
       <ul className="nav-links">
-        {!hideAuthButtons && !hideMovieButtons && (
+        {location.pathname === '/' ? (
           <>
             <li><Link to="/">Home</Link></li>
             <li className="dropdown">
               <a href="#">Genres</a>
               <ul className="dropdown-menu">
-                <li><a href="#action">Action</a></li>
-                <li><a href="#drama">Drama</a></li>
-                <li><a href="#comedy">Comedy</a></li>
-                <li><a href="#horror">Horror</a></li>
-                <li><a href="#sci-fi">Sci-Fi</a></li>
-                <li><a href="#thriller">Thriller</a></li>
+                <li><a href="/#action">Action</a></li>
+                <li><a href="/#drama">Drama</a></li>
+                <li><a href="/#comedy">Comedy</a></li>
+                <li><a href="/#horror">Horror</a></li>
+                <li><a href="/#sci-fi">Sci-Fi</a></li>
+                <li><a href="/#thriller">Thriller</a></li>
               </ul>
             </li>
-            <li><a href="#trending-movies">Movies</a></li>
+            <li><a href="/#trending-movies">Movies</a></li>
           </>
+        ) : (
+          <li><Link to="/">Home</Link></li>
         )}
 
         {!hideAuthButtons && (
