@@ -43,7 +43,7 @@ const googleLogin = async (req, res) => {
             .cookie("token", jwtToken, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
-                sameSite: "lax"
+                sameSite: "none"
             })
             .json({ message: "Google Login Successful", user: { name, email, picture } });
 
@@ -111,8 +111,8 @@ const fetchSubscriber = async (req, res) => {
             .status(200)
             .cookie("token", token, {
                 httpOnly: true,       // prevents JS access (XSS protection)
-                secure: false,        // true in production (HTTPS)
-                sameSite: "lax",      
+                secure: process.env.NODE_ENV === "production",        // true in production (HTTPS)
+                sameSite: "none",      
                 maxAge: 24 * 60 * 60 * 1000 // 1 day
             })
             .json({message : "Logged in!"});
