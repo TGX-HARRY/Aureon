@@ -12,8 +12,8 @@
     "nodemon": "^3.1.14"
   },
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "name": "aureon",
   "version": "1.0.0",

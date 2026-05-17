@@ -1,3 +1,6 @@
+const dotenv = require("dotenv");
+dotenv.config(); // 🔥 FIRST
+
 const express = require("express");
 const cookieparser = require("cookie-parser");
 const dbconfig = require("./config/db")
@@ -18,5 +21,9 @@ app.use("/api/movies", movieRoutes);
 app.get("/api/config/google-client-id", (req, res) => {
     res.json({ clientId: process.env.CLIENT_ID });
 });
+const PORT = process.env.PORT;
 
+app.listen(PORT, () => {
+  console.log(`API and Webpage live at http://localhost:${PORT}`);
+});
 module.exports = app;
