@@ -130,7 +130,7 @@ function Home() {
                   <div className="movie-info">
                     <span>{movie.title}</span>
                     <div className="movie-rating">
-                      <span className="star">{movie.rating}</span>
+                      <span className="star">★ {movie.rating}</span>
                     </div>
                     <div className="movie-genre">{Array.isArray(movie.genre) ? movie.genre.join(", ") : movie.genre}</div>
                   </div>
